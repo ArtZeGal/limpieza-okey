@@ -26,21 +26,6 @@ export const INITIAL_CATEGORIES = [
 
 export const INITIAL_PRODUCTS = [
   {
-    "id": "key-paq-arbol",
-    "sku": "PAQ-ARBOL",
-    "name": "PAQUETE TORRE ÁRBOL (RESIDENCIAL DE LUJO)",
-    "category": "PISOS",
-    "isPackage": true,
-    "presentation": "Dotación Institucional",
-    "cost": 3250.0,
-    "price": 5850.0,
-    "priceRefill": null,
-    "description": "Dotación institucional para edificios de lujo: Key Paraíso 4L, Key Brillante Mármol 4L, Vanguard Cloro 20L, Key Limpiavidrios 4L, Lustrador Acero Inox 1L, Jabón Espuma 4L y 3 Eco-Clips.",
-    "suggestedGift": null,
-    "itemsIncluded": [],
-    "stock": 0
-  },
-  {
     "id": "key-0182",
     "sku": "0182",
     "name": "KEY PARAÍSO 20L (PORRÓN)",
