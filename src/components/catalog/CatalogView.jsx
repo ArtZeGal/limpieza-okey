@@ -2,18 +2,14 @@ import { useState, useMemo } from 'react'
 import {
   Search,
   Plus,
-  SlidersHorizontal,
   Package,
-  Sparkles,
   Eye,
   EyeOff,
   RotateCcw,
-  Gift,
   ShoppingCart,
   TrendingUp,
-  Percent,
-  CheckCircle2,
-  Layers
+  Sparkles,
+  Truck
 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { INITIAL_CATEGORIES } from '../../data/initialCatalog'
@@ -30,22 +26,16 @@ export default function CatalogView() {
     cartTotalItems,
     cartSubtotal,
     setActiveTab,
-    hasFreeShipping,
-    amountForFreeShipping
   } = useApp()
 
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('Todos')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingProduct, setEditingProduct] = useState(null)
-  const [onlyPackages, setOnlyPackages] = useState(false)
 
   // Filtrado reactivo de productos
   const filteredProducts = useMemo(() => {
     return products.filter((prod) => {
-      // Filtro de sólo paquetes si está activo
-      if (onlyPackages && !prod.isPackage) return false
-
       // Filtro de categoría
       if (selectedCategory !== 'Todos' && prod.category !== selectedCategory) {
         return false
@@ -57,18 +47,14 @@ export default function CatalogView() {
         const matchName = prod.name.toLowerCase().includes(query)
         const matchSku = prod.sku?.toLowerCase().includes(query)
         const matchPresentation = prod.presentation?.toLowerCase().includes(query)
-        const matchGift = prod.suggestedGift?.toLowerCase().includes(query)
-        const matchIncluded = prod.itemsIncluded?.some((item) =>
-          item.toLowerCase().includes(query)
-        )
-        return matchName || matchSku || matchPresentation || matchGift || matchIncluded
+        const matchCategory = prod.category?.toLowerCase().includes(query)
+        return matchName || matchSku || matchPresentation || matchCategory
       }
 
       return true
     })
-  }, [products, selectedCategory, searchQuery, onlyPackages])
+  }, [products, selectedCategory, searchQuery])
 
-  const totalPackagesCount = products.filter((p) => p.isPackage).length
   const totalProductsCount = products.length
 
   const handleOpenNew = () => {
@@ -88,14 +74,14 @@ export default function CatalogView() {
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-              Catálogo de Paquetes y Productos
+              Catálogo Oficial de Productos KEY®
             </h1>
             <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800">
               {filteredProducts.length} de {totalProductsCount}
             </span>
           </div>
           <p className="text-xs text-slate-500 mt-1">
-            Precios de venta, cálculo automático de márgenes y regalos sugeridos para Limpieza OKEY.
+            Lista de precios oficial 2026 vigente &bull; Precios al público, costos base y margen comercial.
           </p>
         </div>
 
@@ -137,18 +123,18 @@ export default function CatalogView() {
         </div>
       </div>
 
-      {/* Quick Promotion & Free Shipping Notification Pill */}
+      {/* Free Shipping Notification Pill */}
       <div className="bg-gradient-to-r from-blue-50 via-cyan-50 to-emerald-50 border border-blue-200/80 p-3.5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
         <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0">
-            <Gift className="w-4 h-4" />
+          <div className="w-7 h-7 rounded-lg bg-blue-600 text-white flex items-center justify-center shrink-0">
+            <Truck className="w-4 h-4" />
           </div>
           <div>
             <span className="font-bold text-slate-800">
-              Estrategia Comercial Limpieza OKEY:
+              Regla de Envío Limpieza OKEY:
             </span>
             <span className="text-slate-600 ml-1">
-              Envío gratis a partir de <strong>$1,500 MXN</strong> y paquetes con regalos de cortesía incluidos.
+              Envío gratis automático a partir de <strong>$1,500 MXN</strong> de compra en toda la línea.
             </span>
           </div>
         </div>
@@ -166,41 +152,25 @@ export default function CatalogView() {
 
       {/* Filter and Search Bar */}
       <div className="space-y-3">
-        <div className="flex flex-col sm:flex-row gap-3">
-          {/* Search Input */}
-          <div className="relative flex-1">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Buscar por nombre, SKU, regalo sugerido o producto incluido..."
-              className="w-full pl-10 pr-4 py-2.5 text-xs sm:text-sm bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none shadow-2xs"
-            />
-            {searchQuery && (
-              <button
-                type="button"
-                onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-2.5 text-xs text-slate-400 hover:text-slate-600 font-bold"
-              >
-                Limpiar
-              </button>
-            )}
-          </div>
-
-          {/* Only Packages Quick Filter */}
-          <button
-            type="button"
-            onClick={() => setOnlyPackages((prev) => !prev)}
-            className={`inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs font-bold border transition-all ${
-              onlyPackages
-                ? 'bg-blue-600 text-white border-blue-600 shadow-xs'
-                : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
-            }`}
-          >
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Sólo Paquetes ({totalPackagesCount})</span>
-          </button>
+        {/* Search Input */}
+        <div className="relative">
+          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Buscar por código (ej. 15114, 107), nombre del producto o presentación (ej. 4L, 650ML)..."
+            className="w-full pl-10 pr-4 py-2.5 text-xs sm:text-sm bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none shadow-2xs"
+          />
+          {searchQuery && (
+            <button
+              type="button"
+              onClick={() => setSearchQuery('')}
+              className="absolute right-3 top-2.5 text-xs text-slate-400 hover:text-slate-600 font-bold"
+            >
+              Limpiar
+            </button>
+          )}
         </div>
 
         {/* Category Pills (Horizontal scrollable on mobile) */}
@@ -211,12 +181,7 @@ export default function CatalogView() {
               <button
                 key={cat}
                 type="button"
-                onClick={() => {
-                  setSelectedCategory(cat)
-                  if (onlyPackages && cat !== 'Paquetes Promocionales') {
-                    setOnlyPackages(false)
-                  }
-                }}
+                onClick={() => setSelectedCategory(cat)}
                 className={`whitespace-nowrap px-3.5 py-1.5 rounded-xl font-bold transition-all ${
                   isSelected
                     ? 'bg-slate-900 text-white shadow-xs'
@@ -247,9 +212,9 @@ export default function CatalogView() {
           <div className="w-12 h-12 mx-auto rounded-full bg-slate-100 flex items-center justify-center text-slate-400">
             <Package className="w-6 h-6" />
           </div>
-          <h3 className="font-bold text-slate-800 text-sm">No se encontraron artículos</h3>
+          <h3 className="font-bold text-slate-800 text-sm">No se encontraron productos</h3>
           <p className="text-xs text-slate-500 max-w-sm mx-auto">
-            No hay productos que coincidan con los filtros o el término de búsqueda actual.
+            No hay productos que coincidan con "{searchQuery}" en la categoría seleccionada.
           </p>
           <div className="flex justify-center gap-2 pt-2">
             <button
@@ -257,7 +222,6 @@ export default function CatalogView() {
               onClick={() => {
                 setSearchQuery('')
                 setSelectedCategory('Todos')
-                setOnlyPackages(false)
               }}
               className="px-3 py-1.5 rounded-lg bg-slate-100 text-xs font-semibold text-slate-700 hover:bg-slate-200"
             >
@@ -276,18 +240,18 @@ export default function CatalogView() {
 
       {/* Bottom helper action */}
       <div className="flex items-center justify-between text-xs text-slate-400 pt-4 border-t border-slate-200">
-        <span>Datos guardados localmente en el navegador</span>
+        <span>Catálogo oficial con 275 productos Key® sincronizado localmente</span>
         <button
           type="button"
           onClick={() => {
-            if (window.confirm('¿Deseas restablecer el catálogo a los paquetes y productos iniciales de muestra?')) {
+            if (window.confirm('¿Deseas restablecer el catálogo a la lista oficial de 275 productos Puntos KEY?')) {
               resetCatalog()
             }
           }}
           className="hover:text-slate-700 flex items-center gap-1 transition-colors"
         >
           <RotateCcw className="w-3 h-3" />
-          <span>Restablecer catálogo inicial</span>
+          <span>Restablecer lista oficial 2026</span>
         </button>
       </div>
 

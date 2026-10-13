@@ -25,17 +25,21 @@ Construir una aplicación web moderna, ágil, intuitiva y 100% responsiva (optim
 
 ## 3. 🧩 Módulos Principales y Reglas de Negocio
 
-### 3.1. Catálogo de Paquetes y Productos
+### 3.1. Catálogo Oficial de Productos (Puntos KEY® 2026)
+- **Fuente Oficial de Datos:**
+  - Lista de precios oficial 2026 extraída de Google Sheets (275 productos, 19 categorías).
+  - Incluye categorías oficiales: *Lavandería, Autos, Aseo General, Alfombras, Control de Plagas, Pisos, Desinfección de Superficies y Ambiente, Control de Olores, Desinfección de Manos, Baños, Cocina Profesional, Cocina, Lavado de Manos, Especialidades, Accesorios, Despachadores de Jabón, Despachadores de Papel, Papel y Vileda*.
 - **Estructura de Artículos:**
-  - Código / SKU del producto o paquete.
-  - Nombre descriptivo y categoría (ej. Paquetes de Limpieza, Detergentes, Desinfectantes, Accesorios).
-  - Costo base y Precio de venta al público.
+  - Código SKU oficial (ej. `15114`, `107`, `15013`, etc.).
+  - Nombre completo del producto y presentación (`650ML`, `1L`, `4L`, `3.75L`, `Pieza`, etc.).
+  - Costo base / Empleado ($) y Precio de venta al público ($).
+  - Precio de rellenado si aplica (`RELLENABLE`).
 - **Cálculo de Margen:**
-  - Cálculo automático del margen de ganancia por producto y paquete:
+  - Cálculo automático del margen de ganancia por producto:
     $$\text{Margen (\%)} = \left(\frac{\text{Precio Venta} - \text{Costo}}{\text{Precio Venta}}\right) \times 100$$
     $$\text{Ganancia (\$) } = \text{Precio Venta} - \text{Costo}$$
-- **Regalos Sugeridos e Incentivos:**
-  - Configuración y visualización de artículos promocionales o regalos sugeridos al adquirir ciertos paquetes o llegar a metas de compra (ej. microfibra de regalo, atomizador de cortesía).
+- **Directriz de Paquetes / Promociones:**
+  - **Sin paquetes ni promociones activas por el momento** (enfocado en venta por producto individual).
 
 ### 3.2. Cotizador / Carrito de Compras
 - **Cálculo Financiero Dinámico:**

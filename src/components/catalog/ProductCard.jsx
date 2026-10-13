@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import {
   Package,
-  Gift,
   Plus,
   Minus,
   ShoppingCart,
@@ -11,7 +10,8 @@ import {
   Trash2,
   CheckCircle,
   Layers,
-  Sparkles
+  Sparkles,
+  RefreshCw
 } from 'lucide-react'
 import {
   formatCurrency,
@@ -45,28 +45,17 @@ export default function ProductCard({ product, onEdit }) {
   }
 
   return (
-    <div className={`relative flex flex-col justify-between rounded-2xl bg-white border transition-all duration-200 overflow-hidden ${
-      product.isPackage
-        ? 'border-blue-300 shadow-md ring-1 ring-blue-100 hover:shadow-lg'
-        : 'border-slate-200 shadow-sm hover:border-slate-300 hover:shadow-md'
-    }`}>
+    <div className="relative flex flex-col justify-between rounded-2xl bg-white border border-slate-200 shadow-2xs hover:border-slate-300 hover:shadow-sm transition-all duration-200 overflow-hidden">
       {/* Top Banner / Tags */}
       <div className="p-5 pb-3">
         <div className="flex items-start justify-between gap-2 mb-2">
           <div className="flex flex-wrap items-center gap-1.5">
-            {product.isPackage ? (
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-sm">
-                <Sparkles className="w-3 h-3" />
-                <span>PAQUETE COMBO</span>
-              </span>
-            ) : (
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200">
-                <Layers className="w-3 h-3 text-slate-500" />
-                <span>{product.category}</span>
-              </span>
-            )}
-            <span className="text-[11px] font-mono text-slate-400 font-semibold uppercase">
-              {product.sku}
+            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-slate-100 text-slate-700 border border-slate-200">
+              <Layers className="w-3 h-3 text-slate-500" />
+              <span>{product.category}</span>
+            </span>
+            <span className="text-[11px] font-mono text-slate-400 font-bold uppercase">
+              CÓD: {product.sku}
             </span>
           </div>
 
@@ -93,53 +82,23 @@ export default function ProductCard({ product, onEdit }) {
           )}
         </div>
 
-        {/* Product Title & Presentation */}
-        <h3 className="font-bold text-slate-900 text-base leading-snug line-clamp-2">
+        {/* Product Title */}
+        <h3 className="font-extrabold text-slate-900 text-base leading-snug line-clamp-2">
           {product.name}
         </h3>
-        <p className="text-xs font-medium text-cyan-800 mt-1">
-          {product.presentation}
-        </p>
 
-        {/* Description */}
-        {product.description && (
-          <p className="text-xs text-slate-600 mt-2 line-clamp-2 leading-relaxed">
-            {product.description}
-          </p>
-        )}
-
-        {/* Package included items preview */}
-        {product.isPackage && product.itemsIncluded && product.itemsIncluded.length > 0 && (
-          <div className="mt-3 p-2.5 rounded-xl bg-blue-50/70 border border-blue-100/80">
-            <div className="text-[11px] font-bold text-blue-900 uppercase tracking-wide flex items-center gap-1 mb-1">
-              <Package className="w-3 h-3 text-blue-600" />
-              <span>Contenido del paquete:</span>
-            </div>
-            <ul className="text-xs text-blue-800 space-y-0.5">
-              {product.itemsIncluded.map((item, idx) => (
-                <li key={idx} className="flex items-center gap-1.5">
-                  <span className="w-1 h-1 rounded-full bg-blue-500" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {/* Suggested Gift Promo */}
-        {product.suggestedGift && (
-          <div className="mt-3 p-2.5 rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200/90 flex items-start gap-2 shadow-xs">
-            <Gift className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-            <div>
-              <span className="text-[11px] font-bold text-amber-900 uppercase tracking-wider block">
-                Regalo Sugerido de Cortesía
-              </span>
-              <span className="text-xs font-semibold text-amber-800">
-                {product.suggestedGift}
-              </span>
-            </div>
-          </div>
-        )}
+        {/* Presentation & Refill Badges */}
+        <div className="flex flex-wrap items-center gap-1.5 mt-2">
+          <span className="text-[11px] font-bold text-cyan-800 bg-cyan-50 px-2 py-0.5 rounded-md border border-cyan-200/60">
+            {product.presentation}
+          </span>
+          {product.priceRefill && (
+            <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200/60">
+              <RefreshCw className="w-3 h-3 text-emerald-600" />
+              <span>Relleno: {formatCurrency(product.priceRefill)}</span>
+            </span>
+          )}
+        </div>
       </div>
 
       {/* Pricing and Margin Section */}
@@ -147,7 +106,7 @@ export default function ProductCard({ product, onEdit }) {
         {/* Price & Margins */}
         <div className="flex items-end justify-between gap-2">
           <div>
-            <span className="text-[11px] font-medium text-slate-500 block uppercase tracking-wider">
+            <span className="text-[11px] font-semibold text-slate-500 block uppercase tracking-wider">
               Precio al Público
             </span>
             <div className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
@@ -179,8 +138,10 @@ export default function ProductCard({ product, onEdit }) {
         {/* Detailed Cost Row for Admin */}
         {viewMode === 'admin' && (
           <div className="pt-2 border-t border-slate-200/60 flex items-center justify-between text-xs text-slate-500">
-            <span>Costo Base: <strong>{formatCurrency(product.cost)}</strong></span>
-            <span>Stock: <strong>{product.stock ?? 0} unid.</strong></span>
+            <span>Costo Empleado: <strong>{formatCurrency(product.cost)}</strong></span>
+            {product.priceCentros && (
+              <span>Centros: <strong>{formatCurrency(product.priceCentros)}</strong></span>
+            )}
           </div>
         )}
 
@@ -193,6 +154,7 @@ export default function ProductCard({ product, onEdit }) {
               onClick={() => setQuantity((q) => Math.max(1, q - 1))}
               className="p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-l-xl transition-colors disabled:opacity-40"
               disabled={quantity <= 1}
+              title="Reducir cantidad"
             >
               <Minus className="w-3.5 h-3.5" />
             </button>
@@ -203,6 +165,7 @@ export default function ProductCard({ product, onEdit }) {
               type="button"
               onClick={() => setQuantity((q) => q + 1)}
               className="p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-r-xl transition-colors"
+              title="Aumentar cantidad"
             >
               <Plus className="w-3.5 h-3.5" />
             </button>
