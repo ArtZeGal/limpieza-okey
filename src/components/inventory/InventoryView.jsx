@@ -18,7 +18,10 @@ import {
   Tag,
   Check,
   Eye,
-  SlidersHorizontal
+  SlidersHorizontal,
+  Truck,
+  ShoppingBag,
+  BellRing
 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { INITIAL_CATEGORIES } from '../../data/initialCatalog'
@@ -27,13 +30,14 @@ import { formatCurrency } from '../../utils/formatters'
 export default function InventoryView() {
   const {
     products,
+    receipts,
     updateProductStock,
     adjustProductStock,
     resetAllStock,
     showToast,
   } = useApp()
 
-  // Pestañas principales del módulo: 'audit' (Hacer Inventario) | 'overview' (Existencias y Valuación)
+  // Pestañas del módulo: 'audit' (Hacer Inventario) | 'restock' (Sugerencias de Reposición) | 'overview' (Resumen y Valuación)
   const [activeTab, setActiveTab] = useState('audit')
 
   // Filtros para "Hacer Inventario"
@@ -42,7 +46,10 @@ export default function InventoryView() {
   const [auditFilter, setAuditFilter] = useState('all') // 'all' | 'counted' | 'uncounted'
   const [confirmResetOpen, setConfirmResetOpen] = useState(false)
 
-  // 1. Estadísticas globales
+  // Meta de piezas por producto para resurtido (por defecto 5 piezas)
+  const [targetStockPerItem, setTargetStockPerItem] = useState(5)
+
+  // 1. Estadísticas globales del inventario físico
   const stats = useMemo(() => {
     let totalPieces = 0
     let inStockCount = 0
@@ -98,7 +105,73 @@ export default function InventoryView() {
     return counts
   }, [products])
 
-  // 3. Productos filtrados para la pantalla actual
+  // 3. Sugerencias Inteligentes de Reposición basadas en Ventas y Stock Bajo
+  const restockSuggestions = useMemo(() => {
+    // Mapa de productos vendidos en los recibos emitidos
+    const soldProductMap = new Map()
+    if (Array.isArray(receipts)) {
+      receipts.forEach((r) => {
+        if (Array.isArray(r.items)) {
+          r.items.forEach((it) => {
+            const key = it.productId || it.sku || it.name
+            soldProductMap.set(key, (soldProductMap.get(key) || 0) + (it.quantity || 1))
+          })
+        }
+      })
+    }
+
+    return products
+      .map((p) => {
+        const currentStock = Number(p.stock) || 0
+        const totalSold = soldProductMap.get(p.id) || soldProductMap.get(p.sku) || soldProductMap.get(p.name) || 0
+        const wasSold = totalSold > 0
+
+        // Prioridad de sugerencia:
+        let urgency = null
+        if (wasSold && currentStock === 0) {
+          urgency = 'sold_out' // Se vendió y se agotó totalmente (Alta prioridad)
+        } else if (currentStock >= 1 && currentStock <= 3) {
+          urgency = 'low_stock' // Stock bajo (1 a 3 piezas)
+        } else if (wasSold && currentStock < targetStockPerItem) {
+          urgency = 'replenish' // Vendido recientemente y por debajo de la meta
+        }
+
+        if (!urgency) return null
+
+        const qtyToOrder = Math.max(1, targetStockPerItem - currentStock)
+        const itemCost = p.cost || 0
+        const estimatedOrderCost = qtyToOrder * itemCost
+
+        return {
+          product: p,
+          currentStock,
+          totalSold,
+          urgency,
+          suggestedQty: qtyToOrder,
+          itemCost,
+          estimatedOrderCost,
+        }
+      })
+      .filter(Boolean)
+      .sort((a, b) => {
+        if (a.urgency === 'sold_out' && b.urgency !== 'sold_out') return -1
+        if (b.urgency === 'sold_out' && a.urgency !== 'sold_out') return 1
+        return a.currentStock - b.currentStock
+      })
+  }, [products, receipts, targetStockPerItem])
+
+  // Totales de la lista de reposición sugerida
+  const restockTotals = useMemo(() => {
+    let piecesToOrder = 0
+    let totalInvestment = 0
+    restockSuggestions.forEach((s) => {
+      piecesToOrder += s.suggestedQty
+      totalInvestment += s.estimatedOrderCost
+    })
+    return { piecesToOrder, totalInvestment }
+  }, [restockSuggestions])
+
+  // 4. Productos filtrados para la pantalla de auditoría
   const filteredProducts = useMemo(() => {
     return products
       .filter((p) => {
@@ -123,7 +196,6 @@ export default function InventoryView() {
         return true
       })
       .sort((a, b) => {
-        // En modo "Hacer inventario", si filtramos "todos", poner primero los que ya tienen stock o por nombre
         if (auditFilter === 'counted') {
           return (b.stock || 0) - (a.stock || 0)
         }
@@ -156,6 +228,29 @@ export default function InventoryView() {
     showToast('Reporte de inventario copiado al portapapeles para WhatsApp')
   }
 
+  // Copiar lista de reposición sugerida para el proveedor
+  const handleCopyRestockOrder = () => {
+    let msg = `🛒 *PEDIDO DE REPOSICIÓN A PUNTOS KEY® - LIMPIEZA OKEY*\n`
+    msg += `📅 *Fecha:* ${new Date().toLocaleDateString('es-MX')}\n`
+    msg += `🎯 *Meta de stock en bodega:* ${targetStockPerItem} piezas por artículo\n`
+    msg += `------------------------------------\n`
+    msg += `📦 *PRODUCTOS POR RESURTIR (${restockSuggestions.length}):*\n`
+
+    restockSuggestions.forEach((s) => {
+      const p = s.product
+      const statusText = s.urgency === 'sold_out' ? '⚠️ AGOTADO POR VENTAS' : `Stock: ${s.currentStock} pza(s)`
+      msg += `• *${s.suggestedQty}x* [${p.sku}] ${p.name} (${p.presentation}) [${statusText}] - Costo: ${formatCurrency(s.estimatedOrderCost)}\n`
+    })
+
+    msg += `------------------------------------\n`
+    msg += `🔢 *Total de piezas solicitadas:* ${restockTotals.piecesToOrder}\n`
+    msg += `💵 *Inversión estimada (Costo Empleado):* ${formatCurrency(restockTotals.totalInvestment)}\n`
+    msg += `*Limpieza OKEY - Pedido Oficial de Resurtido* 🧼`
+
+    navigator.clipboard.writeText(msg)
+    showToast('Lista de pedido de reposición copiada para WhatsApp')
+  }
+
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
       {/* Barra Superior del Módulo */}
@@ -175,18 +270,18 @@ export default function InventoryView() {
                 </span>
               </div>
               <p className="text-xs text-slate-500 mt-0.5">
-                Conteo en bodega sin complicaciones. Las ventas se descuentan en automático.
+                Conteo en bodega sin complicaciones. Las ventas se descuentan en automático y sugieren reposición.
               </p>
             </div>
           </div>
         </div>
 
-        {/* Pestañas Principales: "Hacer Inventario" vs "Resumen y Valuación" */}
-        <div className="flex items-center gap-1 bg-slate-100/90 p-1 rounded-2xl border border-slate-200 text-xs font-bold">
+        {/* Pestañas Principales: "Hacer Inventario" vs "Sugerencias de Reposición" vs "Resumen y Valuación" */}
+        <div className="flex items-center gap-1 bg-slate-100/90 p-1 rounded-2xl border border-slate-200 text-xs font-bold overflow-x-auto scrollbar-thin">
           <button
             type="button"
             onClick={() => setActiveTab('audit')}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all ${
+            className={`shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl transition-all ${
               activeTab === 'audit'
                 ? 'bg-white text-blue-700 shadow-sm font-bold'
                 : 'text-slate-600 hover:text-slate-900'
@@ -203,8 +298,26 @@ export default function InventoryView() {
 
           <button
             type="button"
+            onClick={() => setActiveTab('restock')}
+            className={`shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl transition-all ${
+              activeTab === 'restock'
+                ? 'bg-white text-amber-700 shadow-sm font-bold'
+                : 'text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            <Truck className="w-4 h-4 text-amber-600" />
+            <span>Sugerencias de Reposición</span>
+            {restockSuggestions.length > 0 && (
+              <span className="text-[10px] px-1.5 py-0.2 rounded-full font-bold bg-amber-500 text-white">
+                {restockSuggestions.length}
+              </span>
+            )}
+          </button>
+
+          <button
+            type="button"
             onClick={() => setActiveTab('overview')}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all ${
+            className={`shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl transition-all ${
               activeTab === 'overview'
                 ? 'bg-white text-blue-700 shadow-sm font-bold'
                 : 'text-slate-600 hover:text-slate-900'
@@ -380,9 +493,7 @@ export default function InventoryView() {
             </div>
           </div>
 
-          {/* ========================================================= */}
-          {/* LISTA DE CONTEO RÁPIDO (TARJETAS GRANDES Y AMIGABLES)    */}
-          {/* ========================================================= */}
+          {/* LISTA DE CONTEO RÁPIDO (TARJETAS GRANDES Y AMIGABLES) */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
             {filteredProducts.map((p) => {
               const currentStock = Number(p.stock) || 0
@@ -541,7 +652,211 @@ export default function InventoryView() {
       )}
 
       {/* ============================================================== */}
-      {/* VISTA 2: RESUMEN Y VALUACIÓN DE BODEGA                          */}
+      {/* VISTA 2: SUGERENCIAS INTELIGENTES DE REPOSICIÓN (RESURTIDO)     */}
+      {/* ============================================================== */}
+      {activeTab === 'restock' && (
+        <div className="space-y-6 animate-in fade-in duration-150">
+          {/* Header de Reposición */}
+          <div className="bg-gradient-to-r from-amber-50 via-orange-50 to-white p-5 rounded-3xl border border-amber-200/80 shadow-2xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2 text-amber-900 font-extrabold text-base">
+                <Truck className="w-5 h-5 text-amber-600" />
+                <span>Sugerencias de Compra y Reposición a Puntos KEY®</span>
+              </div>
+              <p className="text-xs text-slate-600 max-w-xl">
+                Productos que se han vendido recientemente en recibos o que tienen existencias bajas (1 a 3 piezas). El sistema calcula cuántas piezas pedir y la inversión estimada a Costo Empleado.
+              </p>
+            </div>
+
+            {/* Ajuste de Meta por Producto */}
+            <div className="flex items-center gap-3 bg-white px-4 py-2.5 rounded-2xl border border-amber-200 shadow-2xs shrink-0">
+              <span className="text-xs font-bold text-slate-700">
+                Meta en bodega:
+              </span>
+              <div className="flex items-center gap-1">
+                <button
+                  type="button"
+                  onClick={() => setTargetStockPerItem((t) => Math.max(2, t - 1))}
+                  className="w-7 h-7 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-xs"
+                >
+                  -
+                </button>
+                <span className="w-8 text-center font-black text-sm text-amber-900">
+                  {targetStockPerItem}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setTargetStockPerItem((t) => t + 1)}
+                  className="w-7 h-7 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-xs"
+                >
+                  +
+                </button>
+                <span className="text-xs text-slate-400 font-medium ml-1">pzas c/u</span>
+              </div>
+            </div>
+          </div>
+
+          {/* KPIs de Reposición */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-2xs">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
+                Artículos por Resurtir
+              </span>
+              <div className="text-3xl font-black text-amber-700 tracking-tight">
+                {restockSuggestions.length}
+              </div>
+              <span className="text-xs text-slate-500 block mt-1">
+                productos con stock bajo o agotados por ventas
+              </span>
+            </div>
+
+            <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-2xs">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
+                Piezas Totales a Pedir
+              </span>
+              <div className="text-3xl font-black text-blue-900 tracking-tight">
+                {restockTotals.piecesToOrder}
+              </div>
+              <span className="text-xs text-slate-500 block mt-1">
+                unidades para completar tu meta ({targetStockPerItem} pzas c/u)
+              </span>
+            </div>
+
+            <div className="bg-gradient-to-br from-blue-950 to-slate-900 text-white p-5 rounded-3xl shadow-sm flex flex-col justify-between">
+              <div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-cyan-300 block mb-1">
+                  Inversión Requerida (Costo Empleado)
+                </span>
+                <div className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+                  {formatCurrency(restockTotals.totalInvestment)}
+                </div>
+              </div>
+              <span className="text-xs text-slate-300 block mt-1">
+                Gasto estimado en Puntos KEY®
+              </span>
+            </div>
+          </div>
+
+          {/* Botón para Exportar / Mandar a WhatsApp el Pedido */}
+          {restockSuggestions.length > 0 && (
+            <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-2xs flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div>
+                <h3 className="font-extrabold text-slate-900 text-sm">
+                  ¿Listo para hacer tu pedido a Puntos KEY®?
+                </h3>
+                <p className="text-xs text-slate-500">
+                  Copia la lista formateada con códigos SKU y cantidades para enviarla por WhatsApp a tu proveedor.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={handleCopyRestockOrder}
+                className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold shadow-md shadow-emerald-500/20 transition-all active:scale-98"
+              >
+                <Share2 className="w-4 h-4" />
+                <span>Copiar Pedido para WhatsApp</span>
+              </button>
+            </div>
+          )}
+
+          {/* Lista de Sugerencias de Reposición */}
+          <div className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-2xs">
+            <div className="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between text-xs font-bold text-slate-700">
+              <span>Detalle de Productos para Resurtido ({restockSuggestions.length})</span>
+              <span className="text-slate-400">Ordenados por nivel de urgencia</span>
+            </div>
+
+            <div className="divide-y divide-slate-100">
+              {restockSuggestions.map((item) => {
+                const p = item.product
+                const isSoldOut = item.urgency === 'sold_out'
+
+                return (
+                  <div
+                    key={p.id}
+                    className={`p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-colors ${
+                      isSoldOut ? 'bg-rose-50/30 hover:bg-rose-50/50' : 'hover:bg-slate-50/70'
+                    }`}
+                  >
+                    {/* Info del Producto */}
+                    <div className="space-y-1.5 flex-1 min-w-0">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="font-mono text-xs font-black px-2.5 py-0.5 rounded-lg bg-slate-100 text-slate-800 border border-slate-200">
+                          CÓD: {p.sku}
+                        </span>
+
+                        {isSoldOut ? (
+                          <span className="inline-flex items-center gap-1 text-[11px] font-extrabold px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800 border border-rose-200">
+                            <AlertTriangle className="w-3.5 h-3.5 text-rose-600" />
+                            <span>¡Agotado por ventas recientes!</span>
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-1 text-[11px] font-extrabold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-200">
+                            <AlertTriangle className="w-3.5 h-3.5 text-amber-600" />
+                            <span>Stock bajo: quedan {item.currentStock} pza(s)</span>
+                          </span>
+                        )}
+
+                        <span className="text-[11px] text-slate-400 uppercase font-bold">
+                          {p.category}
+                        </span>
+                      </div>
+
+                      <h4 className="font-extrabold text-slate-900 text-base leading-snug">
+                        {p.name}
+                      </h4>
+
+                      <div className="flex items-center gap-3 text-xs text-slate-500">
+                        <span className="font-semibold text-cyan-800 bg-cyan-50 px-2 py-0.5 rounded border border-cyan-100">
+                          {p.presentation}
+                        </span>
+                        <span>Costo Empleado: <strong>{formatCurrency(item.itemCost)}</strong></span>
+                        {item.totalSold > 0 && (
+                          <span className="text-blue-700 font-bold">
+                            Vendido en recibos: {item.totalSold} pzas
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Sugerencia de Pedido e Inversión */}
+                    <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center border-t sm:border-t-0 pt-3 sm:pt-0 border-slate-100 shrink-0">
+                      <div className="flex items-center gap-2 text-right">
+                        <span className="text-xs font-bold text-slate-500">Pedir:</span>
+                        <span className="font-mono text-xl sm:text-2xl font-black text-blue-900 bg-blue-50 px-3 py-1 rounded-xl border border-blue-200">
+                          {item.suggestedQty} <span className="text-xs font-bold text-slate-500">pzas</span>
+                        </span>
+                      </div>
+
+                      <span className="text-xs text-slate-500 sm:mt-1">
+                        Inversión: <strong className="text-slate-900">{formatCurrency(item.estimatedOrderCost)}</strong>
+                      </span>
+                    </div>
+                  </div>
+                )
+              })}
+
+              {restockSuggestions.length === 0 && (
+                <div className="p-16 text-center text-slate-400 space-y-3">
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">
+                    <CheckCircle2 className="w-6 h-6" />
+                  </div>
+                  <h3 className="font-extrabold text-slate-900 text-base">
+                    ¡Todo tu inventario está en orden!
+                  </h3>
+                  <p className="text-xs text-slate-500 max-w-sm mx-auto">
+                    No tienes productos agotados por ventas ni con existencias bajas en este momento.
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ============================================================== */}
+      {/* VISTA 3: RESUMEN Y VALUACIÓN DE BODEGA                          */}
       {/* ============================================================== */}
       {activeTab === 'overview' && (
         <div className="space-y-6 animate-in fade-in duration-150">
