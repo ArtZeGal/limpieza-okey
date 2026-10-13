@@ -156,9 +156,9 @@ export async function renderReceiptOnCanvas(canvas, receiptData) {
   }
 
   // 6. TOTAL (Pill inferior al lado de "$ TOTAL: $")
-  // "TOTAL: $" termina con el signo '$' en x=515..520.
-  // La línea punteada corre en y=854.
-  // Colocamos el número en x=535 y baseline y=852 (2px arriba de la línea).
+  // El signo '$' de la plantilla termina en x=540.
+  // La línea punteada corre en y=874..875.
+  // Colocamos el número en x=552 con línea base y=870 (descansando 4px sobre los puntos).
   ctx.font = `900 25px ${fontPrimary}`
   ctx.fillStyle = colorNavy
   ctx.textAlign = 'left'
@@ -166,7 +166,7 @@ export async function renderReceiptOnCanvas(canvas, receiptData) {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   }).format(receiptData.total || 0)
-  ctx.fillText(totalAmountStr, 532, 852)
+  ctx.fillText(totalAmountStr, 552, 870)
 
   return canvas.toDataURL('image/jpeg', 0.95)
 }
