@@ -10,7 +10,8 @@ import {
   Menu,
   X,
   DownloadCloud,
-  Boxes
+  Boxes,
+  BookOpen
 } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { useApp } from '../../context/AppContext'
@@ -89,6 +90,13 @@ export default function Navbar() {
       label: 'Recibos & WhatsApp',
       icon: Receipt,
       badge: receipts.length > 0 ? `${receipts.length}` : null,
+      badgeHighlight: false,
+    },
+    {
+      id: 'manual',
+      label: 'Manual de Uso',
+      icon: BookOpen,
+      badge: null,
       badgeHighlight: false,
     },
   ]

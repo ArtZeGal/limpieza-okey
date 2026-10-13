@@ -5,6 +5,7 @@ import QuoterView from './components/quoter/QuoterView'
 import CustomersView from './components/customers/CustomersView'
 import ReceiptsView from './components/receipts/ReceiptsView'
 import InventoryView from './components/inventory/InventoryView'
+import ManualView from './components/manual/ManualView'
 
 function AppContent() {
   const { activeTab } = useApp()
@@ -28,6 +29,9 @@ function AppContent() {
 
         {/* Módulo 4: Recibos */}
         {activeTab === 'receipts' && <ReceiptsView />}
+
+        {/* Módulo 5: Manual de Uso */}
+        {activeTab === 'manual' && <ManualView />}
       </main>
 
       {/* Footer */}
