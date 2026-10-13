@@ -32,12 +32,13 @@ Construir una aplicación web moderna, ágil, intuitiva y 100% responsiva (optim
 - **Estructura de Artículos:**
   - Código SKU oficial (ej. `15114`, `107`, `15013`, etc.).
   - Nombre completo del producto y presentación (`650ML`, `1L`, `4L`, `3.75L`, `Pieza`, etc.).
-  - Costo base / Empleado ($) y Precio de venta al público ($).
+  - **Costo base:** Estrictamente el **Precio de Empleado** de la lista oficial. *(La columna de "Centros" queda completamente excluida por no aplicar al modelo de negocio de Limpieza OKEY).*
+  - **Precio de Venta:** Precio al Público oficial.
   - Precio de rellenado si aplica (`RELLENABLE`).
 - **Cálculo de Margen:**
-  - Cálculo automático del margen de ganancia por producto:
-    $$\text{Margen (\%)} = \left(\frac{\text{Precio Venta} - \text{Costo}}{\text{Precio Venta}}\right) \times 100$$
-    $$\text{Ganancia (\$) } = \text{Precio Venta} - \text{Costo}$$
+  - Cálculo automático del margen comercial basado en costo Empleado vs precio Público:
+    $$\text{Margen (\%)} = \left(\frac{\text{Precio Venta} - \text{Costo Empleado}}{\text{Precio Venta}}\right) \times 100$$
+    $$\text{Ganancia (\$) } = \text{Precio Venta} - \text{Costo Empleado}$$
 - **Directriz de Paquetes / Promociones:**
   - **Sin paquetes ni promociones activas por el momento** (enfocado en venta por producto individual).
 

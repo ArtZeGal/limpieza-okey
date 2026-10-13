@@ -139,9 +139,7 @@ export default function ProductCard({ product, onEdit }) {
         {viewMode === 'admin' && (
           <div className="pt-2 border-t border-slate-200/60 flex items-center justify-between text-xs text-slate-500">
             <span>Costo Empleado: <strong>{formatCurrency(product.cost)}</strong></span>
-            {product.priceCentros && (
-              <span>Centros: <strong>{formatCurrency(product.priceCentros)}</strong></span>
-            )}
+            <span>Stock: <strong>{product.stock ?? 50} uds</strong></span>
           </div>
         )}
 
