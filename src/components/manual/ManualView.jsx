@@ -593,15 +593,18 @@ export default function ManualView() {
               <div className="p-5 rounded-2xl bg-emerald-50/70 border border-emerald-200 space-y-3">
                 <h4 className="font-extrabold text-emerald-950 text-sm flex items-center gap-2">
                   <Droplets className="w-4 h-4 text-emerald-600" />
-                  <span>Botón "🧪 Ficha & Dilución" en el Catálogo</span>
+                  <span>Fichas Técnicas y Diluciones Oficiales al 100% del Catálogo</span>
                 </h4>
                 <p>
-                  En cada tarjeta del catálogo verás el botón <strong>"Ficha & Dilución"</strong>. Al tocarlo se despliega una ficha técnica completa:
+                  En cada tarjeta del catálogo verás el botón <strong>"Ficha & Dilución"</strong> (o <strong>"Ficha Técnica"</strong> para accesorios y papel). Los 282 productos cuentan con su ficha técnica oficial KEY® Química homologada:
                 </p>
                 <ul className="space-y-1.5 list-disc pl-4">
-                  <li><strong>Dosis exacta de agua y químico:</strong> Proporciones oficiales (1:60, 1:40, 1:20...) y mililitros exactos por litro o por cubeta de 10L.</li>
-                  <li><strong>Superficies protegidas:</strong> Mármoles importados, cantera, granito, canceles de aluminio y cabinas de acero inoxidable.</li>
-                  <li><strong>Protección Patrimonial:</strong> Fórmulas con pH neutro y sales orgánicas que evitan servicios de pulido correctivo de más de $50,000 MXN.</li>
+                  <li><strong>Línea de Químicos Concentrados:</strong> Proporciones oficiales (1:80, 1:60, 1:40, 1:20...), mililitros exactos por litro de agua, rendimiento por envase y costo en uso por litro.</li>
+                  <li><strong>Control de Plagas (BioKey & Geles):</strong> Dosificación exacta de BioKey (20 ml en 1L de agua rinde 5L) y aplicación en puntos de cebo para Maxforce y Klerat.</li>
+                  <li><strong>Lavandería Institucional (DLC, SLC, OXI):</strong> Dosis por carga de 5 kg y 11 kg, lavado automático y enjuague.</li>
+                  <li><strong>Línea Automotriz & Aseo General:</strong> Autoshampoo seco en seco, abrillantadores de llantas y desengrasantes especializados.</li>
+                  <li><strong>Accesorios, Papel y Dispensadores:</strong> Especificaciones de capacidad, compatibilidad, durabilidad y ahorro hoja por hoja.</li>
+                  <li><strong>Política de Envases Sellados OKEY:</strong> OKEY comercializa productos en envases sellados originales de fábrica con sello de garantía, por lo que no aplica venta de relleno a granel.</li>
                 </ul>
               </div>
             </div>

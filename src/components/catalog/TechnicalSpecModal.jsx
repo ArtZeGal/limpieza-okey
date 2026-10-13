@@ -19,15 +19,16 @@ export default function TechnicalSpecModal({ product, onClose, onOpenCalculator 
   const spec = getProductSpec(product)
 
   const handleShareWhatsApp = () => {
+    const tableHeader = (spec.tableTitle || 'Tabla de Dilución y Rendimiento Oficial').toUpperCase()
     const dilutionsText = (spec.dilutions || [])
-      .map((d) => `• *${d.level}:* ${d.ratio} (${d.mlPerLiter}) → Rinde ${d.yieldGalon}`)
+      .map((d) => `• *${d.level}:* ${d.ratio} (${d.mlPerLiter}) → ${d.yieldGalon} [${d.costPerLiter}]`)
       .join('\n')
 
     const instructionsText = (spec.instructions || [])
       .map((ins, i) => `${i + 1}. ${ins}`)
       .join('\n')
 
-    const text = `🧪 *FICHA TÉCNICA Y GUÍA DE DILUCIÓN OFICIAL*
+    const text = `🧪 *FICHA TÉCNICA Y GUÍA OFICIAL*
 🏢 *Limpieza OKEY · Soluciones Profesionales KEY®*
 
 📌 *Producto:* ${product.name}
@@ -35,17 +36,17 @@ export default function TechnicalSpecModal({ product, onClose, onOpenCalculator 
 🏷️ *Categoría:* ${product.category}
 
 💡 *Naturaleza y Beneficios:*
-${spec.nature || 'Fórmula concentrada biodegradable de alta tecnología.'}
+${spec.nature || 'Fórmula profesional oficial KEY® Química.'}
 
-💧 *TABLA DE DILUCIONES OFICIALES:*
+${spec.isHardwareOrPaper ? '📋' : '💧'} *${tableHeader}:*
 ${dilutionsText}
 
-📋 *MODO DE EMPLEO PASO A PASO:*
+📋 *MODO DE EMPLEO / RECOMENDACIONES:*
 ${instructionsText}
 
-🛡️ *Superficies Aptas:* ${(spec.safeSurfaces || []).join(', ')}
+🛡️ *Compatibilidad / Superficies:* ${(spec.safeSurfaces || []).join(', ')}
 
-_Consulte soporte técnico con Limpieza OKEY_`
+_Consulte asesoría técnica especializada con Limpieza OKEY_`
 
     const url = `https://wa.me/?text=${encodeURI(text)}`
     window.open(url, '_blank')
@@ -58,8 +59,17 @@ _Consulte soporte técnico con Limpieza OKEY_`
         <div className="bg-gradient-to-r from-slate-900 via-indigo-950 to-blue-900 text-white p-6 flex items-start justify-between gap-4">
           <div className="space-y-1">
             <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-cyan-400/20 text-cyan-300 text-[11px] font-bold uppercase tracking-wider border border-cyan-400/30">
-              <Droplets className="w-3.5 h-3.5" />
-              <span>Ficha Técnica Oficial & Dosificación</span>
+              {spec.isHardwareOrPaper ? (
+                <>
+                  <Layers className="w-3.5 h-3.5" />
+                  <span>Ficha Técnica Oficial & Especificación</span>
+                </>
+              ) : (
+                <>
+                  <Droplets className="w-3.5 h-3.5" />
+                  <span>Ficha Técnica Oficial & Dosificación</span>
+                </>
+              )}
             </div>
             <h3 className="text-xl sm:text-2xl font-black tracking-tight text-white">
               {product.name}
@@ -102,22 +112,30 @@ _Consulte soporte técnico con Limpieza OKEY_`
             )}
           </div>
 
-          {/* Tabla de Dilución Oficial */}
+          {/* Tabla de Dilución o Rendimiento Oficial */}
           <div className="space-y-2.5">
             <h4 className="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
-              <Droplets className="w-4 h-4 text-cyan-600" />
-              <span>Tabla de Dilución y Rendimiento Oficial</span>
+              {spec.isHardwareOrPaper ? (
+                <Layers className="w-4 h-4 text-cyan-600" />
+              ) : (
+                <Droplets className="w-4 h-4 text-cyan-600" />
+              )}
+              <span>{spec.tableTitle || 'Tabla de Dilución y Rendimiento Oficial'}</span>
             </h4>
 
             <div className="overflow-x-auto border border-slate-200 rounded-2xl">
               <table className="w-full text-left text-xs border-collapse">
                 <thead>
                   <tr className="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
-                    <th className="p-3">Nivel de Limpieza</th>
-                    <th className="p-3">Ratio</th>
-                    <th className="p-3">Dosis en Agua</th>
-                    <th className="p-3">Rendimiento (Galón)</th>
-                    <th className="p-3">Costo en Uso</th>
+                    {(spec.tableHeaders || [
+                      'Nivel de Limpieza',
+                      'Ratio',
+                      'Dosis en Agua',
+                      'Rendimiento (Galón)',
+                      'Costo en Uso'
+                    ]).map((th, idx) => (
+                      <th key={idx} className="p-3">{th}</th>
+                    ))}
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 text-slate-600">
@@ -221,14 +239,14 @@ _Consulte soporte técnico con Limpieza OKEY_`
               <span>Enviar Ficha por WhatsApp</span>
             </button>
 
-            {onOpenCalculator && (
+            {onOpenCalculator && !spec.isHardwareOrPaper && (
               <button
                 type="button"
                 onClick={() => {
                   onClose()
                   onOpenCalculator(product)
                 }}
-                className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-xs transition-colors"
+                className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer"
               >
                 <Calculator className="w-3.5 h-3.5" />
                 <span>Calcular Costo en Uso</span>

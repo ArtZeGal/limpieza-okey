@@ -11,7 +11,6 @@ import {
   CheckCircle,
   Layers,
   Sparkles,
-  RefreshCw,
   Droplets
 } from 'lucide-react'
 import {
@@ -88,29 +87,39 @@ export default function ProductCard({ product, onEdit, onOpenSpec }) {
           {product.name}
         </h3>
 
-        {/* Presentation & Refill Badges */}
+        {/* Presentation & Spec Badges */}
         <div className="flex flex-wrap items-center gap-1.5 mt-2">
           <span className="text-[11px] font-bold text-cyan-800 bg-cyan-50 px-2 py-0.5 rounded-md border border-cyan-200/60">
             {product.presentation}
           </span>
-          {product.priceRefill && (
-            <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200/60">
-              <RefreshCw className="w-3 h-3 text-emerald-600" />
-              <span>Relleno: {formatCurrency(product.priceRefill)}</span>
-            </span>
-          )}
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation()
-              onOpenSpec && onOpenSpec(product)
-            }}
-            className="inline-flex items-center gap-1 text-[11px] font-bold text-indigo-700 bg-indigo-50 hover:bg-indigo-100 px-2 py-0.5 rounded-md border border-indigo-200 transition-colors cursor-pointer"
-            title="Ver ficha técnica oficial y diluciones"
-          >
-            <Droplets className="w-3 h-3 text-indigo-600" />
-            <span>Ficha & Dilución</span>
-          </button>
+          {(() => {
+            const isHardware = [
+              'ACCESORIOS',
+              'VILEDA',
+              'DESPACHADORES DE JABÓN DE MANOS',
+              'DESPACHADORES DE PAPEL',
+              'PAPEL PARA MANOS, SUPERFICIES Y SANITARIOS'
+            ].includes(product.category)
+
+            return (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onOpenSpec && onOpenSpec(product)
+                }}
+                className="inline-flex items-center gap-1 text-[11px] font-bold text-indigo-700 bg-indigo-50 hover:bg-indigo-100 px-2 py-0.5 rounded-md border border-indigo-200 transition-colors cursor-pointer"
+                title={isHardware ? "Ver ficha técnica oficial y especificaciones" : "Ver ficha técnica oficial y diluciones"}
+              >
+                {isHardware ? (
+                  <Layers className="w-3 h-3 text-indigo-600" />
+                ) : (
+                  <Droplets className="w-3 h-3 text-indigo-600" />
+                )}
+                <span>{isHardware ? 'Ficha Técnica' : 'Ficha & Dilución'}</span>
+              </button>
+            )
+          })()}
         </div>
       </div>
 
