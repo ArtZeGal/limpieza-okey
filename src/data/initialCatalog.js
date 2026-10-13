@@ -38,7 +38,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY PRELAVADOR 650ML - LAVANDERÍA",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-107",
@@ -53,7 +53,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY PRELAVADOR 1L - LAVANDERÍA",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15002",
@@ -68,7 +68,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY OXI DESMANCHADOR 4L - LAVANDERÍA",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15013",
@@ -83,7 +83,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY DLC DETERGENTE 4L - LAVANDERÍA",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15014",
@@ -98,7 +98,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY SLC SUAVIZANTE 4L - LAVANDERÍA",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-2250",
@@ -113,7 +113,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY PROTECTOR Y ABRILLANTADOR DE LLANTAS 4L - AUTOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-2252",
@@ -128,7 +128,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY ABRILLANTADOR 1L - AUTOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15110",
@@ -143,7 +143,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY AUTOSHAMPO SECO 650ML - AUTOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-5069",
@@ -158,7 +158,7 @@ export const INITIAL_PRODUCTS = [
     "description": "CEPILLO 10\" PVC CARROCERIA 1PZ - AUTOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15112",
@@ -173,7 +173,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY LIMPIAVIDRIOS 650ML - ASEO GENERAL",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-167",
@@ -188,7 +188,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY LIMPIAVIDRIOS 1L - ASEO GENERAL",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-168",
@@ -203,7 +203,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY LIMPIAVIDRIOS 4L - ASEO GENERAL",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15083",
@@ -218,7 +218,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY LCM PLUS 340G - ASEO GENERAL",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15018",
@@ -233,7 +233,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY BRILLO 320G - ASEO GENERAL",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-387",
@@ -248,7 +248,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY BRILLO 1L - ASEO GENERAL",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-388",
@@ -263,7 +263,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY BRILLO 4L - ASEO GENERAL",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15000",
@@ -278,7 +278,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY DESENGRASANTE FORTE 4L (ANTES KEY LD DESENGRASANTE) - ASEO GENERAL",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-173",
@@ -293,7 +293,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY 1000 (USOS) 4L - ASEO GENERAL",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-533",
@@ -308,7 +308,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY UNICO DESENGRASANTE 4L - ASEO GENERAL",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-2501",
@@ -323,7 +323,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY ENVIRO D 4L - ASEO GENERAL",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15081",
@@ -338,7 +338,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY LX-100 250ML - ASEO GENERAL",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-557",
@@ -353,7 +353,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY LX-100 1L - ASEO GENERAL",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15082",
@@ -368,7 +368,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY REMOVEDOR DE ETIQUETAS 250ML - ASEO GENERAL",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-4213",
@@ -383,7 +383,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY REMOVEDOR DE ETIQUETAS Y GRAFFITI 4L - ASEO GENERAL",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15100",
@@ -398,7 +398,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY DESINCRUSTANTE POST OBRA 1L - ASEO GENERAL",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15101",
@@ -413,7 +413,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY DESINCRUSTANTE POST OBRA 4L - ASEO GENERAL",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-70108",
@@ -428,7 +428,7 @@ export const INITIAL_PRODUCTS = [
     "description": "VANGUARD CLORO 3.75L - ASEO GENERAL",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-2240",
@@ -443,7 +443,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY M-CONTROL 1L - ASEO GENERAL",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15005",
@@ -458,7 +458,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY ALFOMBRAS Y TAPICERIAS 4L (ANTES KEY LAVALFOMBRAS) - ALFOMBRAS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15045",
@@ -473,7 +473,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY QUITAMANCHAS 4L - ALFOMBRAS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-621",
@@ -488,7 +488,7 @@ export const INITIAL_PRODUCTS = [
     "description": "BIOKEY 100ML - CONTROL DE PLAGAS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-626",
@@ -503,7 +503,7 @@ export const INITIAL_PRODUCTS = [
     "description": "MAXFORCE 30G - CONTROL DE PLAGAS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-630",
@@ -518,7 +518,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KLERAT ANT GEL 10G - CONTROL DE PLAGAS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-6118",
@@ -533,7 +533,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY PARAISO 4L - PISOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-6908",
@@ -548,7 +548,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY FIESTA FRUTAL 4L - PISOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-70101",
@@ -563,7 +563,7 @@ export const INITIAL_PRODUCTS = [
     "description": "VANGUARD IMPREGNADOR BASE AGUA 4L - PISOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-143",
@@ -578,7 +578,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY LIMON 4L - PISOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-186",
@@ -593,7 +593,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY PINO 3.8L - PISOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15041",
@@ -608,7 +608,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY LIMPIAPISOS PIEDRA NATURAL 4L (ANTES KEY BRILLANTE/LIMPIAPISOS SUAVE) - PISOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1283",
@@ -623,7 +623,7 @@ export const INITIAL_PRODUCTS = [
     "description": "MOP COMPLETO 40CM - PISOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1284",
@@ -638,7 +638,7 @@ export const INITIAL_PRODUCTS = [
     "description": "FUNDA PARA MOP 40CM - PISOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1285",
@@ -653,7 +653,7 @@ export const INITIAL_PRODUCTS = [
     "description": "MOP COMPLETO 60CM - PISOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1286",
@@ -668,7 +668,7 @@ export const INITIAL_PRODUCTS = [
     "description": "FUNDA PARA MOP 60CM - PISOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1287",
@@ -683,7 +683,7 @@ export const INITIAL_PRODUCTS = [
     "description": "MOP COMPLETO 90CM - PISOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1288",
@@ -698,7 +698,7 @@ export const INITIAL_PRODUCTS = [
     "description": "FUNDA PARA MOP 90CM - PISOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1370",
@@ -713,7 +713,7 @@ export const INITIAL_PRODUCTS = [
     "description": "MOP SECO KEY COMPLETO 125CMREPUESTO TURQ Y BASE - PISOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1371",
@@ -728,7 +728,7 @@ export const INITIAL_PRODUCTS = [
     "description": "REPUESTO MOP SECO KEY 125CMTURQ - PISOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1863",
@@ -743,7 +743,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY GLOX CRISTALIZADOR 4L - PISOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-5996",
@@ -758,7 +758,7 @@ export const INITIAL_PRODUCTS = [
     "description": "FUNDA P/MOP AZUL MOD PROF 90CM - PISOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-8033",
@@ -773,7 +773,7 @@ export const INITIAL_PRODUCTS = [
     "description": "FUNDA PARA MOP BLANCO 60CM - PISOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-8075",
@@ -788,7 +788,7 @@ export const INITIAL_PRODUCTS = [
     "description": "FUNDA PARA MOP AZUL 40CM - PISOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15078",
@@ -803,7 +803,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY TOTAL 650ML - DESINFECCIÓN DE SUPERFICIES Y AMBIENTE",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-523",
@@ -818,7 +818,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY TOTAL 4L - DESINFECCIÓN DE SUPERFICIES Y AMBIENTE",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-2628",
@@ -833,7 +833,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY GERMOQUAT 4L - DESINFECCIÓN DE SUPERFICIES Y AMBIENTE",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-7696",
@@ -848,7 +848,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY PEROXIPRO 4L - DESINFECCIÓN DE SUPERFICIES Y AMBIENTE",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-2892",
@@ -863,7 +863,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY AEROSAN AEROSOL EUCALIPTO 300G - DESINFECCIÓN DE SUPERFICIES Y AMBIENTE",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-2894",
@@ -878,7 +878,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY AEROSAN AEROSOL LIMA LIMON 300G - DESINFECCIÓN DE SUPERFICIES Y AMBIENTE",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-2895",
@@ -893,7 +893,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY AEROSAN AEROSOL ORIGINAL 300G - DESINFECCIÓN DE SUPERFICIES Y AMBIENTE",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15052",
@@ -908,7 +908,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY AEROSAN 4L - DESINFECCIÓN DE SUPERFICIES Y AMBIENTE",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15105",
@@ -923,7 +923,7 @@ export const INITIAL_PRODUCTS = [
     "description": "SANI 950 XP 650ML - DESINFECCIÓN DE SUPERFICIES Y AMBIENTE",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-6768",
@@ -938,7 +938,7 @@ export const INITIAL_PRODUCTS = [
     "description": "SANI 950 4L - DESINFECCIÓN DE SUPERFICIES Y AMBIENTE",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-6769",
@@ -953,7 +953,7 @@ export const INITIAL_PRODUCTS = [
     "description": "SANI 950 XP WIPES 20X20CM C/80 - DESINFECCIÓN DE SUPERFICIES Y AMBIENTE",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1661",
@@ -968,7 +968,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY DOSIFICADOR ODOCONTROL AC - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-7623",
@@ -983,7 +983,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY AMBIENTADOR ELEGANCE 4L - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-11712",
@@ -998,7 +998,7 @@ export const INITIAL_PRODUCTS = [
     "description": "PANTALLA WAVE 3D KIWI-TORONJA - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-11713",
@@ -1013,7 +1013,7 @@ export const INITIAL_PRODUCTS = [
     "description": "PANTALLA WAVE 3D LAVANDA - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-11714",
@@ -1028,7 +1028,7 @@ export const INITIAL_PRODUCTS = [
     "description": "PANTALLA WAVE 3D MANGO - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-11715",
@@ -1043,7 +1043,7 @@ export const INITIAL_PRODUCTS = [
     "description": "PANTALLA WAVE 3D CITRUS - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-11716",
@@ -1058,7 +1058,7 @@ export const INITIAL_PRODUCTS = [
     "description": "PANTALLA WAVE 3D PEPINO-MELON - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-11736",
@@ -1073,7 +1073,7 @@ export const INITIAL_PRODUCTS = [
     "description": "VANGUARD TAPETE ANTI-SPLASH P/MINGITORIO LAVANDA 1PZ - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-11737",
@@ -1088,7 +1088,7 @@ export const INITIAL_PRODUCTS = [
     "description": "VANGUARD TAPETE ANTI-SPLASH P/MINGITORIO CITRUS 1PZ - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-11738",
@@ -1103,7 +1103,7 @@ export const INITIAL_PRODUCTS = [
     "description": "VANGUARD TAPETE ANTI-SPLASH P/MINGITORIO CEREZA 1PZ - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-11739",
@@ -1118,7 +1118,7 @@ export const INITIAL_PRODUCTS = [
     "description": "VANGUARD TAPETE ANTI-SPLASH P/MINGITORIO MANGO 1PZ - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-11717",
@@ -1133,7 +1133,7 @@ export const INITIAL_PRODUCTS = [
     "description": "ECO CLIP KIWI-TORONJA - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-11718",
@@ -1148,7 +1148,7 @@ export const INITIAL_PRODUCTS = [
     "description": "ECO CLIP LAVANDA - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-11719",
@@ -1163,7 +1163,7 @@ export const INITIAL_PRODUCTS = [
     "description": "ECO CLIP MANGO - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-11720",
@@ -1178,7 +1178,7 @@ export const INITIAL_PRODUCTS = [
     "description": "ECO CLIP CITRUS - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-11721",
@@ -1193,7 +1193,7 @@ export const INITIAL_PRODUCTS = [
     "description": "ECO CLIP PEPINO MELON - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-11725",
@@ -1208,7 +1208,7 @@ export const INITIAL_PRODUCTS = [
     "description": "VC MICRO AROMA MANZANA 2.6 OZ - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-11726",
@@ -1223,7 +1223,7 @@ export const INITIAL_PRODUCTS = [
     "description": "VC MICRO AROMA BERGAMOTA Y SANDALO 2.6 OZ - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-11727",
@@ -1238,7 +1238,7 @@ export const INITIAL_PRODUCTS = [
     "description": "VC MICRO AROMA CANELA 2.6 OZ - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-11728",
@@ -1253,7 +1253,7 @@ export const INITIAL_PRODUCTS = [
     "description": "VC MICRO AROMA MANGO 2.6 OZ - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-11729",
@@ -1268,7 +1268,7 @@ export const INITIAL_PRODUCTS = [
     "description": "VC MICRO AROMA PEPINO MELON 2.6 OZ - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-11730",
@@ -1283,7 +1283,7 @@ export const INITIAL_PRODUCTS = [
     "description": "VC MICRO AROMA LAVANDA Y GERANIO 2.6 OZ - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-11731",
@@ -1298,7 +1298,7 @@ export const INITIAL_PRODUCTS = [
     "description": "VC MICRO AROMA BRISA 2.6 OZ - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-80017",
@@ -1313,7 +1313,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY O2 SISTEMA ODOCONTROL - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-80018",
@@ -1328,7 +1328,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY O2 AROMA NARANJA (TANG) - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-80020",
@@ -1343,7 +1343,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY O2 AROMA SPA - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-80021",
@@ -1358,7 +1358,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY O2 AROMA GLOW - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-80022",
@@ -1373,7 +1373,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY O2 AROMA CRUSH - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-80023",
@@ -1388,7 +1388,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY O2 AROMA CHARM - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15080",
@@ -1403,7 +1403,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY MULTI-BIO 650ML - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-548",
@@ -1418,7 +1418,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY MULTI-BIO 4L - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-2178",
@@ -1433,7 +1433,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY DEODORIZANTE 4L - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15059",
@@ -1448,7 +1448,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY AIRE LIMPIO LIMA 220G - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15060",
@@ -1463,7 +1463,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY AIRE LIMPIO CANELA 220G - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15064",
@@ -1478,7 +1478,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY AIRE LIMPIO ALPINO 220G - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15065",
@@ -1493,7 +1493,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY AIRE LIMPIO CAMPOS FRESCOS 220G - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15046",
@@ -1508,7 +1508,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY AIRE LIMPIO BOSQUE 220G - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-70038",
@@ -1523,7 +1523,7 @@ export const INITIAL_PRODUCTS = [
     "description": "VANGUARD AROMATIZANTE FIESTA FRUTAL 4L - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-70052",
@@ -1538,7 +1538,7 @@ export const INITIAL_PRODUCTS = [
     "description": "VANGUARD AROMATIZANTE MANZANA CANELA 4L - CONTROL DE OLORES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-2668",
@@ -1553,7 +1553,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY SANODERM 4L - DESINFECCIÓN DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-6780",
@@ -1568,7 +1568,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY SOLUCION ANTISEPTICA 4L - DESINFECCIÓN DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-6964",
@@ -1583,7 +1583,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY DERMOWIPE 70% 960ML - DESINFECCIÓN DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-6960",
@@ -1598,7 +1598,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY DERMOWIPE 70% 4L - DESINFECCIÓN DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1914",
@@ -1613,7 +1613,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TOALLAS SANITIZANTES DE MANOS - DESINFECCIÓN DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15113",
@@ -1628,7 +1628,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY BAÑO FORTE 650ML - BAÑOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15007",
@@ -1643,7 +1643,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY BAÑO FORTE 4L (ANTES KEY LIMPIABAÑOS) - BAÑOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15023",
@@ -1658,7 +1658,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY BAÑO 1L (ANTES KEY FORMULA 503) - BAÑOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15024",
@@ -1673,7 +1673,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY BAÑO 4L (ANTES KEY FORMULA 503) - BAÑOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15037",
@@ -1688,7 +1688,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY PLOMERO 1L - BAÑOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15040",
@@ -1703,7 +1703,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY BAÑO PIEDRA NATURAL 4L (ANTES KEY LIMPIABAÑOS SUAVE) - BAÑOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-618",
@@ -1718,7 +1718,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY L-BIO 4L - COCINA PROFESIONAL - SISTEMA ALISAN",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-4633",
@@ -1733,7 +1733,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY DESINFECTANTE DE FRUTAS Y VERDURAS 4L - COCINA PROFESIONAL - SISTEMA ALISAN",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-6383",
@@ -1748,7 +1748,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY LIMPIADOR DE ACERO INOXIDABLE 3KG - COCINA PROFESIONAL - SISTEMA ALISAN",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-6423",
@@ -1763,7 +1763,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY LIMPIADOR DE PARRILLAS PASO 1 4L - COCINA PROFESIONAL - SISTEMA ALISAN",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-6428",
@@ -1778,7 +1778,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY LIMPIADOR DE PARRILLAS PASO 2 4L - COCINA PROFESIONAL - SISTEMA ALISAN",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15054",
@@ -1793,7 +1793,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY SANITIZANTE COCINA 4L - COCINA PROFESIONAL - SISTEMA ALISAN",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15057",
@@ -1808,7 +1808,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY DESINCRUSTANTE COCINA (PLUS) 4L - COCINA PROFESIONAL - SISTEMA ALISAN",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15111",
@@ -1823,7 +1823,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY DESENGRASANTE COCINA (PLUS) 650ML - COCINA PROFESIONAL - SISTEMA ALISAN",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15058",
@@ -1838,7 +1838,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY DESENGRASANTE COCINA (PLUS) 4L - COCINA PROFESIONAL - SISTEMA ALISAN",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15063",
@@ -1853,7 +1853,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY LUSTRADOR DE ACERO INOXIDABLE 1L - COCINA PROFESIONAL - SISTEMA ALISAN",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-123",
@@ -1868,7 +1868,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY LAVALOZA 4L - COCINA",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-287",
@@ -1883,7 +1883,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY LIMPIAHORNOS 1L - COCINA",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1733",
@@ -1898,7 +1898,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TELAS LIMPIADORAS PARA ACERO INOXIDABLE - COCINA",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15111-2",
@@ -1913,7 +1913,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY DESENGRASANTE COCINA 650ML - COCINA",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-160",
@@ -1928,7 +1928,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY LIMPIAMANOS PASTA 4KG - LAVADO DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-188",
@@ -1943,7 +1943,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY JABON CREMA ALMENDRAS 4L - LAVADO DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-2168",
@@ -1958,7 +1958,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY ESPUMA ANTIBACTERIAL 4L - LAVADO DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-6123",
@@ -1973,7 +1973,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY JABON ESPUMA ALMENDRAS 4L - LAVADO DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-6128",
@@ -1988,7 +1988,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY JABON ESPUMA ROCIO 4L - LAVADO DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-6993",
@@ -2003,7 +2003,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY JABON FLOR DE CORAL 500ML - LAVADO DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15015",
@@ -2018,7 +2018,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY NEUTROLIM 4L - LAVADO DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-2194",
@@ -2033,7 +2033,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY JABON ESPUMA ALMENDRAS CARTUCHO 1L - LAVADO DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-2195",
@@ -2048,7 +2048,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY JABON ESPUMA ROCIO CARTUCHO 1L - LAVADO DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-7683",
@@ -2063,7 +2063,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY SPA SHAMPOO PREMIUM 4L - LAVADO DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-6971",
@@ -2078,7 +2078,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY DERMOWIPE KOP CARTUCHO 1L - LAVADO DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-6980",
@@ -2093,7 +2093,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY JABON ESPUMA ALMENDRAS KOP CARTUCHO 1L - LAVADO DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-6982",
@@ -2108,7 +2108,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY JABON ESPUMA ANTIBACTERIAL KOP CARTUCHO 1L - LAVADO DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-6981",
@@ -2123,7 +2123,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY JABON ESPUMA ROCIO KOP CARTUCHO 1L - LAVADO DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-6975",
@@ -2138,7 +2138,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY JABON LIQUITO NEUTROLIM KOP CARTUCHO 1L - LAVADO DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-6978",
@@ -2153,7 +2153,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY SANODERM KOP CARTUCHO 1L - LAVADO DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15109",
@@ -2168,7 +2168,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY CAPSULA ANTI-OXIDO 1PZ - ESPECIALIDADES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15107",
@@ -2183,7 +2183,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY GEL REMOVEDOR DE OXIDO 1L - ESPECIALIDADES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15108",
@@ -2198,7 +2198,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY LIQUIDO REMOVEDOR DE OXIDO 1L - ESPECIALIDADES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-15103",
@@ -2213,7 +2213,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KEY REMOVEDOR DE CONCRETO 1L - ESPECIALIDADES",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-926",
@@ -2228,7 +2228,7 @@ export const INITIAL_PRODUCTS = [
     "description": "BOTELLA DE PLASTICO 1L PARA DILUCION - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-961",
@@ -2243,7 +2243,7 @@ export const INITIAL_PRODUCTS = [
     "description": "BOMBA DOSIFICADORA 5ML PARA GALON 1PZ - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1137",
@@ -2258,7 +2258,7 @@ export const INITIAL_PRODUCTS = [
     "description": "JALADOR CON MANGO PLASTICO 30CM - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1138",
@@ -2273,7 +2273,7 @@ export const INITIAL_PRODUCTS = [
     "description": "JALADOR CON MANGO PLASTICO 45CM - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1148",
@@ -2288,7 +2288,7 @@ export const INITIAL_PRODUCTS = [
     "description": "REPUESTO DE HULE PARA JALADOR 30CM - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1150",
@@ -2303,7 +2303,7 @@ export const INITIAL_PRODUCTS = [
     "description": "REPUESTO DE HULE PARA JALADOR 45CM - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1154",
@@ -2318,7 +2318,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TUBO DE EXTENSION 2.5M - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1155",
@@ -2333,7 +2333,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TUBO DE EXTENSION 6.6M - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1160",
@@ -2348,7 +2348,7 @@ export const INITIAL_PRODUCTS = [
     "description": "HUMECTADOR COMPLETO 45CM - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1161",
@@ -2363,7 +2363,7 @@ export const INITIAL_PRODUCTS = [
     "description": "FUNDA REPUESTO PARA HUMECTADOR 45CM - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1162",
@@ -2378,7 +2378,7 @@ export const INITIAL_PRODUCTS = [
     "description": "ESPATULA PARA RASPADO DE CRISTALES - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1163",
@@ -2393,7 +2393,7 @@ export const INITIAL_PRODUCTS = [
     "description": "PAQUETE 10 NAVAJAS ESPATULA PARA RASPADO DE CRISTALES - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1183",
@@ -2408,7 +2408,7 @@ export const INITIAL_PRODUCTS = [
     "description": "JALADOR ACERO INOXIDABLE 30CM - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1188",
@@ -2423,7 +2423,7 @@ export const INITIAL_PRODUCTS = [
     "description": "JALADOR ACERO INOXIDABLE 45CM - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1591",
@@ -2438,7 +2438,7 @@ export const INITIAL_PRODUCTS = [
     "description": "PISTOLA ATOMIZADORA USO RUDO ACIDOS - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1593",
@@ -2453,7 +2453,7 @@ export const INITIAL_PRODUCTS = [
     "description": "PISTOLA ATOMIZADORA USO RUDO - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-60001",
@@ -2468,7 +2468,7 @@ export const INITIAL_PRODUCTS = [
     "description": "FIBRA BLANCA 1PZ - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-60002",
@@ -2483,7 +2483,7 @@ export const INITIAL_PRODUCTS = [
     "description": "FIBRA NEGRA 1PZ - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-60003",
@@ -2498,7 +2498,7 @@ export const INITIAL_PRODUCTS = [
     "description": "FIBRA VERDE/AMARILLA 1PZ - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-60000",
@@ -2513,7 +2513,7 @@ export const INITIAL_PRODUCTS = [
     "description": "FIBRA VERDE 1PZ - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-10012",
@@ -2528,7 +2528,7 @@ export const INITIAL_PRODUCTS = [
     "description": "BOLSA VANG ECO4348BK148 ROL/200 PZS - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1945",
@@ -2543,7 +2543,7 @@ export const INITIAL_PRODUCTS = [
     "description": "19\" DISCO CANELA (A.V.) - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1950",
@@ -2558,7 +2558,7 @@ export const INITIAL_PRODUCTS = [
     "description": "DISCO NEGRO EXTRA GRUESO - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1954",
@@ -2573,7 +2573,7 @@ export const INITIAL_PRODUCTS = [
     "description": "DISCO ROJO EXTRA GRUESO - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1957",
@@ -2588,7 +2588,7 @@ export const INITIAL_PRODUCTS = [
     "description": "DISCO BEIGE EXTRA GRUESO - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1965",
@@ -2603,7 +2603,7 @@ export const INITIAL_PRODUCTS = [
     "description": "DISCO DE LANA DE ACERO GRADO 1 - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1966",
@@ -2618,7 +2618,7 @@ export const INITIAL_PRODUCTS = [
     "description": "DISCO VERDE EXTRAGRUESO - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-1975",
@@ -2633,7 +2633,7 @@ export const INITIAL_PRODUCTS = [
     "description": "DISCO BLANCO EXTRAGRUESO - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-3922",
@@ -2648,7 +2648,7 @@ export const INITIAL_PRODUCTS = [
     "description": "GUANTE MULTIUSOS DOBLE CAPA TALLA 8 - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-4014",
@@ -2663,7 +2663,7 @@ export const INITIAL_PRODUCTS = [
     "description": "CUBREBOCA SENCILLO 2 CAPAS (PAQ C/150) - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-4152",
@@ -2678,7 +2678,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TIRAS PARA CLORO 1UD - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-4154",
@@ -2693,7 +2693,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TIRAS PARA QUATS 1UD - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-4156",
@@ -2708,7 +2708,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TIRAS P/ACIDO PERACETICO - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-4838",
@@ -2723,7 +2723,7 @@ export const INITIAL_PRODUCTS = [
     "description": "BASTON DE MADERA 7/8\" X 1.20 PUNTA METALICA - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-4839",
@@ -2738,7 +2738,7 @@ export const INITIAL_PRODUCTS = [
     "description": "BASTON DE LAMINA 1.5M ROJO - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-4842",
@@ -2753,7 +2753,7 @@ export const INITIAL_PRODUCTS = [
     "description": "BASTON DE LAMINA 1.5M AZUL - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-4844",
@@ -2768,7 +2768,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TRAPEADOR HEALTH CARE 18OZ VERDE - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-4850",
@@ -2783,7 +2783,7 @@ export const INITIAL_PRODUCTS = [
     "description": "REPUESTO TRAPEADOR AZUL - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-4877",
@@ -2798,7 +2798,7 @@ export const INITIAL_PRODUCTS = [
     "description": "ESCOBETA PBT MANGO LARGO BLANCO - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-4911",
@@ -2813,7 +2813,7 @@ export const INITIAL_PRODUCTS = [
     "description": "BASTON FIBRA DE VIDRIO 1.5M - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-4916",
@@ -2828,7 +2828,7 @@ export const INITIAL_PRODUCTS = [
     "description": "BASTON FIBRA DE VIDRIO 1.2M - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-35537",
@@ -2843,7 +2843,7 @@ export const INITIAL_PRODUCTS = [
     "description": "REYNERA CEPILLO SANITARIO CON TAZON AZUL 1PZ - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-4998",
@@ -2858,7 +2858,7 @@ export const INITIAL_PRODUCTS = [
     "description": "CUBETA 22L AZUL - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-5005",
@@ -2873,7 +2873,7 @@ export const INITIAL_PRODUCTS = [
     "description": "ESCOBA ANGULAR CON FIBRA - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-5054",
@@ -2888,7 +2888,7 @@ export const INITIAL_PRODUCTS = [
     "description": "RECOGEDOR DE PLASTICO CON BASTON DUST-PRO - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-5067",
@@ -2903,7 +2903,7 @@ export const INITIAL_PRODUCTS = [
     "description": "JALADOR HYGIENIC 45CM AZUL - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-5933",
@@ -2918,7 +2918,7 @@ export const INITIAL_PRODUCTS = [
     "description": "CEPILLO PBT SWISS-DAIRY BLANCO - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-5943",
@@ -2933,7 +2933,7 @@ export const INITIAL_PRODUCTS = [
     "description": "CEPILLO PARA MANOS PBT BLANCO - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-5952",
@@ -2948,7 +2948,7 @@ export const INITIAL_PRODUCTS = [
     "description": "CEPILLO HI-LO POLIPROPILENO - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-7910",
@@ -2963,7 +2963,7 @@ export const INITIAL_PRODUCTS = [
     "description": "CEPILLO TIPO PLANCHA PBT BLANCO - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-8693",
@@ -2978,7 +2978,7 @@ export const INITIAL_PRODUCTS = [
     "description": "ESCOBA TIPO ABANICO EXTRA - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-9069",
@@ -2993,7 +2993,7 @@ export const INITIAL_PRODUCTS = [
     "description": "BASTON PARA MOP VILEDA 140CM 1PZ - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-9063",
@@ -3008,7 +3008,7 @@ export const INITIAL_PRODUCTS = [
     "description": "R-MICROTUFF AZUL 35X38CM (100% RECICLADO) - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-9083",
@@ -3023,7 +3023,7 @@ export const INITIAL_PRODUCTS = [
     "description": "R-MICROTUFF AMAR 35X38CM (100% RECICLADO) - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-9084",
@@ -3038,7 +3038,7 @@ export const INITIAL_PRODUCTS = [
     "description": "R-MICROTUFF ROJO 35X38CM (100% RECICLADO) - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-9085",
@@ -3053,7 +3053,7 @@ export const INITIAL_PRODUCTS = [
     "description": "R-MICROTUFF VERD 35X38CM (100% RECICLADO) - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-9075",
@@ -3068,7 +3068,7 @@ export const INITIAL_PRODUCTS = [
     "description": "MOP ULTRASPED TRIO 40 CM - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-9261",
@@ -3083,7 +3083,7 @@ export const INITIAL_PRODUCTS = [
     "description": "BOTELLA DE PLASTICO CON MEDIDA 1L - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-35001",
@@ -3098,7 +3098,7 @@ export const INITIAL_PRODUCTS = [
     "description": "CUBETA ERGONOMICA 33.1L 1PZ - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-35004",
@@ -3113,7 +3113,7 @@ export const INITIAL_PRODUCTS = [
     "description": "BASE P/MOP QUIJADA 1PZ - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-35005",
@@ -3128,7 +3128,7 @@ export const INITIAL_PRODUCTS = [
     "description": "BASTON MICROFIBRA CON TANQUE USO RUDO P/MICROFIBRA 1PZ - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-35217",
@@ -3143,7 +3143,7 @@ export const INITIAL_PRODUCTS = [
     "description": "MICROFIBRA ROJA 40X40CM - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-35218",
@@ -3158,7 +3158,7 @@ export const INITIAL_PRODUCTS = [
     "description": "MICROFIBRA VERDE 40X40CM - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-35219",
@@ -3173,7 +3173,7 @@ export const INITIAL_PRODUCTS = [
     "description": "MICROFIBRA AZUL 40X40CM - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-35220",
@@ -3188,7 +3188,7 @@ export const INITIAL_PRODUCTS = [
     "description": "MICROFIBRA AMARILLA 40X4 - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-35259",
@@ -3203,7 +3203,7 @@ export const INITIAL_PRODUCTS = [
     "description": "CUBEETA CON EXPRIMIDOR TANDEM 29L 1PZ - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-35278",
@@ -3218,7 +3218,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TRAPEADOR MEZCLA ALGODON/FIBRA SINTETICA SUPER STITCH GRANDE VERDE 1PZ - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-35335",
@@ -3233,7 +3233,7 @@ export const INITIAL_PRODUCTS = [
     "description": "SEÑAL PISO DOBLE CARA C/ADVERTENCIA MULTILINGUE 26 PULG 1PZ - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-35539",
@@ -3248,7 +3248,7 @@ export const INITIAL_PRODUCTS = [
     "description": "RECOGEDOR TRADICIONAL CON MANGO METALICO 1PZ - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-35401",
@@ -3263,7 +3263,7 @@ export const INITIAL_PRODUCTS = [
     "description": "SACUDIDOR DE LANA DE OVEJA BASTON EXTENSIBLE 106.6M 1PZ - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-35541",
@@ -3278,7 +3278,7 @@ export const INITIAL_PRODUCTS = [
     "description": "ORGANIZADOR P/HERRAMIENTAS LIMPIEZA 4 GANCHOS 1PZ - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-35900",
@@ -3293,7 +3293,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TELA CHIX KITCHEN FRESH - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-35901",
@@ -3308,7 +3308,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TELA CHIX FRESH GUY 1PZ - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-35906",
@@ -3323,7 +3323,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TELA DURAWIPE SMOOTH AZU - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-54088",
@@ -3338,7 +3338,7 @@ export const INITIAL_PRODUCTS = [
     "description": "MOPA ULTRASPEED MICROLITE 1PZ - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-99401",
@@ -3353,7 +3353,7 @@ export const INITIAL_PRODUCTS = [
     "description": "ESPUMADORA 250 ML - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-99402",
@@ -3368,7 +3368,7 @@ export const INITIAL_PRODUCTS = [
     "description": "ESPUMADORA 160 ML - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-99414",
@@ -3383,7 +3383,7 @@ export const INITIAL_PRODUCTS = [
     "description": "ESPUMADORA MINI - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-99415",
@@ -3398,7 +3398,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TRAPEADOR DE MICROFIBRA - ACCESORIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-883",
@@ -3413,7 +3413,7 @@ export const INITIAL_PRODUCTS = [
     "description": "JABONERA INDUSTRIAL PARA GALON - DESPACHADORES DE JABÓN DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-51628",
@@ -3428,7 +3428,7 @@ export const INITIAL_PRODUCTS = [
     "description": "DEPOSITO CON VALVULA (JABONERA COD 995) - DESPACHADORES DE JABÓN DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-80030",
@@ -3443,7 +3443,7 @@ export const INITIAL_PRODUCTS = [
     "description": "JABONERA KOP AUTOMATICO 1L BLANCO - DESPACHADORES DE JABÓN DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-80031",
@@ -3458,7 +3458,7 @@ export const INITIAL_PRODUCTS = [
     "description": "JABONERA KOP AUTOMATICO 1L NEGRO - DESPACHADORES DE JABÓN DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-80032",
@@ -3473,7 +3473,7 @@ export const INITIAL_PRODUCTS = [
     "description": "JABONERA KOP MANUAL 1L BLANCO - DESPACHADORES DE JABÓN DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-80033",
@@ -3488,7 +3488,7 @@ export const INITIAL_PRODUCTS = [
     "description": "JABONERA KOP MANUAL 1L NEGRO - DESPACHADORES DE JABÓN DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-80070",
@@ -3503,7 +3503,7 @@ export const INITIAL_PRODUCTS = [
     "description": "JABONERA OV AUTOMATICO RELLENABLE LIQ/GEL 1L BLANCO 1PZ - DESPACHADORES DE JABÓN DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-80071",
@@ -3518,7 +3518,7 @@ export const INITIAL_PRODUCTS = [
     "description": "JABONERA OV MANUAL RELLENABLE ESPUMA 750ML BLANCO 1PZ - DESPACHADORES DE JABÓN DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-80072",
@@ -3533,7 +3533,7 @@ export const INITIAL_PRODUCTS = [
     "description": "JABONERA RELLENABLE AITANA 1L BLANCA 1PZ - DESPACHADORES DE JABÓN DE MANOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-9346",
@@ -3548,7 +3548,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KC DESP TOALLA EN ROLLO MARLIPALANCA HUMO (92276) - DESPACHADORES DE PAPEL",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-9348",
@@ -3563,7 +3563,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KC DESP TOALLA INTER MARLI HUMHUMO (92730) - DESPACHADORES DE PAPEL",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-9347",
@@ -3578,7 +3578,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KC DESP HIG JUMBO JR MARLI HUMHUMO (92715) - DESPACHADORES DE PAPEL",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-9351",
@@ -3593,7 +3593,7 @@ export const INITIAL_PRODUCTS = [
     "description": "KC DESP HIG SR MARLI MANUAL HUMO (94248) - DESPACHADORES DE PAPEL",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-5425",
@@ -3608,7 +3608,7 @@ export const INITIAL_PRODUCTS = [
     "description": "VANGUARD PAPEL MINIROLLO HD 18090537 - PAPEL PARA MANOS, SUPERFICIES Y SANITARIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-5424",
@@ -3623,7 +3623,7 @@ export const INITIAL_PRODUCTS = [
     "description": "VANGUARD PAPEL MAXIROLLO HD 36090538 - PAPEL PARA MANOS, SUPERFICIES Y SANITARIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-5201",
@@ -3638,7 +3638,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TOALLA EN ROLLO PETALO 180M BLANCO CAJA C/6 (92221) - PAPEL PARA MANOS, SUPERFICIES Y SANITARIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-5205",
@@ -3653,7 +3653,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TOALLA EN ROLLO MARLI 180M BLANCO CAJA C/6 (92257) - PAPEL PARA MANOS, SUPERFICIES Y SANITARIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-5210",
@@ -3668,7 +3668,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TOALLA ECOLOGICA EN ROLLO 180MX19.5 CM. CAJA C/6 (92244) - PAPEL PARA MANOS, SUPERFICIES Y SANITARIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-5211",
@@ -3683,7 +3683,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TOALLA INTERDOBLADA PETALO 150 H.BLANCA CAJA C/20 (92113) - PAPEL PARA MANOS, SUPERFICIES Y SANITARIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-5213",
@@ -3698,7 +3698,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TOALLA INTERDOBLADA KLEENEX COTTONELLE 200HJ BLANCO CAJA C/10 (92230) - PAPEL PARA MANOS, SUPERFICIES Y SANITARIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-5214",
@@ -3713,7 +3713,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TOALLA INTERDOBLADA SANITAS 100HJ BLANCO CAJA C/20 (92231) - PAPEL PARA MANOS, SUPERFICIES Y SANITARIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-5252",
@@ -3728,7 +3728,7 @@ export const INITIAL_PRODUCTS = [
     "description": "SERVILLETAS MARLI C/500 HS CAJA C/12 PAQ. (91668) - PAPEL PARA MANOS, SUPERFICIES Y SANITARIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-5270",
@@ -3743,7 +3743,7 @@ export const INITIAL_PRODUCTS = [
     "description": "WIPER WYPALL L40 DE 56PZ - PAPEL PARA MANOS, SUPERFICIES Y SANITARIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-5512",
@@ -3758,7 +3758,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TORK PREMIUM TOALLA INTERDOBLADA BLANCA H/D 21 PAQ.C/100 (10029700) - PAPEL PARA MANOS, SUPERFICIES Y SANITARIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-5513",
@@ -3773,7 +3773,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TORK ADVANCED TOALLA INTERDOBLADA BLANCA H/D 12 PAQ.C/250 (70017420) - PAPEL PARA MANOS, SUPERFICIES Y SANITARIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-5516",
@@ -3788,7 +3788,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TORK UNIV. TOALLA INTERDOBLADA ECOLOGICA H/D 8 PAQ.DE 250 SERVICIOS (70016320) - PAPEL PARA MANOS, SUPERFICIES Y SANITARIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-5533",
@@ -3803,7 +3803,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TORK UNIV. HIGIENICO EN BOBINA MULTIMINI BLANCO H/D 200M (C/12) - PAPEL PARA MANOS, SUPERFICIES Y SANITARIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-5601",
@@ -3818,7 +3818,7 @@ export const INITIAL_PRODUCTS = [
     "description": "SERVI TORK XPRESSNAP ADVANCED BLANCO 24/250HS - PAPEL PARA MANOS, SUPERFICIES Y SANITARIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-5503",
@@ -3833,7 +3833,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TORK UNIVERSAL TOALLA ROLLO BLANCA H/S 180M (C/6) (700160) - PAPEL PARA MANOS, SUPERFICIES Y SANITARIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-6018",
@@ -3848,7 +3848,7 @@ export const INITIAL_PRODUCTS = [
     "description": "VANGUARD TOALLA EN ROLLO 213M HOJA SENCILLA BLANCA C/6 - PAPEL PARA MANOS, SUPERFICIES Y SANITARIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-7100",
@@ -3863,7 +3863,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TORK HIGIENICO ADVANCED 200M HOJA DOBLE BLANCO C/6 - PAPEL PARA MANOS, SUPERFICIES Y SANITARIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-9240",
@@ -3878,7 +3878,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TORK UNIVERSAL TOALLA INTERDOBLADA BLANCA H/D 10 PAQ 200 SERV. 21.5CM - PAPEL PARA MANOS, SUPERFICIES Y SANITARIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-9246",
@@ -3893,7 +3893,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TORK HIGIENICO ADVANCED 200M HOJA DOBLE BLANCO C/6 - PAPEL PARA MANOS, SUPERFICIES Y SANITARIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-9247",
@@ -3908,7 +3908,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TORK HIGIENICO FLUIDO CENTRICO SMARTONE 620M HOJA DOBLE BLANCO C/12 - PAPEL PARA MANOS, SUPERFICIES Y SANITARIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-9301",
@@ -3923,7 +3923,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TORK TOALLA EN ROLLO MATIC 280M BLANCA C/6 - PAPEL PARA MANOS, SUPERFICIES Y SANITARIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-5641",
@@ -3938,7 +3938,7 @@ export const INITIAL_PRODUCTS = [
     "description": "TORK WIPER SHOPMAX ROLLO AZUL C/60 HJS - PAPEL PARA MANOS, SUPERFICIES Y SANITARIOS",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-9061",
@@ -3953,7 +3953,7 @@ export const INITIAL_PRODUCTS = [
     "description": "MICRONQUICK AZUL VILEDA - VILEDA",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-7700",
@@ -3968,7 +3968,7 @@ export const INITIAL_PRODUCTS = [
     "description": "SALVAUÑAS PURACTIVE VERDE VILEDA - VILEDA",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-9065",
@@ -3983,7 +3983,7 @@ export const INITIAL_PRODUCTS = [
     "description": "ESPONJA MIRACLEAN BORRADOR MAGICO VILEDA - VILEDA",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-9068",
@@ -3998,7 +3998,7 @@ export const INITIAL_PRODUCTS = [
     "description": "CUBO 10L GRIS VILEDA - VILEDA",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-54013",
@@ -4013,7 +4013,7 @@ export const INITIAL_PRODUCTS = [
     "description": "PVA ROJA VILEDA - VILEDA",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-54014",
@@ -4028,7 +4028,7 @@ export const INITIAL_PRODUCTS = [
     "description": "PVA AZUL VILEDA - VILEDA",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-54027",
@@ -4043,7 +4043,7 @@ export const INITIAL_PRODUCTS = [
     "description": "SALVAUÑAS PURACTIVE AZUL VILEDA - VILEDA",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-54047",
@@ -4058,7 +4058,7 @@ export const INITIAL_PRODUCTS = [
     "description": "GUANTE UNIVERSAL NITRILO VERDE VILEDA - VILEDA",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-54048",
@@ -4073,7 +4073,7 @@ export const INITIAL_PRODUCTS = [
     "description": "SOPORTE MOP ULTRASPEED VILEDA - VILEDA",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-54059",
@@ -4088,7 +4088,7 @@ export const INITIAL_PRODUCTS = [
     "description": "JALADOR 45CM ESPUMA VERDE PARA PISOS VILEDA - VILEDA",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-54075",
@@ -4103,7 +4103,7 @@ export const INITIAL_PRODUCTS = [
     "description": "MICRONQUICK ROJA VILEDA - VILEDA",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-54092",
@@ -4118,7 +4118,7 @@ export const INITIAL_PRODUCTS = [
     "description": "REPUESTO MOP ULTRASPIN BLANCO DE TRAPEADOR VILEDA - VILEDA",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-54094",
@@ -4133,7 +4133,7 @@ export const INITIAL_PRODUCTS = [
     "description": "CUBO ULTRASPIN MINI AZUL (PEDAL) VILEDA - VILEDA",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   },
   {
     "id": "key-54113",
@@ -4148,6 +4148,6 @@ export const INITIAL_PRODUCTS = [
     "description": "POWER INOX PAD VILEDA - VILEDA",
     "suggestedGift": null,
     "itemsIncluded": [],
-    "stock": 50
+    "stock": 0
   }
 ]
