@@ -177,7 +177,14 @@ export function AppProvider({ children }) {
     }
 
     setReceipts((prev) => [newReceipt, ...prev])
-    setFolioSequence((prev) => prev + 1)
+
+    // Si el usuario editó el folio manualmente (ej. OK-045), continuar el consecutivo a partir de ahí
+    const folioMatch = receiptData.folio ? receiptData.folio.match(/\d+/) : null
+    if (folioMatch) {
+      setFolioSequence(Number(folioMatch[0]) + 1)
+    } else {
+      setFolioSequence((prev) => prev + 1)
+    }
 
     // Incrementar conteo de pedidos del cliente si existe
     if (receiptData.customerId) {
