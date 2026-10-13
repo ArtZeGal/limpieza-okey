@@ -7,7 +7,7 @@ const AppContext = createContext(null)
 const STORAGE_KEYS = {
   CATALOG: 'okey_catalog_v5',
   CART: 'okey_cart_v1',
-  CUSTOMERS: 'okey_customers_v1',
+  CUSTOMERS: 'okey_customers_v2',
   SELECTED_CUSTOMER: 'okey_selected_cust_v1',
   VIEW_MODE: 'okey_view_mode_v1',
   QUOTE_PARAMS: 'okey_quote_params_v1',

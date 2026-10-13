@@ -30,9 +30,9 @@ export default function CustomerSelector() {
   const matchingCustomers = customers.filter((c) => {
     if (!query.trim()) return true
     const q = query.toLowerCase().trim()
-    const matchName = c.name.toLowerCase().includes(q)
-    const matchPhone = c.whatsapp.replace(/\D/g, '').includes(q.replace(/\D/g, ''))
-    const matchAddress = c.address.toLowerCase().includes(q)
+    const matchName = (c.name || '').toLowerCase().includes(q)
+    const matchPhone = (c.whatsapp || '').replace(/\D/g, '').includes(q.replace(/\D/g, ''))
+    const matchAddress = (c.address || '').toLowerCase().includes(q)
     return matchName || matchPhone || matchAddress
   }).slice(0, 5)
 

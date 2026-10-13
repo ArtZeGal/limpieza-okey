@@ -42,11 +42,11 @@ export default function CustomersView() {
       // Filtro de búsqueda (nombre, persona de contacto, whatsapp o dirección)
       if (searchQuery.trim()) {
         const query = searchQuery.toLowerCase().trim()
-        const matchName = cust.name.toLowerCase().includes(query)
-        const matchContact = cust.contactPerson?.toLowerCase().includes(query)
-        const matchPhone = cust.whatsapp.replace(/\D/g, '').includes(query.replace(/\D/g, ''))
-        const matchAddress = cust.address.toLowerCase().includes(query)
-        const matchReferences = cust.references?.toLowerCase().includes(query)
+        const matchName = (cust.name || '').toLowerCase().includes(query)
+        const matchContact = cust.contactPerson?.toLowerCase().includes(query) || false
+        const matchPhone = (cust.whatsapp || '').replace(/\D/g, '').includes(query.replace(/\D/g, ''))
+        const matchAddress = (cust.address || '').toLowerCase().includes(query)
+        const matchReferences = (cust.references || '').toLowerCase().includes(query)
         return matchName || matchContact || matchPhone || matchAddress || matchReferences
       }
 

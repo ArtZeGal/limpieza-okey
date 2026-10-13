@@ -21,8 +21,8 @@ export default function CustomerCard({ customer, onEdit }) {
   const isSelected = selectedCustomer?.id === customer.id
 
   // Formato para WhatsApp
-  const cleanPhone = customer.whatsapp.replace(/\D/g, '')
-  const whatsappUrl = `https://wa.me/52${cleanPhone}`
+  const cleanPhone = customer.whatsapp ? customer.whatsapp.replace(/\D/g, '') : ''
+  const whatsappUrl = cleanPhone ? `https://wa.me/52${cleanPhone}` : '#'
 
   const getCustomerTypeIcon = (type) => {
     switch (type) {
@@ -111,26 +111,40 @@ export default function CustomerCard({ customer, onEdit }) {
 
         {/* WhatsApp & Phone */}
         <div className="mt-3 flex items-center gap-2">
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold border border-emerald-200 transition-colors"
-            title="Abrir chat de WhatsApp"
-          >
-            <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
-            <span>{customer.whatsapp}</span>
-          </a>
+          {cleanPhone ? (
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold border border-emerald-200 transition-colors"
+              title="Abrir chat de WhatsApp"
+            >
+              <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
+              <span>{customer.whatsapp}</span>
+            </a>
+          ) : (
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-slate-100 text-slate-500 text-[11px] font-medium border border-slate-200">
+              <Phone className="w-3 h-3 text-slate-400" />
+              <span>Sin WhatsApp registrado</span>
+            </span>
+          )}
         </div>
 
         {/* Delivery Address & References */}
         <div className="mt-3.5 pt-3 border-t border-slate-100 space-y-2 text-xs">
-          <div className="flex items-start gap-2 text-slate-700">
-            <MapPin className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
-            <span className="font-medium leading-relaxed">
-              {customer.address}
-            </span>
-          </div>
+          {customer.address ? (
+            <div className="flex items-start gap-2 text-slate-700">
+              <MapPin className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+              <span className="font-medium leading-relaxed">
+                {customer.address}
+              </span>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2 text-slate-400 italic text-[11px]">
+              <MapPin className="w-3.5 h-3.5 text-slate-300 shrink-0" />
+              <span>Dirección pendiente de registrar</span>
+            </div>
+          )}
 
           {customer.references && (
             <div className="pl-6 text-[11px] text-slate-500 italic bg-slate-50 p-2 rounded-xl border border-slate-200/60">
