@@ -11,10 +11,12 @@ import {
   AlertCircle,
   CheckCircle2,
   FileText,
+  Receipt,
   Sparkles
 } from 'lucide-react'
 import { formatCurrency, formatPercentage } from '../../utils/formatters'
 import { useApp } from '../../context/AppContext'
+import CustomerSelector from './CustomerSelector'
 
 export default function QuotationSummary() {
   const {
@@ -29,6 +31,7 @@ export default function QuotationSummary() {
     pendingBalance,
     isFullyPaid,
     accumulatedGifts,
+    selectedCustomer,
     setActiveTab,
     showToast,
   } = useApp()
@@ -58,6 +61,16 @@ export default function QuotationSummary() {
 
     let text = `🧼 *COTIZACIÓN LIMPIEZA OKEY*\n`
     text += `📅 Fecha: ${dateStr}\n`
+
+    if (selectedCustomer) {
+      text += `👤 *Cliente:* ${selectedCustomer.name}\n`
+      text += `📱 *WhatsApp:* ${selectedCustomer.whatsapp}\n`
+      text += `📍 *Entrega:* ${selectedCustomer.address}\n`
+      if (selectedCustomer.references) {
+        text += `   _(Ref: ${selectedCustomer.references})_\n`
+      }
+    }
+
     text += `--------------------------------\n`
     text += `📦 *PRODUCTOS Y PAQUETES:*\n`
 
@@ -107,13 +120,13 @@ export default function QuotationSummary() {
 
     navigator.clipboard.writeText(text).then(() => {
       setCopied(true)
-      showToast('Cotización copiada al portapapeles para WhatsApp')
+      showToast('Cotización copiada con datos de entrega para WhatsApp')
       setTimeout(() => setCopied(false), 2500)
     })
   }
 
   return (
-    <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm p-6 space-y-6 sticky top-20">
+    <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm p-6 space-y-5 sticky top-20">
       <div className="flex items-center justify-between pb-3 border-b border-slate-100">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
@@ -125,6 +138,9 @@ export default function QuotationSummary() {
           Cotización
         </span>
       </div>
+
+      {/* Selector y Autocompletado de Cliente */}
+      <CustomerSelector />
 
       {/* Tipo de Entrega */}
       <div className="space-y-2">
@@ -359,15 +375,27 @@ export default function QuotationSummary() {
 
       {/* Botones de Acción */}
       <div className="space-y-2 pt-2">
-        {/* Continuar a Clientes */}
-        <button
-          type="button"
-          onClick={() => setActiveTab('customers')}
-          className="w-full py-3 px-4 rounded-xl font-bold text-xs sm:text-sm bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-500/20 transition-all flex items-center justify-center gap-2 active:scale-98"
-        >
-          <span>Continuar con Datos del Cliente</span>
-          <ArrowRight className="w-4 h-4" />
-        </button>
+        {/* Continuar al siguiente paso (Recibo o Seleccionar Cliente) */}
+        {selectedCustomer ? (
+          <button
+            type="button"
+            onClick={() => setActiveTab('receipts')}
+            className="w-full py-3 px-4 rounded-xl font-bold text-xs sm:text-sm bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-md shadow-blue-500/20 transition-all flex items-center justify-center gap-2 active:scale-98"
+          >
+            <Receipt className="w-4 h-4" />
+            <span>Generar Recibo Oficial ({selectedCustomer.name.split(' ')[0]})</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={() => setActiveTab('customers')}
+            className="w-full py-3 px-4 rounded-xl font-bold text-xs sm:text-sm bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-500/20 transition-all flex items-center justify-center gap-2 active:scale-98"
+          >
+            <span>Seleccionar Datos del Cliente</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        )}
 
         {/* Copiar cotización para WhatsApp */}
         <button

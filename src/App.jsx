@@ -2,8 +2,8 @@ import { AppProvider, useApp } from './context/AppContext'
 import Navbar from './components/common/Navbar'
 import CatalogView from './components/catalog/CatalogView'
 import QuoterView from './components/quoter/QuoterView'
+import CustomersView from './components/customers/CustomersView'
 import {
-  Users,
   Receipt,
   Sparkles,
   ArrowRight
@@ -23,34 +23,8 @@ function AppContent() {
         {/* Módulo 2: Cotizador / Carrito */}
         {activeTab === 'quoter' && <QuoterView />}
 
-        {/* Placeholder para Módulo 3: Clientes */}
-        {activeTab === 'customers' && (
-          <div className="max-w-2xl mx-auto my-12 bg-white rounded-3xl border border-slate-200 p-8 text-center space-y-4 shadow-sm animate-in fade-in duration-200">
-            <div className="w-16 h-16 rounded-2xl bg-violet-50 text-violet-600 mx-auto flex items-center justify-center">
-              <Users className="w-8 h-8" />
-            </div>
-            <div className="space-y-1">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-violet-700 bg-violet-100 px-2.5 py-0.5 rounded-full">
-                Siguiente Módulo en la Lista
-              </span>
-              <h2 className="text-xl sm:text-2xl font-black text-slate-900">
-                Directorio y Búsqueda de Clientes
-              </h2>
-            </div>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-md mx-auto">
-              Búsqueda ultrarrápida por nombre o WhatsApp, historial de compras y autocompletado automático de dirección de entrega.
-            </p>
-            <div className="pt-2 flex justify-center gap-3">
-              <button
-                type="button"
-                onClick={() => setActiveTab('quoter')}
-                className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-all shadow-sm"
-              >
-                Volver al Cotizador
-              </button>
-            </div>
-          </div>
-        )}
+        {/* Módulo 3: Clientes */}
+        {activeTab === 'customers' && <CustomersView />}
 
         {/* Placeholder para Módulo 4: Recibos */}
         {activeTab === 'receipts' && (
@@ -60,22 +34,22 @@ function AppContent() {
             </div>
             <div className="space-y-1">
               <span className="text-[11px] font-bold uppercase tracking-wider text-amber-700 bg-amber-100 px-2.5 py-0.5 rounded-full">
-                Módulo 4
+                Siguiente Módulo en la Lista
               </span>
               <h2 className="text-xl sm:text-2xl font-black text-slate-900">
                 Generador de Recibos y WhatsApp
               </h2>
             </div>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-md mx-auto">
-              Folio tipo OK-001, desglose de pagos, datos bancarios BBVA y botón de envío directo a WhatsApp.
+              Folio oficial consecutivo tipo <strong>OK-001</strong>, desglose formal de pago, datos de transferencia bancaria BBVA y botón directo de emisión y envío por WhatsApp.
             </p>
             <div className="pt-2 flex justify-center gap-3">
               <button
                 type="button"
-                onClick={() => setActiveTab('catalog')}
-                className="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-colors"
+                onClick={() => setActiveTab('quoter')}
+                className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-all shadow-sm"
               >
-                Explorar Catálogo
+                Revisar Cotizador
               </button>
             </div>
           </div>

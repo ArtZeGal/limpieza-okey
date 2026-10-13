@@ -1,11 +1,14 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { INITIAL_PRODUCTS } from '../data/initialCatalog'
+import { INITIAL_CUSTOMERS } from '../data/initialCustomers'
 
 const AppContext = createContext(null)
 
 const STORAGE_KEYS = {
   CATALOG: 'okey_catalog_v1',
   CART: 'okey_cart_v1',
+  CUSTOMERS: 'okey_customers_v1',
+  SELECTED_CUSTOMER: 'okey_selected_cust_v1',
   VIEW_MODE: 'okey_view_mode_v1',
   QUOTE_PARAMS: 'okey_quote_params_v1',
 }
@@ -33,7 +36,52 @@ export function AppProvider({ children }) {
     }
   }, [products])
 
-  // 2. Carrito de Compras
+  // 2. Directorio de Clientes
+  const [customers, setCustomers] = useState(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.CUSTOMERS)
+      if (saved) {
+        const parsed = JSON.parse(saved)
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed
+      }
+    } catch (e) {
+      console.error('Error al leer clientes', e)
+    }
+    return INITIAL_CUSTOMERS
+  })
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEYS.CUSTOMERS, JSON.stringify(customers))
+    } catch (e) {
+      console.error('Error al guardar clientes', e)
+    }
+  }, [customers])
+
+  // Cliente actualmente seleccionado para la cotización / recibo
+  const [selectedCustomer, setSelectedCustomer] = useState(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.SELECTED_CUSTOMER)
+      if (saved) return JSON.parse(saved)
+    } catch (e) {
+      console.error('Error al leer cliente seleccionado', e)
+    }
+    return null
+  })
+
+  useEffect(() => {
+    try {
+      if (selectedCustomer) {
+        localStorage.setItem(STORAGE_KEYS.SELECTED_CUSTOMER, JSON.stringify(selectedCustomer))
+      } else {
+        localStorage.removeItem(STORAGE_KEYS.SELECTED_CUSTOMER)
+      }
+    } catch (e) {
+      console.error('Error al guardar cliente seleccionado', e)
+    }
+  }, [selectedCustomer])
+
+  // 3. Carrito de Compras
   const [cart, setCart] = useState(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.CART)
@@ -52,7 +100,7 @@ export function AppProvider({ children }) {
     }
   }, [cart])
 
-  // 3. Parámetros de Cotización (Anticipo, Tipo de Entrega, Descuento, Notas)
+  // 4. Parámetros de Cotización (Anticipo, Tipo de Entrega, Descuento, Notas)
   const [quoteParams, setQuoteParams] = useState(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.QUOTE_PARAMS)
@@ -77,7 +125,7 @@ export function AppProvider({ children }) {
     }
   }, [quoteParams])
 
-  // 4. Modo de visualización: 'admin' vs 'counter'
+  // 5. Modo de visualización: 'admin' vs 'counter'
   const [viewMode, setViewMode] = useState(() => {
     try {
       return localStorage.getItem(STORAGE_KEYS.VIEW_MODE) || 'admin'
@@ -94,10 +142,10 @@ export function AppProvider({ children }) {
     }
   }, [viewMode])
 
-  // 5. Pestaña de navegación activa
+  // 6. Pestaña de navegación activa
   const [activeTab, setActiveTab] = useState('catalog')
 
-  // 6. Toast de notificaciones
+  // 7. Toast de notificaciones
   const [toast, setToast] = useState(null)
 
   const showToast = (message, type = 'success') => {
@@ -105,6 +153,50 @@ export function AppProvider({ children }) {
     setTimeout(() => {
       setToast((curr) => (curr && curr.message === message ? null : curr))
     }, 3200)
+  }
+
+  // Operaciones de Clientes
+  const addCustomer = (customerData) => {
+    const id = `cust-${Date.now()}`
+    const newCust = {
+      ...customerData,
+      id,
+      ordersCount: 0,
+      createdAt: new Date().toISOString().split('T')[0],
+    }
+    setCustomers((prev) => [newCust, ...prev])
+    setSelectedCustomer(newCust)
+    showToast(`Cliente "${newCust.name}" registrado`)
+    return newCust
+  }
+
+  const updateCustomer = (id, updatedData) => {
+    setCustomers((prev) =>
+      prev.map((c) => (c.id === id ? { ...c, ...updatedData } : c))
+    )
+    if (selectedCustomer?.id === id) {
+      setSelectedCustomer((prev) => ({ ...prev, ...updatedData }))
+    }
+    showToast('Datos del cliente actualizados')
+  }
+
+  const deleteCustomer = (id) => {
+    const cust = customers.find((c) => c.id === id)
+    setCustomers((prev) => prev.filter((c) => c.id !== id))
+    if (selectedCustomer?.id === id) {
+      setSelectedCustomer(null)
+    }
+    showToast(`Cliente "${cust?.name || 'Cliente'}" eliminado`, 'info')
+  }
+
+  const resetCustomers = () => {
+    setCustomers(INITIAL_CUSTOMERS)
+    showToast('Directorio de clientes restablecido', 'info')
+  }
+
+  const clearSelectedCustomer = () => {
+    setSelectedCustomer(null)
+    showToast('Cliente desvinculado de la orden', 'info')
   }
 
   // Operaciones de Catálogo
@@ -191,7 +283,6 @@ export function AppProvider({ children }) {
     showToast('Cotizador vaciado', 'info')
   }
 
-  // Actualizaciones de Parámetros de Cotización
   const updateQuoteParam = (key, value) => {
     setQuoteParams((prev) => ({ ...prev, [key]: value }))
   }
@@ -222,7 +313,7 @@ export function AppProvider({ children }) {
   const pendingBalance = Math.max(0, orderTotal - downPaymentAmount)
   const isFullyPaid = orderTotal > 0 && downPaymentAmount >= orderTotal
 
-  // Regalos sugeridos acumulados en el carrito
+  // Regalos sugeridos acumulados
   const accumulatedGifts = cart
     .filter((item) => item.product.suggestedGift)
     .map((item) => ({
@@ -241,6 +332,16 @@ export function AppProvider({ children }) {
         deleteProduct,
         resetCatalog,
 
+        // Clientes
+        customers,
+        addCustomer,
+        updateCustomer,
+        deleteCustomer,
+        resetCustomers,
+        selectedCustomer,
+        setSelectedCustomer,
+        clearSelectedCustomer,
+
         // Carrito
         cart,
         addToCart,
@@ -254,7 +355,7 @@ export function AppProvider({ children }) {
         amountForFreeShipping,
         freeShippingProgress,
 
-        // Parámetros y cálculos de Cotización
+        // Cotizador
         quoteParams,
         updateQuoteParam,
         effectiveShippingCost,
