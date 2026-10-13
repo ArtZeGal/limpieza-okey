@@ -5,7 +5,7 @@ import { INITIAL_CUSTOMERS } from '../data/initialCustomers'
 const AppContext = createContext(null)
 
 const STORAGE_KEYS = {
-  CATALOG: 'okey_catalog_v2',
+  CATALOG: 'okey_catalog_v3',
   CART: 'okey_cart_v1',
   CUSTOMERS: 'okey_customers_v1',
   SELECTED_CUSTOMER: 'okey_selected_cust_v1',

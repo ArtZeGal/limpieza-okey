@@ -2026,7 +2026,7 @@ export const INITIAL_PRODUCTS = [
     "stock": 50
   },
   {
-    "id": "key-15111",
+    "id": "key-15111-2",
     "sku": "15111",
     "name": "KEY DESENGRASANTE COCINA 650ML",
     "category": "COCINA",
