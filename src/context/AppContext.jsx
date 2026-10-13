@@ -11,6 +11,8 @@ const STORAGE_KEYS = {
   SELECTED_CUSTOMER: 'okey_selected_cust_v1',
   VIEW_MODE: 'okey_view_mode_v1',
   QUOTE_PARAMS: 'okey_quote_params_v1',
+  RECEIPTS: 'okey_receipts_v1',
+  FOLIO_SEQ: 'okey_folio_seq_v1',
 }
 
 export function AppProvider({ children }) {
@@ -58,7 +60,7 @@ export function AppProvider({ children }) {
     }
   }, [customers])
 
-  // Cliente actualmente seleccionado para la cotización / recibo
+  // Cliente actualmente seleccionado
   const [selectedCustomer, setSelectedCustomer] = useState(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.SELECTED_CUSTOMER)
@@ -100,7 +102,7 @@ export function AppProvider({ children }) {
     }
   }, [cart])
 
-  // 4. Parámetros de Cotización (Anticipo, Tipo de Entrega, Descuento, Notas)
+  // 4. Parámetros de Cotización
   const [quoteParams, setQuoteParams] = useState(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.QUOTE_PARAMS)
@@ -110,8 +112,8 @@ export function AppProvider({ children }) {
     }
     return {
       downPayment: '',
-      shippingType: 'delivery', // 'delivery' | 'pickup'
-      deliveryFee: 120, // Tarifa estándar cuando no aplica envío gratis
+      shippingType: 'delivery',
+      deliveryFee: 120,
       discount: '',
       notes: '',
     }
@@ -125,7 +127,79 @@ export function AppProvider({ children }) {
     }
   }, [quoteParams])
 
-  // 5. Modo de visualización: 'admin' vs 'counter'
+  // 5. Historial de Recibos y Consecutivo de Folio
+  const [receipts, setReceipts] = useState(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.RECEIPTS)
+      if (saved) return JSON.parse(saved)
+    } catch (e) {
+      console.error('Error al leer recibos', e)
+    }
+    return []
+  })
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEYS.RECEIPTS, JSON.stringify(receipts))
+    } catch (e) {
+      console.error('Error al guardar recibos', e)
+    }
+  }, [receipts])
+
+  const [folioSequence, setFolioSequence] = useState(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.FOLIO_SEQ)
+      if (saved) return Number(saved) || 1
+    } catch {
+      return 1
+    }
+    return 1
+  })
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEYS.FOLIO_SEQ, folioSequence.toString())
+    } catch (e) {
+      console.error('Error al guardar secuencia de folio', e)
+    }
+  }, [folioSequence])
+
+  // Generador de folio consecutivo (OK-001, OK-002...)
+  const nextFolio = `OK-${String(folioSequence).padStart(3, '0')}`
+
+  // Guardar un nuevo recibo oficial
+  const saveReceipt = (receiptData) => {
+    const id = `rec-${Date.now()}`
+    const newReceipt = {
+      ...receiptData,
+      id,
+      createdAt: new Date().toISOString(),
+    }
+
+    setReceipts((prev) => [newReceipt, ...prev])
+    setFolioSequence((prev) => prev + 1)
+
+    // Incrementar conteo de pedidos del cliente si existe
+    if (receiptData.customerId) {
+      setCustomers((prev) =>
+        prev.map((c) =>
+          c.id === receiptData.customerId
+            ? { ...c, ordersCount: (c.ordersCount || 0) + 1 }
+            : c
+        )
+      )
+    }
+
+    showToast(`Recibo ${newReceipt.folio} emitido y guardado`)
+    return newReceipt
+  }
+
+  const deleteReceipt = (id) => {
+    setReceipts((prev) => prev.filter((r) => r.id !== id))
+    showToast('Recibo eliminado del historial', 'info')
+  }
+
+  // 6. Modo de visualización: 'admin' vs 'counter'
   const [viewMode, setViewMode] = useState(() => {
     try {
       return localStorage.getItem(STORAGE_KEYS.VIEW_MODE) || 'admin'
@@ -142,10 +216,10 @@ export function AppProvider({ children }) {
     }
   }, [viewMode])
 
-  // 6. Pestaña de navegación activa
+  // 7. Pestaña de navegación activa
   const [activeTab, setActiveTab] = useState('catalog')
 
-  // 7. Toast de notificaciones
+  // 8. Toast de notificaciones
   const [toast, setToast] = useState(null)
 
   const showToast = (message, type = 'success') => {
@@ -365,6 +439,12 @@ export function AppProvider({ children }) {
         pendingBalance,
         isFullyPaid,
         accumulatedGifts,
+
+        // Recibos y Folios
+        receipts,
+        nextFolio,
+        saveReceipt,
+        deleteReceipt,
 
         // Preferencias & Navegación
         viewMode,
