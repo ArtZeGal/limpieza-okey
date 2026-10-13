@@ -56,24 +56,31 @@ Construir una aplicación web moderna, ágil, intuitiva y 100% responsiva (optim
   - Modal o formulario exprés para registrar clientes sobre la marcha sin interrumpir el flujo de cotización.
 
 ### 3.4. Generador de Recibos y Órdenes
-- **Folio Consecutivo:**
-  - Nomenclatura oficial con formato tipo `OK-001`, `OK-002`, etc.
-- **Desglose Claro de Pago:**
-  - Lista de productos con cantidades y precios unitarios.
-  - Subtotal, costo de envío (o gratis), descuento si aplica.
-  - Monto total.
-  - Anticipo recibido y Saldo a liquidar contra entrega.
+- **Plantilla Oficial de Recibo (1024x1024 px):**
+  - El recibo **se estampa exactamente sobre la plantilla gráfica oficial** (`/recibo-template.jpg`).
+  - Renderizado en alta resolución mediante HTML5 Canvas manteniendo fidelidad total a los campos gráficos:
+    - **FOLIO:** Posicionado exactamente en la línea punteada superior izquierda (consecutivo tipo `OK-001`, `OK-002`...).
+    - **FECHA:** Posicionada en la línea punteada superior derecha (`DD/MM/AAAA`).
+    - **NOMBRE:** Posicionado en la línea punteada de cliente.
+    - **PEDIDO:** Escrito dentro del recuadro blanco redondeado central, con lista de artículos, cantidades, precios unitarios, regalos incluidos, desglose de subtotal, envío gratis o cobrado, anticipo y saldo a liquidar.
+    - **TOTAL:** Estampado en formato numérico destacado al lado del símbolo `$`.
 - **Datos Bancarios Oficiales para Transferencia (BBVA):**
-  - Banco: **BBVA**
-  - Beneficiario: *Limpieza OKEY*
-  - CLABE Interbancaria y/o Número de Cuenta (configurables).
+  - **Banco:** BBVA
+  - **Beneficiario:** Limpieza OKEY
+  - **Cuenta:** `048 673 9415`
+  - **CLABE Interbancaria:** `012580004867394159`
+  - **Tarjeta:** `4152 3143 1334 7307`
+  *(Coincidentes con el pie de la plantilla gráfica).*
+- **Descargas y Exportación:**
+  - **Descarga como Imagen (JPG / PNG):** Generación instantánea de la imagen a 1024x1024 para enviar directamente como archivo adjunto en chats.
+  - **Impresión / PDF:** Formato de impresión listo para ticket o documento.
 - **Acción Rápida de Envío por WhatsApp:**
   - Botón directo que genera el enlace `https://wa.me/<telefono>?text=<mensaje_formateado>` con un mensaje estructurado y limpio:
     - Saludo personalizado con el nombre del cliente.
-    - Folio y resumen de la compra.
-    - Totales, anticipo recibido y saldo pendiente.
-    - Datos de transferencia BBVA.
-    - Opción de vista o descarga del recibo digital.
+    - Folio y resumen detallado del pedido.
+    - Totales, anticipo recibido y saldo pendiente a liquidar contra entrega.
+    - Datos completos de transferencia BBVA.
+    - Nota indicando que se adjunta la imagen oficial del recibo.
 
 ---
 
