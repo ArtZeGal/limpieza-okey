@@ -11,18 +11,64 @@ import {
   Trash2,
   CheckCircle,
   ArrowRight,
-  FileText
+  FileText,
+  Bell
 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 
 export default function CustomerCard({ customer, onEdit }) {
-  const { selectedCustomer, setSelectedCustomer, deleteCustomer, setActiveTab, showToast } = useApp()
+  const { selectedCustomer, setSelectedCustomer, deleteCustomer, setActiveTab, showToast, receipts } = useApp()
 
   const isSelected = selectedCustomer?.id === customer.id
 
   // Formato para WhatsApp
   const cleanPhone = customer.whatsapp ? customer.whatsapp.replace(/\D/g, '') : ''
   const whatsappUrl = cleanPhone ? `https://wa.me/52${cleanPhone}` : '#'
+
+  // Cálculo de Reorden Inteligente (30 días)
+  const customerReceipts = (receipts || []).filter(
+    (r) =>
+      (r.customerName && r.customerName.toLowerCase().trim() === customer.name.toLowerCase().trim()) ||
+      (r.customerPhone && cleanPhone && r.customerPhone.replace(/\D/g, '') === cleanPhone)
+  )
+  const lastReceipt = customerReceipts[0]
+  const lastDateStr = lastReceipt?.date || lastReceipt?.createdAt || customer.lastPurchaseDate || customer.createdAt || '2026-09-01'
+
+  const parseCustomerDate = (str) => {
+    if (!str) return new Date(2026, 8, 1)
+    if (str.includes('/')) {
+      const parts = str.split('/')
+      if (parts.length === 3) {
+        return new Date(Number(parts[2]), Number(parts[1]) - 1, Number(parts[0]))
+      }
+    }
+    const d = new Date(str)
+    return isNaN(d.getTime()) ? new Date(2026, 8, 1) : d
+  }
+
+  const lastPurchaseDateObj = parseCustomerDate(lastDateStr)
+  const now = new Date()
+  const daysSinceLastPurchase = Math.max(0, Math.floor((now - lastPurchaseDateObj) / (1000 * 60 * 60 * 24)))
+  const isReorderDue = daysSinceLastPurchase >= 30
+
+  const handleSendReorderWhatsApp = () => {
+    if (!cleanPhone) {
+      showToast('Este cliente no tiene teléfono o WhatsApp registrado', 'error')
+      return
+    }
+    const contact = customer.contactPerson || customer.name
+    const text = `¡Hola ${contact}! 🌸 Buenas tardes de Limpieza OKEY.
+
+Esperamos que se encuentre muy bien. Notamos que hace aprox. ${daysSinceLastPurchase} días le surtimos sus productos de limpieza y queríamos ver cómo van en sus instalaciones (pisos, jabón de manos, desengrasante, etc.).
+
+Esta semana tenemos entregas programadas en su zona, ¿gusta que le llevemos algo a domicilio? 🚚✨
+
+Quedamos a sus órdenes con mucho gusto.
+_Limpieza OKEY · Atención personalizada_`
+
+    const url = `https://wa.me/52${cleanPhone}?text=${encodeURIComponent(text)}`
+    window.open(url, '_blank')
+  }
 
   const getCustomerTypeIcon = (type) => {
     switch (type) {
@@ -129,6 +175,35 @@ export default function CustomerCard({ customer, onEdit }) {
             </span>
           )}
         </div>
+
+        {/* Banner de Reorden Inteligente (+30 días) */}
+        {isReorderDue && (
+          <div className="mt-3 p-2.5 rounded-xl bg-amber-50 border border-amber-200/90 flex items-center justify-between gap-2 text-xs">
+            <div className="flex items-center gap-1.5 text-amber-900 min-w-0">
+              <Bell className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+              <div className="min-w-0">
+                <span className="font-extrabold text-[11px] block text-amber-900 truncate">
+                  🔔 Reorden sugerido (+30 días)
+                </span>
+                <span className="text-[10px] text-amber-700 block">
+                  Última compra hace {daysSinceLastPurchase} días
+                </span>
+              </div>
+            </div>
+
+            {cleanPhone && (
+              <button
+                type="button"
+                onClick={handleSendReorderWhatsApp}
+                className="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-black text-[10px] shadow-2xs flex items-center gap-1 shrink-0 transition-all"
+                title="Enviar recordatorio de recompra cordial por WhatsApp"
+              >
+                <MessageCircle className="w-3 h-3" />
+                <span>Recordar</span>
+              </button>
+            )}
+          </div>
+        )}
 
         {/* Delivery Address & References */}
         <div className="mt-3.5 pt-3 border-t border-slate-100 space-y-2 text-xs">

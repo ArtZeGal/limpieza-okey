@@ -9,7 +9,8 @@ import {
   ShoppingCart,
   MessageCircle,
   Building2,
-  Sparkles
+  Sparkles,
+  Bell
 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { CUSTOMER_TYPES } from '../../data/initialCustomers'
@@ -23,17 +24,61 @@ export default function CustomersView() {
     clearSelectedCustomer,
     resetCustomers,
     setActiveTab,
-    cartTotalItems
+    cartTotalItems,
+    receipts
   } = useApp()
 
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedType, setSelectedType] = useState('Todos')
+  const [reorderFilter, setReorderFilter] = useState('all') // 'all' | 'due' | 'recent'
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [customerToEdit, setCustomerToEdit] = useState(null)
+
+  // Función auxiliar para calcular días desde última compra
+  const getDaysSinceLastPurchase = (cust) => {
+    const cleanPhone = cust.whatsapp ? cust.whatsapp.replace(/\D/g, '') : ''
+    const custReceipts = (receipts || []).filter(
+      (r) =>
+        (r.customerName && r.customerName.toLowerCase().trim() === cust.name.toLowerCase().trim()) ||
+        (r.customerPhone && cleanPhone && r.customerPhone.replace(/\D/g, '') === cleanPhone)
+    )
+    const lastDateStr = custReceipts[0]?.date || custReceipts[0]?.createdAt || cust.lastPurchaseDate || cust.createdAt || '2026-09-01'
+    let lastDate = new Date(2026, 8, 1)
+    if (lastDateStr.includes('/')) {
+      const parts = lastDateStr.split('/')
+      if (parts.length === 3) lastDate = new Date(Number(parts[2]), Number(parts[1]) - 1, Number(parts[0]))
+    } else {
+      const d = new Date(lastDateStr)
+      if (!isNaN(d.getTime())) lastDate = d
+    }
+    const diff = Math.floor((new Date() - lastDate) / (1000 * 60 * 60 * 24))
+    return Math.max(0, diff)
+  }
+
+  // Conteos para tabs de reorden
+  const { dueCount, recentCount } = useMemo(() => {
+    let due = 0
+    let recent = 0
+    customers.forEach((cust) => {
+      const days = getDaysSinceLastPurchase(cust)
+      if (days >= 30) due++
+      else recent++
+    })
+    return { dueCount: due, recentCount: recent }
+  }, [customers, receipts])
 
   // Filtrado reactivo en tiempo real
   const filteredCustomers = useMemo(() => {
     return customers.filter((cust) => {
+      // Filtro de reorden (+30 días)
+      if (reorderFilter === 'due') {
+        const days = getDaysSinceLastPurchase(cust)
+        if (days < 30) return false
+      } else if (reorderFilter === 'recent') {
+        const days = getDaysSinceLastPurchase(cust)
+        if (days >= 30) return false
+      }
+
       // Filtro de tipo
       if (selectedType !== 'Todos' && cust.type !== selectedType) {
         return false
@@ -52,7 +97,7 @@ export default function CustomersView() {
 
       return true
     })
-  }, [customers, selectedType, searchQuery])
+  }, [customers, selectedType, searchQuery, reorderFilter, receipts])
 
   const handleOpenNew = () => {
     setCustomerToEdit(null)
@@ -159,6 +204,44 @@ export default function CustomersView() {
               Limpiar
             </button>
           )}
+        </div>
+
+        {/* Reorder Status Tabs */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
+          <button
+            type="button"
+            onClick={() => setReorderFilter('all')}
+            className={`whitespace-nowrap px-3.5 py-1.5 rounded-xl font-bold transition-all ${
+              reorderFilter === 'all'
+                ? 'bg-blue-600 text-white shadow-xs'
+                : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+            }`}
+          >
+            Todos ({customers.length})
+          </button>
+          <button
+            type="button"
+            onClick={() => setReorderFilter('due')}
+            className={`whitespace-nowrap px-3.5 py-1.5 rounded-xl font-bold flex items-center gap-1.5 transition-all ${
+              reorderFilter === 'due'
+                ? 'bg-amber-600 text-white shadow-xs'
+                : 'bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100'
+            }`}
+          >
+            <Bell className="w-3.5 h-3.5" />
+            <span>🔔 Por Reordenar (+30 días) ({dueCount})</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setReorderFilter('recent')}
+            className={`whitespace-nowrap px-3.5 py-1.5 rounded-xl font-bold transition-all ${
+              reorderFilter === 'recent'
+                ? 'bg-emerald-600 text-white shadow-xs'
+                : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+            }`}
+          >
+            ✅ Al Día ({recentCount})
+          </button>
         </div>
 
         {/* Filter Pills */}

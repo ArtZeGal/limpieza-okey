@@ -22,6 +22,7 @@ import { useApp } from '../../context/AppContext'
 import { formatCurrency } from '../../utils/formatters'
 import ReceiptCanvasPreview from './ReceiptCanvasPreview'
 import BBVAInfoCard from './BBVAInfoCard'
+import CashClosureView from './CashClosureView'
 
 export default function ReceiptsView() {
   const {
@@ -252,10 +253,22 @@ export default function ReceiptsView() {
             <History className="w-4 h-4" />
             <span>Historial ({receipts.length})</span>
           </button>
+          <button
+            type="button"
+            onClick={() => setActiveTabState('closure')}
+            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg transition-all ${
+              activeTab === 'closure'
+                ? 'bg-white text-emerald-700 shadow-xs font-bold'
+                : 'text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            <DollarSign className="w-4 h-4 text-emerald-600" />
+            <span>Cierre de Caja & Ganancia</span>
+          </button>
         </div>
       </div>
 
-      {activeTab === 'create' ? (
+      {activeTab === 'create' && (
         /* VISTA: EMITIR RECIBO */
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           {/* Columna Izquierda: Datos y Formulario del Recibo (5 columnas) */}
@@ -401,7 +414,9 @@ export default function ReceiptsView() {
             <ReceiptCanvasPreview receiptData={currentReceiptData} />
           </div>
         </div>
-      ) : (
+      )}
+
+      {activeTab === 'history' && (
         /* VISTA: HISTORIAL DE RECIBOS EMITIDOS */
         <div className="space-y-4">
           {/* Buscador de Historial */}
@@ -519,6 +534,11 @@ export default function ReceiptsView() {
             </div>
           )}
         </div>
+      )}
+
+      {/* VISTA: CIERRE DE CAJA & GANANCIA */}
+      {activeTab === 'closure' && (
+        <CashClosureView />
       )}
     </div>
   )

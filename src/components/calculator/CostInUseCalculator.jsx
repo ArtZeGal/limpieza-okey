@@ -4,7 +4,8 @@ import {
   Share2,
   X,
   Pencil,
-  RotateCcw
+  RotateCcw,
+  Timer
 } from 'lucide-react'
 import { formatCurrency, formatPercentage } from '../../utils/formatters'
 
@@ -89,8 +90,18 @@ export default function CostInUseCalculator({ onClose }) {
     desengrasante: 38.00,
   })
 
+  const [containerType, setContainerType] = useState('galon') // 'galon' | 'porron'
+
   const product = SIMPLE_PRESETS.find((p) => p.id === selectedProductId) || SIMPLE_PRESETS[0]
   const bucket = BUCKET_PRESETS.find((b) => b.id === selectedBucketPresetId) || BUCKET_PRESETS[1]
+
+  // Duración estimada (Calculadora Inversa simple)
+  const totalBucketsYield = containerType === 'galon' ? product.yieldBucketsPerGalon : product.yieldBucketsPerGalon * 5
+  const bucketsPerDay = bucket.litersPerDay / 10
+  const daysOfSupply = Math.round(totalBucketsYield / bucketsPerDay)
+  const durationText = daysOfSupply < 30
+    ? `${daysOfSupply} días (~${Math.max(1, Math.round(daysOfSupply / 7))} sem)`
+    : `${Math.round(daysOfSupply / 30)} meses (~${daysOfSupply} días)`
 
   const currentMarketPrice = Number(customMarketPrices[product.id] ?? product.defaultMarketCostPerLiter)
   const isCustomPrice = currentMarketPrice !== product.defaultMarketCostPerLiter
@@ -143,6 +154,7 @@ export default function CostInUseCalculator({ onClose }) {
 
 🔹 *Área / Producto:* ${product.name} (${product.product})
 🔹 *Uso estimado:* ${bucket.label} (~${metrics.monthlyLiters} litros preparados al mes)
+⏱️ *Duración del envase:* 1 ${containerType === 'galon' ? 'Galón (4L)' : 'Porrón (20L)'} te dura *${durationText}* de uso continuo (~${totalBucketsYield} cubetas).
 
 💰 *COMPARATIVA DE COSTO EN USO:*
 • ❌ *Limpiador convencional actual:* ${formatCurrency(currentMarketPrice)} MXN / litro
@@ -258,6 +270,52 @@ _Presentado por Limpieza OKEY · limpieza-okey.vercel.app_`
                 </button>
               )
             })}
+          </div>
+
+          {/* Mini Calculadora Inversa: ¿Cuánto dura el envase? */}
+          <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs">
+            <div className="flex items-center gap-2 text-slate-700 min-w-0">
+              <Timer className="w-4 h-4 text-indigo-600 shrink-0" />
+              <div>
+                <span className="text-[11px] font-bold text-slate-800 block">
+                  ¿Cuánto dura a este ritmo?
+                </span>
+                <span className="text-[10px] text-slate-500 block">
+                  Rinde <strong>{totalBucketsYield} cubetas</strong> en total.
+                </span>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 self-end sm:self-auto shrink-0">
+              <div className="flex items-center bg-slate-200/80 p-0.5 rounded-xl text-[10px] font-bold">
+                <button
+                  type="button"
+                  onClick={() => setContainerType('galon')}
+                  className={`px-2 py-0.5 rounded-lg transition-all ${
+                    containerType === 'galon'
+                      ? 'bg-white shadow-xs text-slate-900 font-extrabold'
+                      : 'text-slate-500 hover:text-slate-900'
+                  }`}
+                >
+                  Galón 4L
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setContainerType('porron')}
+                  className={`px-2 py-0.5 rounded-lg transition-all ${
+                    containerType === 'porron'
+                      ? 'bg-white shadow-xs text-slate-900 font-extrabold'
+                      : 'text-slate-500 hover:text-slate-900'
+                  }`}
+                >
+                  Porrón 20L
+                </button>
+              </div>
+
+              <span className="px-2 py-0.5 rounded-xl bg-emerald-100 text-emerald-800 font-extrabold text-[11px] border border-emerald-300/60 whitespace-nowrap">
+                ⏳ {durationText}
+              </span>
+            </div>
           </div>
         </div>
 

@@ -405,6 +405,14 @@ export default function ManualView() {
                     En la pestaña <strong>"Recibos & WhatsApp"</strong> tienes el historial completo de todas las órdenes emitidas para reimprimir o consultar cuando quieras.
                   </p>
                 </div>
+                <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-1 sm:col-span-2">
+                  <h5 className="font-bold text-emerald-950 flex items-center gap-1.5">
+                    <span>💰 Cierre de Caja & Ganancia Neta (Por Rango de Fechas)</span>
+                  </h5>
+                  <p className="text-emerald-800 text-xs">
+                    Entra a la sub-pestaña <strong>"Cierre de Caja & Ganancia"</strong> dentro de Recibos para ver el total cobrado, costo oficial OKEY, ganancia en bolsillo y porcentaje de margen en cualquier fecha (Hoy, Esta Semana, Este Mes o Personalizado). Incluye un botón para <em>Ocultar Utilidad</em> si estás frente a un cliente y un botón para <em>Enviar Reporte por WhatsApp</em>.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -443,6 +451,14 @@ export default function ManualView() {
                 <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
                   <strong className="text-slate-900 block">Completar Domicilios</strong>
                   <span>Pulsa el icono de lápiz para editar y guardar calles, colonias o referencias de entrega cuando el cliente las pase.</span>
+                </div>
+                <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200 space-y-1 sm:col-span-3">
+                  <strong className="text-amber-950 block flex items-center gap-1.5">
+                    <span>🔔 Recordatorios de Recompra Automáticos (Cada 30 días)</span>
+                  </strong>
+                  <span className="text-amber-800 text-xs">
+                    La app calcula los días transcurridos desde la última compra de cada cliente. Si ya pasaron 30 días o más, se ilumina una alerta en su tarjeta con un botón directo de <strong>"Recordar (WhatsApp)"</strong> que redacta un mensaje cordial preguntando cómo van con sus insumos y ofreciendo entrega en su zona.
+                  </span>
                 </div>
               </div>
             </div>
@@ -589,6 +605,31 @@ export default function ManualView() {
                 </ul>
               </div>
             </div>
+
+            {/* Nuevo Bloque: Propuesta para Oficinas & Google Sheets */}
+            <div className="p-5 rounded-2xl bg-teal-50 border border-teal-200 space-y-2 text-xs">
+              <h4 className="font-extrabold text-teal-950 text-sm flex items-center gap-2">
+                <Building2 className="w-4 h-4 text-teal-700" />
+                <span>🏢 Propuesta Ejecutiva para Clientes Oficina (Google Sheets / Excel)</span>
+              </h4>
+              <p className="text-teal-900 leading-relaxed">
+                Ubicada en el Catálogo en el botón <strong>"Propuesta Oficinas (Sheets)"</strong>. Permite diagnosticar las necesidades de una oficina en 30 segundos (número de empleados, áreas de café, baños y ventanales), calcular su inversión mensual y exportar la tabla con un clic:
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
+                <div className="p-2.5 rounded-xl bg-white border border-teal-200">
+                  <strong className="text-teal-950 block">📋 Copiar a Google Sheets</strong>
+                  <span className="text-[11px] text-slate-600">Copia la tabla con celdas y tabulaciones exactas. Al darle Ctrl+V en Sheets queda lista.</span>
+                </div>
+                <div className="p-2.5 rounded-xl bg-white border border-teal-200">
+                  <strong className="text-teal-950 block">📥 Descargar CSV / Excel</strong>
+                  <span className="text-[11px] text-slate-600">Genera un archivo compatible con Excel en español con acentos limpios.</span>
+                </div>
+                <div className="p-2.5 rounded-xl bg-white border border-teal-200">
+                  <strong className="text-teal-950 block">📲 WhatsApp Ejecutivo</strong>
+                  <span className="text-[11px] text-slate-600">Redacta una propuesta formal con viñetas para el encargado de compras.</span>
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </div>
@@ -610,6 +651,14 @@ export default function ManualView() {
             {
               q: '¿Cómo explico que el galón de Key Paraíso sale a $1.28 el litro preparado?',
               a: 'Key Paraíso es un concentrado puro. Con una dilución ligera de mantenimiento diario (1:60, aprox. 16 ml por litro de agua), un galón de 4 litros rinde entre 240 y 320 litros de limpiador listo para trapear. Al dividir el precio del galón ($411) entre 320 litros, cada litro de solución cuesta apenas $1.28 MXN, contra los $20.00 o más que cobran en el súper por agua con aroma.',
+            },
+            {
+              q: '¿Cómo funciona la exportación a Google Sheets de la propuesta para oficinas?',
+              a: 'Al presionar "Copiar para Google Sheets", la app copia el desglose completo al portapapeles con formato tabular (TSV). Solo abres una hoja en blanco en sheets.new o Google Drive y presionas Ctrl+V (o Cmd+V en Mac); todas las columnas de productos, cantidades, precios y beneficios se acomodan automáticamente en sus celdas.',
+            },
+            {
+              q: '¿Cómo se calculan las ganancias en el Cierre de Caja?',
+              a: 'La app toma cada producto vendido en los recibos del periodo seleccionado y le resta su Precio de Empleado (Costo OKEY) registrado en el catálogo oficial 2026. La diferencia es tu utilidad bruta exacta.',
             },
           ].map((faq, idx) => {
             const isOpen = openFaqIndex === idx

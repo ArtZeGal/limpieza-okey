@@ -11,7 +11,8 @@ import {
   Sparkles,
   Truck,
   Calculator,
-  Droplets
+  Droplets,
+  Building2
 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { INITIAL_CATEGORIES } from '../../data/initialCatalog'
@@ -19,6 +20,7 @@ import ProductCard from './ProductCard'
 import ProductModal from './ProductModal'
 import TechnicalSpecModal from './TechnicalSpecModal'
 import CostInUseCalculator from '../calculator/CostInUseCalculator'
+import OfficeProposalModal from '../proposals/OfficeProposalModal'
 import { formatCurrency } from '../../utils/formatters'
 
 export default function CatalogView() {
@@ -38,6 +40,7 @@ export default function CatalogView() {
   const [editingProduct, setEditingProduct] = useState(null)
   const [specProduct, setSpecProduct] = useState(null)
   const [isCalculatorOpen, setIsCalculatorOpen] = useState(false)
+  const [isOfficeProposalOpen, setIsOfficeProposalOpen] = useState(false)
 
   // Filtrado reactivo de productos
   const filteredProducts = useMemo(() => {
@@ -126,6 +129,17 @@ export default function CatalogView() {
           >
             <Calculator className="w-3.5 h-3.5" />
             <span>Calculadora de Ahorro</span>
+          </button>
+
+          {/* Botón Propuesta Oficinas (Google Sheets) */}
+          <button
+            type="button"
+            onClick={() => setIsOfficeProposalOpen(true)}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white shadow-xs transition-all active:scale-98"
+            title="Cuestionario de diagnóstico y exportación de propuesta para oficinas a Google Sheets / Excel"
+          >
+            <Building2 className="w-3.5 h-3.5" />
+            <span>Propuesta Oficinas (Sheets)</span>
           </button>
 
           {/* Botón Nuevo Producto */}
@@ -299,6 +313,11 @@ export default function CatalogView() {
             <CostInUseCalculator onClose={() => setIsCalculatorOpen(false)} />
           </div>
         </div>
+      )}
+
+      {/* Modal Propuesta para Oficinas (Google Sheets) */}
+      {isOfficeProposalOpen && (
+        <OfficeProposalModal onClose={() => setIsOfficeProposalOpen(false)} />
       )}
     </div>
   )
