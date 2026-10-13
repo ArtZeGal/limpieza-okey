@@ -215,7 +215,7 @@ export default function ProductModal({ isOpen, onClose, productToEdit }) {
               <span>Precios y Costo Base</span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs font-medium text-slate-600 mb-1">
                   Costo Base / Empleado ($)
@@ -251,20 +251,6 @@ export default function ProductModal({ isOpen, onClose, productToEdit }) {
                     className="w-full pl-7 pr-3 py-2 text-sm font-bold border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none bg-white text-slate-900"
                   />
                 </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-slate-600 mb-1">
-                  Inventario Inicial
-                </label>
-                <input
-                  type="number"
-                  min="0"
-                  value={formData.stock}
-                  onChange={(e) => setFormData({ ...formData, stock: e.target.value })}
-                  placeholder="50"
-                  className="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none bg-white"
-                />
               </div>
             </div>
 
