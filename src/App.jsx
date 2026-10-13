@@ -4,6 +4,7 @@ import CatalogView from './components/catalog/CatalogView'
 import QuoterView from './components/quoter/QuoterView'
 import CustomersView from './components/customers/CustomersView'
 import ReceiptsView from './components/receipts/ReceiptsView'
+import InventoryView from './components/inventory/InventoryView'
 
 function AppContent() {
   const { activeTab } = useApp()
@@ -15,6 +16,9 @@ function AppContent() {
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* Módulo 1: Catálogo */}
         {activeTab === 'catalog' && <CatalogView />}
+
+        {/* Módulo de Inventario Físico */}
+        {activeTab === 'inventory' && <InventoryView />}
 
         {/* Módulo 2: Cotizador / Carrito */}
         {activeTab === 'quoter' && <QuoterView />}

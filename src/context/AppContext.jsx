@@ -186,6 +186,26 @@ export function AppProvider({ children }) {
       setFolioSequence((prev) => prev + 1)
     }
 
+    // Descontar automáticamente del inventario físico al realizar la venta
+    if (Array.isArray(receiptData.items) && receiptData.items.length > 0) {
+      setProducts((prev) => {
+        return prev.map((product) => {
+          const soldItem = receiptData.items.find(
+            (it) =>
+              (it.productId && it.productId === product.id) ||
+              (it.sku && product.sku && it.sku === product.sku) ||
+              (it.name && product.name && it.name.trim().toLowerCase() === product.name.trim().toLowerCase())
+          )
+          if (soldItem) {
+            const qtySold = Number(soldItem.quantity) || 1
+            const newStock = Math.max(0, (product.stock || 0) - qtySold)
+            return { ...product, stock: newStock }
+          }
+          return product
+        })
+      })
+    }
+
     // Incrementar conteo de pedidos del cliente si existe
     if (receiptData.customerId) {
       setCustomers((prev) =>
@@ -197,8 +217,35 @@ export function AppProvider({ children }) {
       )
     }
 
-    showToast(`Recibo ${newReceipt.folio} emitido y guardado`)
+    showToast(`Recibo ${newReceipt.folio} emitido y descontado de inventario`)
     return newReceipt
+  }
+
+  // Operaciones de Inventario Físico
+  const updateProductStock = (productId, newStock) => {
+    const qty = Math.max(0, parseInt(newStock, 10) || 0)
+    setProducts((prev) =>
+      prev.map((p) => (p.id === productId ? { ...p, stock: qty } : p))
+    )
+  }
+
+  const adjustProductStock = (productId, delta) => {
+    setProducts((prev) =>
+      prev.map((p) => {
+        if (p.id === productId) {
+          const updated = Math.max(0, (p.stock || 0) + delta)
+          return { ...p, stock: updated }
+        }
+        return p
+      })
+    )
+  }
+
+  const resetAllStock = (defaultStock = 0) => {
+    setProducts((prev) =>
+      prev.map((p) => ({ ...p, stock: Math.max(0, defaultStock) }))
+    )
+    showToast(`Inventario físico establecido en ${defaultStock} para todos los artículos`, 'info')
   }
 
   const deleteReceipt = (id) => {
@@ -452,6 +499,11 @@ export function AppProvider({ children }) {
         nextFolio,
         saveReceipt,
         deleteReceipt,
+
+        // Inventario Físico
+        updateProductStock,
+        adjustProductStock,
+        resetAllStock,
 
         // Preferencias & Navegación
         viewMode,

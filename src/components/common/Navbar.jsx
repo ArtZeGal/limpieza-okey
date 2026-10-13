@@ -9,7 +9,8 @@ import {
   AlertTriangle,
   Menu,
   X,
-  DownloadCloud
+  DownloadCloud,
+  Boxes
 } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { useApp } from '../../context/AppContext'
@@ -61,6 +62,12 @@ export default function Navbar() {
       id: 'catalog',
       label: 'Catálogo',
       icon: Package,
+      badge: null,
+    },
+    {
+      id: 'inventory',
+      label: 'Inventario',
+      icon: Boxes,
       badge: null,
     },
     {

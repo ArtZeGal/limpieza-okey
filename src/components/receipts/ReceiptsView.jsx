@@ -74,6 +74,8 @@ export default function ReceiptsView() {
   // Datos estructurados para renderizar en la plantilla canvas
   const currentReceiptData = useMemo(() => {
     const items = cart.map((item) => ({
+      productId: item.product.id,
+      sku: item.product.sku,
       name: item.product.name,
       quantity: item.quantity,
       price: item.product.price,
