@@ -426,6 +426,48 @@ export const PRODUCT_SPECS = {
       { size: 'Aerosan 300g Original', sku: '2895', price: 159.00, cost: 88.33 },
     ],
     idealFor: 'Sanitarios comunes, elevadores y pasillos cerrados con alto flujo peatonal.'
+  },
+
+  // 11. BIOKEY (CONTROL DE PLAGAS)
+  'biokey': {
+    title: 'Biokey · Insecticida Concentrado Oficial KEY® (100 ml)',
+    sku: '0586',
+    category: 'CONTROL DE PLAGAS',
+    nature: 'Insecticida concentrado emulsionable para control de plagas urbanas (cucarachas, hormigas, arañas, moscas).',
+    safeSurfaces: ['Zoclos', 'Grietas', 'Marcos de puertas', 'Cuartos de basura', 'Debajo de tarjas y muebles'],
+    benefits: [
+      'Efecto de derribe inmediato y efecto residual prolongado.',
+      'Formulación oficial KEY® Química para uso profesional urbano.',
+      'Un solo frasco de 100 ml rinde para 5 litros completos de solución lista para aspersión.'
+    ],
+    dilutions: [
+      {
+        level: 'Dosis Oficial Estándar (Cucarachas y rastreros)',
+        ratio: '20 ml por 1 L de agua',
+        mlPerLiter: '20 ml de Biokey en 1 L de agua limpia',
+        yieldGalon: '1 frasco (100 ml) = 5 litros de mezcla lista',
+        yieldPorron: 'N/A',
+        costPerLiter: '$55.00 MXN por litro listo para aspersión',
+      },
+      {
+        level: 'Mantenimiento Preventivo / Insectos Voladores',
+        ratio: '10 ml por 1 L de agua',
+        mlPerLiter: '10 ml de Biokey en 1 L de agua limpia',
+        yieldGalon: '1 frasco (100 ml) = 10 litros de mezcla preventiva',
+        yieldPorron: 'N/A',
+        costPerLiter: '$27.50 MXN por litro preparado',
+      }
+    ],
+    instructions: [
+      'Vierta exactamente 20 ml de Biokey en una botella con atomizador y complete con 1 litro de agua limpia.',
+      'Agite suavemente la botella para emulsionar la mezcla.',
+      'Aspersione sobre zoclos, detrás de electrodomésticos, cuartos de basura y grietas.',
+      'No aplicar sobre alimentos. Dejar ventilar el área durante 30 minutos tras aplicar.'
+    ],
+    presentations: [
+      { size: 'Frasco 100 ml', sku: '0586', price: 275.00, cost: 153.00 },
+    ],
+    idealFor: 'Control de plagas en cuartos de basura, cocinetas, bodegas y perímetros de edificios y empresas.'
   }
 }
 
@@ -445,6 +487,7 @@ export function getProductSpec(product) {
   if (name.includes('acero') || name.includes('lustrador')) return PRODUCT_SPECS['acero']
   if (name.includes('jabon') || name.includes('jabón') || name.includes('espuma')) return PRODUCT_SPECS['jabon']
   if (name.includes('clip') || name.includes('aerosan')) return PRODUCT_SPECS['ecoclip']
+  if (name.includes('biokey') || name.includes('plaga') || name.includes('insecticida')) return PRODUCT_SPECS['biokey']
 
   // Fallback inteligente para productos generales según su categoría
   return {
