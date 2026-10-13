@@ -18,7 +18,8 @@ import {
   ChevronDown,
   ChevronUp,
   FileText,
-  BadgePercent
+  BadgePercent,
+  HelpCircle
 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 

@@ -6,32 +6,35 @@ import CustomersView from './components/customers/CustomersView'
 import ReceiptsView from './components/receipts/ReceiptsView'
 import InventoryView from './components/inventory/InventoryView'
 import ManualView from './components/manual/ManualView'
+import ErrorBoundary from './components/common/ErrorBoundary'
 
 function AppContent() {
-  const { activeTab } = useApp()
+  const { activeTab, setActiveTab } = useApp()
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
       <Navbar />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        {/* Módulo 1: Catálogo */}
-        {activeTab === 'catalog' && <CatalogView />}
+        <ErrorBoundary onReset={() => setActiveTab('catalog')}>
+          {/* Módulo 1: Catálogo */}
+          {activeTab === 'catalog' && <CatalogView />}
 
-        {/* Módulo de Inventario Físico */}
-        {activeTab === 'inventory' && <InventoryView />}
+          {/* Módulo de Inventario Físico */}
+          {activeTab === 'inventory' && <InventoryView />}
 
-        {/* Módulo 2: Cotizador / Carrito */}
-        {activeTab === 'quoter' && <QuoterView />}
+          {/* Módulo 2: Cotizador / Carrito */}
+          {activeTab === 'quoter' && <QuoterView />}
 
-        {/* Módulo 3: Clientes */}
-        {activeTab === 'customers' && <CustomersView />}
+          {/* Módulo 3: Clientes */}
+          {activeTab === 'customers' && <CustomersView />}
 
-        {/* Módulo 4: Recibos */}
-        {activeTab === 'receipts' && <ReceiptsView />}
+          {/* Módulo 4: Recibos */}
+          {activeTab === 'receipts' && <ReceiptsView />}
 
-        {/* Módulo 5: Manual de Uso */}
-        {activeTab === 'manual' && <ManualView />}
+          {/* Módulo 5: Manual de Uso */}
+          {activeTab === 'manual' && <ManualView />}
+        </ErrorBoundary>
       </main>
 
       {/* Footer */}
