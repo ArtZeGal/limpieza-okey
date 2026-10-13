@@ -15,7 +15,7 @@ import { useApp } from '../../context/AppContext'
 import { formatCurrency } from '../../utils/formatters'
 
 export default function Navbar() {
-  const { activeTab, setActiveTab, cartTotalItems, cartSubtotal, toast } = useApp()
+  const { activeTab, setActiveTab, cartTotalItems, cartSubtotal, toast, receipts, customers } = useApp()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const navItems = [
@@ -36,13 +36,15 @@ export default function Navbar() {
       id: 'customers',
       label: 'Clientes',
       icon: Users,
-      badge: 'Próx.',
+      badge: customers.length > 0 ? `${customers.length}` : null,
+      badgeHighlight: false,
     },
     {
       id: 'receipts',
       label: 'Recibos & WhatsApp',
       icon: Receipt,
-      badge: 'Próx.',
+      badge: receipts.length > 0 ? `${receipts.length}` : null,
+      badgeHighlight: false,
     },
   ]
 
