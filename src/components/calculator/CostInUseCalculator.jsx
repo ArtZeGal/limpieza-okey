@@ -1,12 +1,10 @@
 import { useState, useMemo } from 'react'
 import {
   Sparkles,
-  TrendingDown,
   Share2,
-  CheckCircle2,
   X,
-  ShieldCheck,
-  Check
+  Pencil,
+  RotateCcw
 } from 'lucide-react'
 import { formatCurrency, formatPercentage } from '../../utils/formatters'
 
@@ -17,9 +15,10 @@ export const SIMPLE_PRESETS = [
     product: 'Key Paraíso (Galón 4 L)',
     icon: '🌸',
     keyCostPerLiter: 1.28,
-    marketCostPerLiter: 18.00,
+    defaultMarketCostPerLiter: 20.00,
     yieldBucketsPerGalon: 32, // cubetas de 10L
-    benefit: 'pH neutro que protege el mármol, granito y cantera sin desgastar el brillo.',
+    benefit: 'pH neutro que protege el mármol, granito y cantera sin desgastar el brillo ni dejar residuo resbaloso.',
+    marketNote: 'Promedio multiusos comercial (Fabuloso / Pinol / Maestro Limpio)',
   },
   {
     id: 'brillante',
@@ -27,9 +26,10 @@ export const SIMPLE_PRESETS = [
     product: 'Key Brillante (Galón 4 L)',
     icon: '💎',
     keyCostPerLiter: 2.16,
-    marketCostPerLiter: 24.00,
+    defaultMarketCostPerLiter: 26.00,
     yieldBucketsPerGalon: 24,
-    benefit: 'Prolonga el cristalizado del mármol y evita costosos servicios de pulido.',
+    benefit: 'Prolonga el cristalizado del mármol y evita costosos servicios correctivos de desbastado y pulido.',
+    marketNote: 'Promedio limpiador especializado de pisos / mármol en autoservicio',
   },
   {
     id: 'limpiavidrios',
@@ -37,9 +37,10 @@ export const SIMPLE_PRESETS = [
     product: 'Key Limpiavidrios (Galón 4 L)',
     icon: '🪟',
     keyCostPerLiter: 16.68,
-    marketCostPerLiter: 45.00,
+    defaultMarketCostPerLiter: 42.00,
     yieldBucketsPerGalon: 16, // litros listos
-    benefit: 'Secado instantáneo sin marcas de jalador ni sombras en ventanales.',
+    benefit: 'Secado instantáneo sin marcas de jalador, grasa ni sombras en ventanales panorámicos y espejos.',
+    marketNote: 'Promedio Windex / limpiador de vidrios comercial con pistola 650ml',
   },
   {
     id: 'desengrasante',
@@ -47,9 +48,10 @@ export const SIMPLE_PRESETS = [
     product: 'Key Desengrasante Alisan (Galón 4 L)',
     icon: '🍳',
     keyCostPerLiter: 3.79,
-    marketCostPerLiter: 35.00,
+    defaultMarketCostPerLiter: 38.00,
     yieldBucketsPerGalon: 12,
-    benefit: 'Biodegradable sin solventes: no quema acero inoxidable ni genera vapores.',
+    benefit: 'Biodegradable sin solventes ni soda cáustica: no quema acero inoxidable ni emite vapores irritantes.',
+    marketNote: 'Promedio desengrasante comercial de cocina / parrilla en pistola',
   },
 ]
 
@@ -78,19 +80,51 @@ export const BUCKET_PRESETS = [
 export default function CostInUseCalculator({ onClose }) {
   const [selectedProductId, setSelectedProductId] = useState('paraiso')
   const [selectedBucketPresetId, setSelectedBucketPresetId] = useState('medium')
+  
+  // Precios de mercado personalizados por producto (permiten edición en tiempo real)
+  const [customMarketPrices, setCustomMarketPrices] = useState({
+    paraiso: 20.00,
+    brillante: 26.00,
+    limpiavidrios: 42.00,
+    desengrasante: 38.00,
+  })
 
   const product = SIMPLE_PRESETS.find((p) => p.id === selectedProductId) || SIMPLE_PRESETS[0]
   const bucket = BUCKET_PRESETS.find((b) => b.id === selectedBucketPresetId) || BUCKET_PRESETS[1]
 
+  const currentMarketPrice = Number(customMarketPrices[product.id] ?? product.defaultMarketCostPerLiter)
+  const isCustomPrice = currentMarketPrice !== product.defaultMarketCostPerLiter
+
+  const handlePriceChange = (val) => {
+    const num = val === '' ? '' : Math.max(0, parseFloat(val) || 0)
+    setCustomMarketPrices((prev) => ({
+      ...prev,
+      [product.id]: num,
+    }))
+  }
+
+  const handleResetPrice = () => {
+    setCustomMarketPrices((prev) => ({
+      ...prev,
+      [product.id]: product.defaultMarketCostPerLiter,
+    }))
+  }
+
   // Cálculos matemáticos simples y contundentes
   const metrics = useMemo(() => {
+    const marketPrice = typeof currentMarketPrice === 'number' && !isNaN(currentMarketPrice) ? currentMarketPrice : 0
     const monthlyLiters = bucket.litersPerDay * 30
     const monthlyKeyCost = monthlyLiters * product.keyCostPerLiter
-    const monthlyMarketCost = monthlyLiters * product.marketCostPerLiter
+    const monthlyMarketCost = monthlyLiters * marketPrice
 
     const monthlySavings = Math.max(0, monthlyMarketCost - monthlyKeyCost)
     const annualSavings = monthlySavings * 12
-    const timesCheaper = Math.round(product.marketCostPerLiter / product.keyCostPerLiter)
+    const timesCheaper = product.keyCostPerLiter > 0 && marketPrice > 0
+      ? (marketPrice / product.keyCostPerLiter).toFixed(1)
+      : '0'
+    const savingsPercent = monthlyMarketCost > 0
+      ? Math.round((monthlySavings / monthlyMarketCost) * 100)
+      : 0
 
     return {
       monthlyLiters,
@@ -99,8 +133,9 @@ export default function CostInUseCalculator({ onClose }) {
       monthlySavings,
       annualSavings,
       timesCheaper,
+      savingsPercent,
     }
-  }, [product, bucket])
+  }, [product, bucket, currentMarketPrice])
 
   const handleShareWhatsApp = () => {
     const text = `📊 *ESTUDIO DE AHORRO REAL EN LIMPIEZA*
@@ -110,11 +145,11 @@ export default function CostInUseCalculator({ onClose }) {
 🔹 *Uso estimado:* ${bucket.label} (~${metrics.monthlyLiters} litros preparados al mes)
 
 💰 *COMPARATIVA DE COSTO EN USO:*
-• ❌ *Limpiador convencional:* ${formatCurrency(product.marketCostPerLiter)} MXN / litro
+• ❌ *Limpiador convencional actual:* ${formatCurrency(currentMarketPrice)} MXN / litro
 • ✅ *KEY® Concentrado:* *${formatCurrency(product.keyCostPerLiter)} MXN / litro*
-⭐ *¡Cuesta ${metrics.timesCheaper} veces menos!*
+⭐ *¡KEY cuesta ${metrics.timesCheaper}x menos (${metrics.savingsPercent}% de ahorro directo)!*
 
-📈 *AHORRO DIRECTO:*
+📈 *AHORRO DIRECTO PROYECTADO:*
 • Ahorro estimado al mes: *${formatCurrency(metrics.monthlySavings)} MXN*
 💎 *AHORRO PROYECTADO AL AÑO:* *${formatCurrency(metrics.annualSavings)} MXN*
 
@@ -140,7 +175,7 @@ _Presentado por Limpieza OKEY · limpieza-okey.vercel.app_`
             Costo en Uso y Ahorro Real
           </h3>
           <p className="text-xs text-slate-300">
-            Compara en 3 toques el costo por litro listo para usar.
+            Compara en vivo lo que tu cliente paga hoy vs. el sistema concentrado KEY®.
           </p>
         </div>
 
@@ -228,23 +263,53 @@ _Presentado por Limpieza OKEY · limpieza-okey.vercel.app_`
 
         {/* Paso 3: Comparativa Cara a Cara */}
         <div className="grid grid-cols-2 gap-3 pt-1">
-          {/* Súper / Tradicional */}
-          <div className="p-4 rounded-2xl bg-rose-50/70 border border-rose-200 text-center space-y-1">
-            <span className="text-[10px] font-bold text-rose-700 uppercase tracking-wider block">
-              ❌ Supermercado / Común
-            </span>
-            <div className="text-xl sm:text-2xl font-black text-rose-900">
-              {formatCurrency(product.marketCostPerLiter)}
+          {/* Lo que paga hoy (Supermercado / Distribuidor) - EDITABLE */}
+          <div className="p-3.5 sm:p-4 rounded-2xl bg-rose-50/80 border border-rose-200 text-center space-y-1.5 relative">
+            <div className="flex items-center justify-center gap-1">
+              <span className="text-[10px] font-bold text-rose-700 uppercase tracking-wider">
+                ❌ Paga hoy (Súper)
+              </span>
+              <Pencil className="w-2.5 h-2.5 text-rose-500" />
             </div>
-            <span className="text-[10px] text-rose-600 block">
-              por litro preparado
-            </span>
+
+            <div className="flex items-center justify-center gap-1">
+              <span className="text-base sm:text-lg font-black text-rose-900">$</span>
+              <input
+                type="number"
+                min="0"
+                max="999"
+                step="1"
+                value={currentMarketPrice === '' ? '' : currentMarketPrice}
+                onChange={(e) => handlePriceChange(e.target.value)}
+                className="w-20 text-center text-xl sm:text-2xl font-black text-rose-900 bg-white border border-rose-300 rounded-xl py-0.5 px-1 shadow-inner focus:outline-none focus:ring-2 focus:ring-rose-500"
+                title="Toca para ingresar lo que paga tu cliente hoy"
+              />
+              <span className="text-[11px] font-bold text-rose-700">/L</span>
+            </div>
+
+            <div className="flex items-center justify-center min-h-[16px]">
+              {isCustomPrice ? (
+                <button
+                  type="button"
+                  onClick={handleResetPrice}
+                  className="text-[9px] text-rose-700 hover:text-rose-900 underline font-semibold flex items-center gap-0.5"
+                  title="Restablecer al promedio de mercado sugerido"
+                >
+                  <RotateCcw className="w-2.5 h-2.5" />
+                  <span>Sugerido (${product.defaultMarketCostPerLiter})</span>
+                </button>
+              ) : (
+                <span className="text-[9px] text-rose-500 font-medium">
+                  ✏️ Toca cifra para editar
+                </span>
+              )}
+            </div>
           </div>
 
           {/* KEY Concentrado */}
-          <div className="p-4 rounded-2xl bg-emerald-50 border-2 border-emerald-500 text-center space-y-1 relative shadow-xs">
-            <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full bg-emerald-600 text-white font-extrabold text-[9px] uppercase tracking-wider shadow-xs">
-              {metrics.timesCheaper}x más barato
+          <div className="p-3.5 sm:p-4 rounded-2xl bg-emerald-50 border-2 border-emerald-500 text-center space-y-1.5 relative shadow-xs flex flex-col justify-between">
+            <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-emerald-600 text-white font-extrabold text-[9px] uppercase tracking-wider shadow-xs whitespace-nowrap">
+              {Number(metrics.timesCheaper) > 1 ? `${metrics.timesCheaper}x más barato` : 'Más económico'}
             </span>
             <span className="text-[10px] font-bold text-emerald-800 uppercase tracking-wider block">
               ✅ KEY® Concentrado
@@ -252,8 +317,8 @@ _Presentado por Limpieza OKEY · limpieza-okey.vercel.app_`
             <div className="text-xl sm:text-2xl font-black text-emerald-700">
               {formatCurrency(product.keyCostPerLiter)}
             </div>
-            <span className="text-[10px] text-emerald-800 font-semibold block">
-              por litro listo en cubeta
+            <span className="text-[10px] text-emerald-800 font-semibold block min-h-[16px]">
+              por litro en cubeta
             </span>
           </div>
         </div>
@@ -265,7 +330,7 @@ _Presentado por Limpieza OKEY · limpieza-okey.vercel.app_`
               Ahorro Estimado para el Cliente:
             </span>
             <span className="text-[11px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/40">
-              90%+ de ahorro
+              {metrics.savingsPercent}% de ahorro directo
             </span>
           </div>
 
