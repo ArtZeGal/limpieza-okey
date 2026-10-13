@@ -11,7 +11,8 @@ import {
   CheckCircle,
   Layers,
   Sparkles,
-  RefreshCw
+  RefreshCw,
+  Droplets
 } from 'lucide-react'
 import {
   formatCurrency,
@@ -22,7 +23,7 @@ import {
 } from '../../utils/formatters'
 import { useApp } from '../../context/AppContext'
 
-export default function ProductCard({ product, onEdit }) {
+export default function ProductCard({ product, onEdit, onOpenSpec }) {
   const { addToCart, viewMode, deleteProduct } = useApp()
   const [quantity, setQuantity] = useState(1)
   const [justAdded, setJustAdded] = useState(false)
@@ -98,6 +99,18 @@ export default function ProductCard({ product, onEdit }) {
               <span>Relleno: {formatCurrency(product.priceRefill)}</span>
             </span>
           )}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation()
+              onOpenSpec && onOpenSpec(product)
+            }}
+            className="inline-flex items-center gap-1 text-[11px] font-bold text-indigo-700 bg-indigo-50 hover:bg-indigo-100 px-2 py-0.5 rounded-md border border-indigo-200 transition-colors cursor-pointer"
+            title="Ver ficha técnica oficial y diluciones"
+          >
+            <Droplets className="w-3 h-3 text-indigo-600" />
+            <span>Ficha & Dilución</span>
+          </button>
         </div>
       </div>
 

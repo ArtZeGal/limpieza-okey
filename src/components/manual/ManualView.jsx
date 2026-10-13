@@ -19,7 +19,9 @@ import {
   ChevronUp,
   FileText,
   BadgePercent,
-  HelpCircle
+  HelpCircle,
+  Calculator,
+  Droplets
 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 
@@ -68,6 +70,12 @@ export default function ManualView() {
       label: '📱 Instalar en Celular',
       icon: Smartphone,
       color: 'from-rose-500 to-pink-600',
+    },
+    {
+      id: 'calculator',
+      label: '🧮 Ahorro en Edificios',
+      icon: Calculator,
+      color: 'from-indigo-600 to-blue-700',
     },
   ]
 
@@ -487,6 +495,58 @@ export default function ManualView() {
                   <li>Selecciona <strong>"Instalar aplicación"</strong> o <strong>"Agregar a pantalla principal"</strong>.</li>
                   <li>Confirma en <strong>"Instalar"</strong>.</li>
                 </ol>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* 7. AHORRO EN EDIFICIOS Y DILUCIONES */}
+        {activeSection === 'calculator' && (
+          <div className="space-y-6 animate-fadeIn">
+            <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
+              <div className="w-10 h-10 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold">
+                <Calculator className="w-5 h-5" />
+              </div>
+              <div>
+                <h2 className="text-lg font-black text-slate-900">
+                  Calculadora de Costo en Uso y Fichas de Dilución (Venta Corporativa / Torres)
+                </h2>
+                <p className="text-xs text-slate-500">
+                  La herramienta de persuasión y cierre para administradores de condominios, comités y edificios residenciales de lujo.
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-slate-600">
+              <div className="p-5 rounded-2xl bg-blue-50/70 border border-blue-200 space-y-3">
+                <h4 className="font-extrabold text-blue-950 text-sm flex items-center gap-2">
+                  <Calculator className="w-4 h-4 text-blue-600" />
+                  <span>¿Cómo usar la Calculadora en una Cita?</span>
+                </h4>
+                <p>
+                  En el <strong>Catálogo</strong> o en el <strong>Cotizador</strong>, pulsa el botón <strong>"Calculadora de Ahorro"</strong>.
+                </p>
+                <ul className="space-y-1.5 list-disc pl-4">
+                  <li>Elige el producto concentrado (ej. <em>Key Paraíso</em> o <em>Key Brillante</em>).</li>
+                  <li>Ajusta la dilución y las cubetas que trapean al día en el edificio.</li>
+                  <li>La pantalla mostrará en tiempo real: <strong>$1.28 el litro preparado</strong> vs los $18 a $25 de productos comerciales.</li>
+                  <li>Toca <strong>"Enviar Análisis por WhatsApp"</strong> para mandarle al administrador una propuesta financiera formal e irrechazable.</li>
+                </ul>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-emerald-50/70 border border-emerald-200 space-y-3">
+                <h4 className="font-extrabold text-emerald-950 text-sm flex items-center gap-2">
+                  <Droplets className="w-4 h-4 text-emerald-600" />
+                  <span>Botón "Ficha & Dilución" en Cada Producto</span>
+                </h4>
+                <p>
+                  En cada tarjeta del catálogo verás el botón <strong>"Ficha & Dilución"</strong>. Al tocarlo se despliega:
+                </p>
+                <ul className="space-y-1.5 list-disc pl-4">
+                  <li><strong>Dosis exacta de agua y químico:</strong> Cuántos mililitros poner por cada litro de agua (1:60, 1:40, 1:20...).</li>
+                  <li><strong>Superficies aptas:</strong> Mármoles, granito, cancelería de aluminio y cabinas de elevadores.</li>
+                  <li><strong>Modo de empleo en 3 pasos:</strong> La receta oficial para capacitar al personal de intendencia.</li>
+                </ul>
               </div>
             </div>
           </div>

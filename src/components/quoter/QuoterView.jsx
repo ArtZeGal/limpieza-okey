@@ -4,14 +4,18 @@ import {
   Trash2,
   FileText,
   PackagePlus,
-  AlertCircle
+  AlertCircle,
+  Calculator
 } from 'lucide-react'
+import { useState } from 'react'
 import { useApp } from '../../context/AppContext'
 import FreeShippingBanner from './FreeShippingBanner'
 import CartItemRow from './CartItemRow'
 import QuotationSummary from './QuotationSummary'
+import CostInUseCalculator from '../calculator/CostInUseCalculator'
 
 export default function QuoterView() {
+  const [isCalculatorOpen, setIsCalculatorOpen] = useState(false)
   const {
     cart,
     cartTotalItems,
@@ -57,6 +61,16 @@ export default function QuoterView() {
 
         {/* Header Actions */}
         <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setIsCalculatorOpen(true)}
+            className="px-3.5 py-2 rounded-xl text-xs font-bold text-indigo-700 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 transition-colors flex items-center gap-1.5"
+            title="Calcular ahorro y costo en uso por litro"
+          >
+            <Calculator className="w-4 h-4 text-indigo-600" />
+            <span>Calculadora de Ahorro</span>
+          </button>
+
           <button
             type="button"
             onClick={() => setActiveTab('catalog')}
@@ -146,6 +160,15 @@ export default function QuoterView() {
             <PackagePlus className="w-4 h-4" />
             <span>Ir al Catálogo de Productos</span>
           </button>
+        </div>
+      )}
+
+      {/* Modal Calculadora de Costo en Uso */}
+      {isCalculatorOpen && (
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+            <CostInUseCalculator onClose={() => setIsCalculatorOpen(false)} />
+          </div>
         </div>
       )}
     </div>

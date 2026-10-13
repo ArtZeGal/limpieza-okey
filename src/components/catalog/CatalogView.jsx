@@ -9,12 +9,16 @@ import {
   ShoppingCart,
   TrendingUp,
   Sparkles,
-  Truck
+  Truck,
+  Calculator,
+  Droplets
 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { INITIAL_CATEGORIES } from '../../data/initialCatalog'
 import ProductCard from './ProductCard'
 import ProductModal from './ProductModal'
+import TechnicalSpecModal from './TechnicalSpecModal'
+import CostInUseCalculator from '../calculator/CostInUseCalculator'
 import { formatCurrency } from '../../utils/formatters'
 
 export default function CatalogView() {
@@ -32,6 +36,8 @@ export default function CatalogView() {
   const [selectedCategory, setSelectedCategory] = useState('Todos')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingProduct, setEditingProduct] = useState(null)
+  const [specProduct, setSpecProduct] = useState(null)
+  const [isCalculatorOpen, setIsCalculatorOpen] = useState(false)
 
   // Filtrado reactivo de productos
   const filteredProducts = useMemo(() => {
@@ -109,6 +115,17 @@ export default function CatalogView() {
                 <span>Modo Admin (Ver Márgenes & Costos)</span>
               </>
             )}
+          </button>
+
+          {/* Botón Calculadora de Costo en Uso */}
+          <button
+            type="button"
+            onClick={() => setIsCalculatorOpen(true)}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white shadow-xs transition-all active:scale-98"
+            title="Calcular ahorro y costo en uso por litro para administradores y edificios"
+          >
+            <Calculator className="w-3.5 h-3.5" />
+            <span>Calculadora de Ahorro</span>
           </button>
 
           {/* Botón Nuevo Producto */}
@@ -203,6 +220,7 @@ export default function CatalogView() {
               key={product.id}
               product={product}
               onEdit={handleEdit}
+              onOpenSpec={(p) => setSpecProduct(p)}
             />
           ))}
         </div>
@@ -261,6 +279,27 @@ export default function CatalogView() {
         onClose={() => setIsModalOpen(false)}
         productToEdit={editingProduct}
       />
+
+      {/* Modal Ficha Técnica & Dilución */}
+      {specProduct && (
+        <TechnicalSpecModal
+          product={specProduct}
+          onClose={() => setSpecProduct(null)}
+          onOpenCalculator={(p) => {
+            setSpecProduct(null)
+            setIsCalculatorOpen(true)
+          }}
+        />
+      )}
+
+      {/* Modal Calculadora de Costo en Uso */}
+      {isCalculatorOpen && (
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+            <CostInUseCalculator onClose={() => setIsCalculatorOpen(false)} />
+          </div>
+        </div>
+      )}
     </div>
   )
 }
