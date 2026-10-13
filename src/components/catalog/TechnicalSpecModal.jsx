@@ -8,15 +8,18 @@ import {
   CheckCircle2,
   AlertTriangle,
   Layers,
-  ArrowRight
+  ArrowRight,
+  FlaskConical
 } from 'lucide-react'
 import { getProductSpec } from '../../data/productSpecs'
-import { formatCurrency } from '../../utils/formatters'
+import { formatCurrency, isFractionalEligible, calculateFractional1L } from '../../utils/formatters'
 
 export default function TechnicalSpecModal({ product, onClose, onOpenCalculator }) {
   if (!product) return null
 
   const spec = getProductSpec(product)
+  const isFractional = isFractionalEligible(product)
+  const fractionalData = isFractional ? calculateFractional1L(product) : null
 
   const handleShareWhatsApp = () => {
     const tableHeader = (spec.tableTitle || 'Tabla de Dilución y Rendimiento Oficial').toUpperCase()
@@ -198,22 +201,47 @@ _Consulte asesoría técnica especializada con Limpieza OKEY_`
             </div>
           </div>
 
-          {/* Presentaciones y Precios Oficiales */}
-          {spec.presentations && spec.presentations.length > 0 && (
-            <div className="space-y-2">
-              <h4 className="text-xs font-extrabold text-slate-900 uppercase tracking-wider">
-                Presentaciones Disponibles Oficiales (Catálogo KEY®)
-              </h4>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                {spec.presentations.map((pres, idx) => (
-                  <div key={idx} className="p-2.5 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between text-xs">
-                    <div>
-                      <strong className="text-slate-900 block">{pres.size}</strong>
-                      <span className="text-[10px] text-slate-400 font-mono">SKU: {pres.sku}</span>
-                    </div>
-                    <span className="font-extrabold text-slate-900">{formatCurrency(pres.price)}</span>
+          {/* Opción de Venta por Litro Fraccionado OKEY */}
+          {isFractional && fractionalData && (
+            <div className="p-4 rounded-2xl bg-indigo-50/80 border border-indigo-200/90 space-y-2.5 animate-in fade-in">
+              <div className="flex items-center justify-between">
+                <h4 className="text-xs font-black text-indigo-950 uppercase tracking-wider flex items-center gap-1.5">
+                  <FlaskConical className="w-4 h-4 text-indigo-600" />
+                  <span>Venta por Litro Fraccionado (Sin Comprar el Galón Completo)</span>
+                </h4>
+                <span className="text-[10px] font-bold text-indigo-700 bg-white px-2 py-0.5 rounded-full border border-indigo-200 shadow-2xs">
+                  Fórmula OKEY: (Galón/4 × 1.37) + Envase
+                </span>
+              </div>
+              <p className="text-xs text-indigo-900 leading-relaxed">
+                Para clientes residenciales o pequeñas oficinas que no requieren los 4 litros completos, Limpieza OKEY ofrece fraccionamiento oficial por litro:
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                <div className="p-3 rounded-xl bg-white border border-indigo-200 flex items-center justify-between shadow-2xs">
+                  <div>
+                    <strong className="text-slate-900 block text-xs">1 Litro en Bote Plástico</strong>
+                    <span className="text-[10px] text-slate-500 block">Tapa estándar hermética (+ $11.00)</span>
                   </div>
-                ))}
+                  <div className="text-right">
+                    <span className="text-sm font-black text-indigo-700 block">
+                      {formatCurrency(fractionalData.bote.price)}
+                    </span>
+                    <span className="text-[10px] text-slate-400">1 Litro listo</span>
+                  </div>
+                </div>
+
+                <div className="p-3 rounded-xl bg-white border border-indigo-200 flex items-center justify-between shadow-2xs">
+                  <div>
+                    <strong className="text-slate-900 block text-xs">1 Litro Bote Key + Aspersor Key</strong>
+                    <span className="text-[10px] text-slate-500 block">Envase oficial + gatillo profesional (+ $45.00)</span>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-sm font-black text-indigo-700 block">
+                      {formatCurrency(fractionalData.aspersor.price)}
+                    </span>
+                    <span className="text-[10px] text-slate-400">1 Litro con gatillo</span>
+                  </div>
+                </div>
               </div>
             </div>
           )}

@@ -11,14 +11,17 @@ import {
   CheckCircle,
   Layers,
   Sparkles,
-  Droplets
+  Droplets,
+  FlaskConical
 } from 'lucide-react'
 import {
   formatCurrency,
   formatPercentage,
   calculateMargin,
   calculateProfit,
-  getMarginStatus
+  getMarginStatus,
+  isFractionalEligible,
+  calculateFractional1L
 } from '../../utils/formatters'
 import { useApp } from '../../context/AppContext'
 
@@ -26,16 +29,36 @@ export default function ProductCard({ product, onEdit, onOpenSpec }) {
   const { addToCart, viewMode, deleteProduct } = useApp()
   const [quantity, setQuantity] = useState(1)
   const [justAdded, setJustAdded] = useState(false)
+  const [selectedFormat, setSelectedFormat] = useState('galon') // 'galon' | '1l-bote' | '1l-aspersor'
 
-  const margin = calculateMargin(product.cost, product.price)
-  const profit = calculateProfit(product.cost, product.price)
+  const isFractional = isFractionalEligible(product)
+  const fractionalData = isFractional ? calculateFractional1L(product) : null
+
+  // Determinar el artículo activo a cotizar o añadir al carrito
+  const currentItem = (() => {
+    if (!isFractional || selectedFormat === 'galon') return product
+    if (selectedFormat === '1l-bote') return fractionalData.bote
+    return fractionalData.aspersor
+  })()
+
+  const currentPrice = currentItem.price
+  const currentCost = currentItem.cost
+
+  const margin = calculateMargin(currentCost, currentPrice)
+  const profit = calculateProfit(currentCost, currentPrice)
   const marginStatus = getMarginStatus(margin)
 
   const handleAddToCart = () => {
-    addToCart(product, quantity)
+    addToCart(currentItem, quantity)
     setJustAdded(true)
     setTimeout(() => setJustAdded(false), 1200)
     setQuantity(1)
+  }
+
+  const handleQuickAdd = (itemToAdd) => {
+    addToCart(itemToAdd, 1)
+    setJustAdded(true)
+    setTimeout(() => setJustAdded(false), 1200)
   }
 
   const handleDelete = () => {
@@ -125,14 +148,76 @@ export default function ProductCard({ product, onEdit, onOpenSpec }) {
 
       {/* Pricing and Margin Section */}
       <div className="p-5 pt-3 border-t border-slate-100 bg-slate-50/50 mt-auto space-y-3">
+        {/* Presentation Selector for 1L Fractional Products */}
+        {isFractional && fractionalData && (
+          <div className="bg-amber-50/70 border border-amber-200/80 rounded-xl p-2 space-y-1.5">
+            <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-wider text-amber-900">
+              <span className="flex items-center gap-1">
+                <FlaskConical className="w-3 h-3 text-amber-600" />
+                Venta / Presentación
+              </span>
+              <span className="text-[9px] font-bold text-amber-800 bg-amber-200/60 px-1.5 py-0.5 rounded">
+                Fraccionar 1L
+              </span>
+            </div>
+
+            <div className="grid grid-cols-3 gap-1">
+              <button
+                type="button"
+                onClick={() => setSelectedFormat('galon')}
+                className={`px-1.5 py-1.5 rounded-lg text-center font-bold text-[11px] transition-all cursor-pointer ${
+                  selectedFormat === 'galon'
+                    ? 'bg-amber-600 text-white shadow-xs'
+                    : 'bg-white text-slate-700 border border-amber-200/80 hover:bg-amber-100/50'
+                }`}
+              >
+                <div className="leading-tight">Galón 4L</div>
+                <div className="text-[10px] font-black opacity-95">{formatCurrency(product.price)}</div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setSelectedFormat('1l-bote')}
+                className={`px-1.5 py-1.5 rounded-lg text-center font-bold text-[11px] transition-all cursor-pointer ${
+                  selectedFormat === '1l-bote'
+                    ? 'bg-amber-600 text-white shadow-xs'
+                    : 'bg-white text-slate-700 border border-amber-200/80 hover:bg-amber-100/50'
+                }`}
+                title="1 Litro en bote estándar hermético (+ $11.00 bote)"
+              >
+                <div className="leading-tight">1L Bote</div>
+                <div className="text-[10px] font-black opacity-95">{formatCurrency(fractionalData.bote.price)}</div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setSelectedFormat('1l-aspersor')}
+                className={`px-1.5 py-1.5 rounded-lg text-center font-bold text-[11px] transition-all cursor-pointer ${
+                  selectedFormat === '1l-aspersor'
+                    ? 'bg-amber-600 text-white shadow-xs'
+                    : 'bg-white text-slate-700 border border-amber-200/80 hover:bg-amber-100/50'
+                }`}
+                title="1 Litro en bote Key + aspersor oficial (+ $45.00)"
+              >
+                <div className="leading-tight">1L + Gatillo</div>
+                <div className="text-[10px] font-black opacity-95">{formatCurrency(fractionalData.aspersor.price)}</div>
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Price & Margins */}
         <div className="flex items-end justify-between gap-2">
           <div>
             <span className="text-[11px] font-semibold text-slate-500 block uppercase tracking-wider">
-              Precio al Público
+              {selectedFormat === 'galon'
+                ? 'Precio al Público (Galón)'
+                : selectedFormat === '1l-bote'
+                ? 'Precio al Público (1L Bote)'
+                : 'Precio al Público (1L + Gatillo)'}
             </span>
             <div className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-              {formatCurrency(product.price)}
+              {formatCurrency(currentPrice)}
             </div>
           </div>
 
@@ -157,7 +242,12 @@ export default function ProductCard({ product, onEdit, onOpenSpec }) {
         {/* Detailed Cost Row for Admin */}
         {viewMode === 'admin' && (
           <div className="pt-2 border-t border-slate-200/60 flex items-center justify-between text-xs text-slate-500">
-            <span>Costo Empleado: <strong>{formatCurrency(product.cost)}</strong></span>
+            <span>Costo Empleado: <strong>{formatCurrency(currentCost)}</strong></span>
+            {isFractional && selectedFormat !== 'galon' && (
+              <span className="text-[10px] text-amber-700 font-semibold bg-amber-50 px-1.5 py-0.5 rounded">
+                {selectedFormat === '1l-bote' ? '+ $11 bote' : '+ $45 bote y gatillo Key'}
+              </span>
+            )}
           </div>
         )}
 
@@ -205,7 +295,13 @@ export default function ProductCard({ product, onEdit, onOpenSpec }) {
             ) : (
               <>
                 <ShoppingCart className="w-4 h-4" />
-                <span>Agregar</span>
+                <span>
+                  {selectedFormat === 'galon'
+                    ? 'Agregar'
+                    : selectedFormat === '1l-bote'
+                    ? 'Agregar 1L Bote'
+                    : 'Agregar 1L + Gatillo'}
+                </span>
               </>
             )}
           </button>

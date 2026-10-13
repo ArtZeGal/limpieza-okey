@@ -21,7 +21,9 @@ import {
   BadgePercent,
   HelpCircle,
   Calculator,
-  Droplets
+  Droplets,
+  Building2,
+  FlaskConical
 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 
@@ -77,12 +79,22 @@ export default function ManualView() {
       icon: Calculator,
       color: 'from-indigo-600 to-blue-700',
     },
+    {
+      id: 'fractional',
+      label: '🧴 Venta por Litro (1L)',
+      icon: FlaskConical,
+      color: 'from-amber-500 to-yellow-600',
+    },
   ]
 
   const faqs = [
     {
       q: '¿Cómo sabe el sistema en qué número de folio de recibo va Karen?',
       a: 'La app sugiere automáticamente el consecutivo oficial (ej. OK-001, OK-002). Si Karen necesita empezar en un número específico (ej. OK-015), sólo lo escribe manualmente en el campo de Folio una sola vez al generar el recibo; la app continuará automáticamente el consecutivo desde ahí para los siguientes pedidos.',
+    },
+    {
+      q: '¿Cómo funciona la Venta Fraccionada por Litro (1 Litro)?',
+      a: 'Para clientes que no requieren comprar el galón de 4L completo, la app calcula automáticamente el precio por litro con la regla oficial de Karen: (Precio Galón / 4) × 1.37. Si el cliente compra en bote estándar con tapa hermética se añaden +$11.00; si lleva el bote oficial Key con aspersor/gatillo profesional se añaden +$45.00. La app ajusta los márgenes y costos netos automáticamente en el recibo y en el corte de caja.',
     },
     {
       q: '¿Cuándo se descuentan los productos del inventario?',
@@ -143,7 +155,7 @@ export default function ManualView() {
       </div>
 
       {/* Selector de Sección del Manual */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 xl:grid-cols-8 gap-2">
         {sections.map((sec) => {
           const Icon = sec.icon
           const isSelected = activeSection === sec.id
@@ -631,6 +643,95 @@ export default function ManualView() {
                   <strong className="text-teal-950 block">📲 WhatsApp Ejecutivo</strong>
                   <span className="text-[11px] text-slate-600">Redacta una propuesta formal con viñetas para el encargado de compras.</span>
                 </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* 8. VENTA FRACCIONADA POR LITRO (1L) */}
+        {activeSection === 'fractional' && (
+          <div className="space-y-6 animate-fadeIn">
+            <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
+              <div className="w-10 h-10 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center font-bold">
+                <FlaskConical className="w-5 h-5" />
+              </div>
+              <div>
+                <h2 className="text-lg font-black text-slate-900">
+                  Venta Fraccionada por Litro (1 Litro) — Fórmula OKEY
+                </h2>
+                <p className="text-xs text-slate-500">
+                  Cómo vender productos de 4L fraccionados por litro para clientes residenciales u oficinas sin pagar el galón entero.
+                </p>
+              </div>
+            </div>
+
+            {/* Tarjeta explicativa de la Fórmula de Karen */}
+            <div className="p-5 rounded-2xl bg-gradient-to-br from-amber-950 via-slate-900 to-amber-900 text-white space-y-3 shadow-md">
+              <div className="flex items-center gap-2 text-amber-300 font-bold text-xs uppercase tracking-wider">
+                <Sparkles className="w-4 h-4" />
+                <span>La Fórmula Oficial de Karen para Venta por Litro</span>
+              </div>
+              <p className="text-xs text-slate-200 leading-relaxed">
+                Muchos clientes quieren probar un químico (como <em>Key Paraíso</em>, <em>Key Limón</em>, <em>Baño Forte</em>, <em>Fórmula 503</em>, etc.) o no desean adquirir los 4 litros de golpe. Para no perder la venta y proteger tu ganancia, la app calcula en automático el precio por litro:
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs">
+                <div className="p-3 rounded-xl bg-white/10 border border-white/10 space-y-1">
+                  <span className="font-bold text-amber-300 block">1. Químico Base (1L)</span>
+                  <span className="text-[11px] text-slate-300 block font-mono">(Precio Galón ÷ 4) × 1.37</span>
+                  <span className="text-[10px] text-emerald-300 font-bold block pt-1">Margen comercial de fraccionamiento</span>
+                </div>
+                <div className="p-3 rounded-xl bg-white/10 border border-white/10 space-y-1">
+                  <span className="font-bold text-cyan-300 block">2. Bote Plástico Estándar</span>
+                  <span className="text-[11px] text-slate-300 block font-mono">+ $11.00 MXN</span>
+                  <span className="text-[10px] text-cyan-200 font-bold block pt-1">Envase estándar con tapa hermética</span>
+                </div>
+                <div className="p-3 rounded-xl bg-white/10 border border-white/10 space-y-1">
+                  <span className="font-bold text-purple-300 block">3. Bote Key + Aspersor Key</span>
+                  <span className="text-[11px] text-slate-300 block font-mono">+ $45.00 MXN</span>
+                  <span className="text-[10px] text-purple-200 font-bold block pt-1">Envase oficial KEY® + gatillo profesional</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Cómo usarlo en el Catálogo y Recibos */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-slate-600">
+              <div className="p-5 rounded-2xl bg-amber-50/70 border border-amber-200 space-y-3">
+                <h4 className="font-extrabold text-amber-950 text-sm flex items-center gap-2">
+                  <Package className="w-4 h-4 text-amber-700" />
+                  <span>En el Catálogo de Productos</span>
+                </h4>
+                <ol className="space-y-2 list-decimal pl-4">
+                  <li>
+                    <strong>Filtro Rápido en 1 Toque:</strong> Toca la píldora <strong>"🧴 Venta por Litro (1L)"</strong> en la barra de categorías para ver únicamente los 52 productos líquidos de 4L fraccionables.
+                  </li>
+                  <li>
+                    <strong>Selector en la Tarjeta:</strong> En cada producto elegible verás 3 botones interactivos: <strong>[ Galón 4L ]</strong>, <strong>[ 1L Bote ]</strong> y <strong>[ 1L + Gatillo ]</strong>.
+                  </li>
+                  <li>
+                    <strong>Precios y Márgenes en Tiempo Real:</strong> Al pulsar cualquiera de los 3 botones, el precio al público, el costo de empleado y el botón de agregar se adaptan inmediatamente.
+                  </li>
+                  <li>
+                    <strong>Búsqueda Directa:</strong> Si escribes <em>"1L"</em> o <em>"litro"</em> en el buscador del catálogo, la app te muestra los productos fraccionables al instante.
+                  </li>
+                </ol>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-blue-50/70 border border-blue-200 space-y-3">
+                <h4 className="font-extrabold text-blue-950 text-sm flex items-center gap-2">
+                  <Receipt className="w-4 h-4 text-blue-700" />
+                  <span>En Cotizaciones, Recibos y Cierre de Caja</span>
+                </h4>
+                <ul className="space-y-2 list-disc pl-4">
+                  <li>
+                    <strong>Descripción Clara en el Recibo:</strong> Se agrega como <em>"Key Paraíso (1L - Bote Plástico)"</em> o <em>"Key Paraíso (1L - Bote + Aspersor Key)"</em> para que el cliente sepa exactamente qué tipo de envase se le entregó.
+                  </li>
+                  <li>
+                    <strong>Costos y Ganancia Exacta:</strong> El costo empleado de los envases ($6.00 para el bote estándar, $25.00 para el bote + aspersor Key) queda contemplado en la ganancia neta.
+                  </li>
+                  <li>
+                    <strong>Cierre de Caja sin Descuadres:</strong> Al emitir el recibo oficial, la utilidad neta del fraccionado se suma limpiamente al corte de caja de Karen y Arturo.
+                  </li>
+                </ul>
               </div>
             </div>
           </div>

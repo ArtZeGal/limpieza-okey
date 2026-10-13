@@ -65,3 +65,91 @@ export const getMarginStatus = (margin) => {
     badge: 'bg-rose-500',
   }
 }
+
+/**
+ * Determina si un producto es líquido de ~4L susceptible a venta fraccionada por litro (Regla de Karen)
+ */
+export const isFractionalEligible = (product) => {
+  if (!product) return false
+  const cat = String(product.category || '').toUpperCase()
+  if ([
+    'ACCESORIOS',
+    'VILEDA',
+    'PAPEL PARA MANOS, SUPERFICIES Y SANITARIOS',
+    'DESPACHADORES DE JABÓN DE MANOS',
+    'DESPACHADORES DE PAPEL'
+  ].includes(cat)) {
+    return false
+  }
+  const pres = String(product.presentation || '').toUpperCase()
+  const name = String(product.name || '').toUpperCase()
+  // Excluir presentaciones que no sean galones líquidos (ej. 20L, piezas, pastillas, polvos de 3kg)
+  if (pres.includes('20L') || pres.includes('PIEZA') || pres.includes('CAJA') || pres.includes('3KG') || pres.includes('4KG')) {
+    return false
+  }
+  return (
+    pres.includes('4L') ||
+    pres.includes('3.8L') ||
+    pres.includes('3.75L') ||
+    name.includes(' 4L') ||
+    name.includes(' 3.8L') ||
+    name.includes(' 3.75L')
+  )
+}
+
+/**
+ * Calcula precios y costos para venta por litro fraccionado (Regla de Karen)
+ * Fórmula oficial de Karen: (Precio Galón / 4) * 1.37 + costoEnvase
+ * Bote estándar plástico (sin aspersor): +$11
+ * Bote Key + aspersor Key: +$45
+ */
+export const calculateFractional1L = (product) => {
+  if (!product || !product.price) return null
+  const galonPrice = Number(product.price) || 0
+  const galonCost = Number(product.cost) || 0
+
+  const baseChemicalPrice = (galonPrice / 4) * 1.37
+  const baseChemicalCost = (galonCost / 4)
+
+  const priceBote = Math.round(baseChemicalPrice + 11)
+  const priceAspersor = Math.round(baseChemicalPrice + 45)
+
+  const costBote = Math.round(baseChemicalCost + 11)
+  const costAspersor = Math.round(baseChemicalCost + 45)
+
+  const cleanName = String(product.name || '')
+    .replace(/\s*(4L|3\.8L|3\.75L)\b/gi, '')
+    .replace(/\s*\((GALÓN|PORRÓN|ENVASE)\)/gi, '')
+    .trim()
+
+  return {
+    cleanName,
+    baseChemicalPrice,
+    baseChemicalCost,
+    bote: {
+      id: `${product.id}-1L-BOTE`,
+      sku: `${product.sku}-1L`,
+      name: `${cleanName} 1L (Bote Estándar)`,
+      category: product.category,
+      presentation: '1L',
+      price: priceBote,
+      cost: costBote,
+      packaging: 'Bote de plástico (sin aspersor)',
+      isFractional: true,
+      parentProductId: product.id
+    },
+    aspersor: {
+      id: `${product.id}-1L-ASP`,
+      sku: `${product.sku}-1L-ASP`,
+      name: `${cleanName} 1L (Bote Key + Aspersor Key)`,
+      category: product.category,
+      presentation: '1L',
+      price: priceAspersor,
+      cost: costAspersor,
+      packaging: 'Bote Key + Aspersor Key',
+      isFractional: true,
+      parentProductId: product.id
+    }
+  }
+}
+

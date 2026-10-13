@@ -12,7 +12,8 @@ import {
   Truck,
   Calculator,
   Droplets,
-  Building2
+  Building2,
+  FlaskConical
 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { INITIAL_CATEGORIES } from '../../data/initialCatalog'
@@ -21,7 +22,7 @@ import ProductModal from './ProductModal'
 import TechnicalSpecModal from './TechnicalSpecModal'
 import CostInUseCalculator from '../calculator/CostInUseCalculator'
 import OfficeProposalModal from '../proposals/OfficeProposalModal'
-import { formatCurrency } from '../../utils/formatters'
+import { formatCurrency, isFractionalEligible } from '../../utils/formatters'
 
 export default function CatalogView() {
   const {
@@ -36,6 +37,7 @@ export default function CatalogView() {
 
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('Todos')
+  const [onlyFractional, setOnlyFractional] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingProduct, setEditingProduct] = useState(null)
   const [specProduct, setSpecProduct] = useState(null)
@@ -45,6 +47,11 @@ export default function CatalogView() {
   // Filtrado reactivo de productos
   const filteredProducts = useMemo(() => {
     return products.filter((prod) => {
+      // Filtro especial de venta fraccionada por litro
+      if (onlyFractional && !isFractionalEligible(prod)) {
+        return false
+      }
+
       // Filtro de categoría
       if (selectedCategory !== 'Todos' && prod.category !== selectedCategory) {
         return false
@@ -57,12 +64,13 @@ export default function CatalogView() {
         const matchSku = prod.sku?.toLowerCase().includes(query)
         const matchPresentation = prod.presentation?.toLowerCase().includes(query)
         const matchCategory = prod.category?.toLowerCase().includes(query)
-        return matchName || matchSku || matchPresentation || matchCategory
+        const matchFractional = (query === '1l' || query === 'litro' || query === 'litros' || query === 'fraccion' || query === 'fraccionado') && isFractionalEligible(prod)
+        return matchName || matchSku || matchPresentation || matchCategory || matchFractional
       }
 
       return true
     })
-  }, [products, selectedCategory, searchQuery])
+  }, [products, selectedCategory, searchQuery, onlyFractional])
 
   const totalProductsCount = products.length
 
@@ -207,20 +215,44 @@ export default function CatalogView() {
         {/* Category Pills (Horizontal scrollable on mobile) */}
         <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none text-xs">
           {INITIAL_CATEGORIES.map((cat) => {
-            const isSelected = selectedCategory === cat
+            const isSelected = selectedCategory === cat && (!onlyFractional || cat !== 'Todos')
             return (
-              <button
-                key={cat}
-                type="button"
-                onClick={() => setSelectedCategory(cat)}
-                className={`whitespace-nowrap px-3.5 py-1.5 rounded-xl font-bold transition-all ${
-                  isSelected
-                    ? 'bg-slate-900 text-white shadow-xs'
-                    : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 hover:text-slate-900'
-                }`}
-              >
-                {cat}
-              </button>
+              <span key={cat} className="inline-flex items-center gap-1.5 shrink-0">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSelectedCategory(cat)
+                    if (cat !== 'Todos') setOnlyFractional(false)
+                  }}
+                  className={`whitespace-nowrap px-3.5 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
+                    isSelected && !onlyFractional
+                      ? 'bg-slate-900 text-white shadow-xs'
+                      : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 hover:text-slate-900'
+                  }`}
+                >
+                  {cat}
+                </button>
+
+                {/* Pill destacada para Venta Fraccionada por Litro */}
+                {cat === 'Todos' && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setOnlyFractional((prev) => !prev)
+                      if (!onlyFractional) setSelectedCategory('Todos')
+                    }}
+                    className={`whitespace-nowrap px-3 py-1.5 rounded-xl font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                      onlyFractional
+                        ? 'bg-amber-600 text-white shadow-xs'
+                        : 'bg-amber-50 text-amber-800 border border-amber-300 hover:bg-amber-100'
+                    }`}
+                    title="Ver productos con opción de venta por litro (1L Bote o 1L + Gatillo)"
+                  >
+                    <FlaskConical className="w-3.5 h-3.5" />
+                    <span>🧴 Venta por Litro (1L)</span>
+                  </button>
+                )}
+              </span>
             )
           })}
         </div>
@@ -254,6 +286,7 @@ export default function CatalogView() {
               onClick={() => {
                 setSearchQuery('')
                 setSelectedCategory('Todos')
+                setOnlyFractional(false)
               }}
               className="px-3 py-1.5 rounded-lg bg-slate-100 text-xs font-semibold text-slate-700 hover:bg-slate-200"
             >
