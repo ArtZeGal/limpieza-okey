@@ -7,10 +7,11 @@ const STORAGE_KEYS = {
   CATALOG: 'okey_catalog_v1',
   CART: 'okey_cart_v1',
   VIEW_MODE: 'okey_view_mode_v1',
+  QUOTE_PARAMS: 'okey_quote_params_v1',
 }
 
 export function AppProvider({ children }) {
-  // 1. Estado del Catálogo de Productos y Paquetes
+  // 1. Catálogo de Productos y Paquetes
   const [products, setProducts] = useState(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.CATALOG)
@@ -19,21 +20,20 @@ export function AppProvider({ children }) {
         if (Array.isArray(parsed) && parsed.length > 0) return parsed
       }
     } catch (e) {
-      console.error('Error al leer catálogo desde localStorage', e)
+      console.error('Error al leer catálogo', e)
     }
     return INITIAL_PRODUCTS
   })
 
-  // Sincronizar catálogo con localStorage
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEYS.CATALOG, JSON.stringify(products))
     } catch (e) {
-      console.error('Error al guardar catálogo en localStorage', e)
+      console.error('Error al guardar catálogo', e)
     }
   }, [products])
 
-  // 2. Estado del Carrito / Cotizador
+  // 2. Carrito de Compras
   const [cart, setCart] = useState(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.CART)
@@ -52,7 +52,32 @@ export function AppProvider({ children }) {
     }
   }, [cart])
 
-  // 3. Modo de visualización: 'admin' (muestra márgenes y costos) vs 'counter' (modo mostrador para clientes)
+  // 3. Parámetros de Cotización (Anticipo, Tipo de Entrega, Descuento, Notas)
+  const [quoteParams, setQuoteParams] = useState(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.QUOTE_PARAMS)
+      if (saved) return JSON.parse(saved)
+    } catch (e) {
+      console.error('Error al leer parámetros de cotización', e)
+    }
+    return {
+      downPayment: '',
+      shippingType: 'delivery', // 'delivery' | 'pickup'
+      deliveryFee: 120, // Tarifa estándar cuando no aplica envío gratis
+      discount: '',
+      notes: '',
+    }
+  })
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEYS.QUOTE_PARAMS, JSON.stringify(quoteParams))
+    } catch (e) {
+      console.error('Error al guardar parámetros de cotización', e)
+    }
+  }, [quoteParams])
+
+  // 4. Modo de visualización: 'admin' vs 'counter'
   const [viewMode, setViewMode] = useState(() => {
     try {
       return localStorage.getItem(STORAGE_KEYS.VIEW_MODE) || 'admin'
@@ -69,10 +94,10 @@ export function AppProvider({ children }) {
     }
   }, [viewMode])
 
-  // 4. Pestaña de navegación activa
+  // 5. Pestaña de navegación activa
   const [activeTab, setActiveTab] = useState('catalog')
 
-  // 5. Notificación / Toast feedback
+  // 6. Toast de notificaciones
   const [toast, setToast] = useState(null)
 
   const showToast = (message, type = 'success') => {
@@ -117,7 +142,6 @@ export function AppProvider({ children }) {
   const deleteProduct = (id) => {
     const prod = products.find((p) => p.id === id)
     setProducts((prev) => prev.filter((p) => p.id !== id))
-    // Remover también del carrito si existe
     setCart((prev) => prev.filter((item) => item.product.id !== id))
     showToast(`"${prod?.name || 'Artículo'}" eliminado del catálogo`, 'info')
   }
@@ -163,15 +187,49 @@ export function AppProvider({ children }) {
 
   const clearCart = () => {
     setCart([])
+    setQuoteParams((prev) => ({ ...prev, downPayment: '', discount: '', notes: '' }))
+    showToast('Cotizador vaciado', 'info')
   }
 
-  // Cálculos financieros del Carrito
+  // Actualizaciones de Parámetros de Cotización
+  const updateQuoteParam = (key, value) => {
+    setQuoteParams((prev) => ({ ...prev, [key]: value }))
+  }
+
+  // Cálculos Financieros del Cotizador
   const cartSubtotal = cart.reduce((acc, item) => acc + item.quantity * item.product.price, 0)
   const cartTotalItems = cart.reduce((acc, item) => acc + item.quantity, 0)
+  
+  // Regla de Negocio: Envío gratis a partir de $1,500 MXN
   const FREE_SHIPPING_THRESHOLD = 1500
   const hasFreeShipping = cartSubtotal >= FREE_SHIPPING_THRESHOLD
   const amountForFreeShipping = Math.max(0, FREE_SHIPPING_THRESHOLD - cartSubtotal)
   const freeShippingProgress = Math.min(100, (cartSubtotal / FREE_SHIPPING_THRESHOLD) * 100)
+
+  // Costo efectivo de envío
+  const effectiveShippingCost =
+    quoteParams.shippingType === 'pickup'
+      ? 0
+      : hasFreeShipping
+      ? 0
+      : Number(quoteParams.deliveryFee) || 120
+
+  const discountAmount = Math.max(0, Number(quoteParams.discount) || 0)
+  const orderTotal = Math.max(0, cartSubtotal + effectiveShippingCost - discountAmount)
+
+  // Anticipo y Saldo
+  const downPaymentAmount = Math.min(orderTotal, Math.max(0, Number(quoteParams.downPayment) || 0))
+  const pendingBalance = Math.max(0, orderTotal - downPaymentAmount)
+  const isFullyPaid = orderTotal > 0 && downPaymentAmount >= orderTotal
+
+  // Regalos sugeridos acumulados en el carrito
+  const accumulatedGifts = cart
+    .filter((item) => item.product.suggestedGift)
+    .map((item) => ({
+      productName: item.product.name,
+      gift: item.product.suggestedGift,
+      quantity: item.quantity,
+    }))
 
   return (
     <AppContext.Provider
@@ -182,6 +240,7 @@ export function AppProvider({ children }) {
         updateProduct,
         deleteProduct,
         resetCatalog,
+
         // Carrito
         cart,
         addToCart,
@@ -194,12 +253,25 @@ export function AppProvider({ children }) {
         hasFreeShipping,
         amountForFreeShipping,
         freeShippingProgress,
+
+        // Parámetros y cálculos de Cotización
+        quoteParams,
+        updateQuoteParam,
+        effectiveShippingCost,
+        discountAmount,
+        orderTotal,
+        downPaymentAmount,
+        pendingBalance,
+        isFullyPaid,
+        accumulatedGifts,
+
         // Preferencias & Navegación
         viewMode,
         setViewMode,
         toggleViewMode: () => setViewMode((m) => (m === 'admin' ? 'counter' : 'admin')),
         activeTab,
         setActiveTab,
+
         // Toast
         toast,
         showToast,
