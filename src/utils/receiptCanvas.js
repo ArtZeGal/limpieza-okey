@@ -159,7 +159,7 @@ export async function renderReceiptOnCanvas(canvas, receiptData) {
   // El signo '$' de la plantilla termina en x=540.
   // La línea punteada corre en y=874..875.
   // Colocamos el número en x=552 con línea base y=870 (descansando 4px sobre los puntos).
-  ctx.font = `900 25px ${fontPrimary}`
+  ctx.font = `900 34px ${fontPrimary}`
   ctx.fillStyle = colorNavy
   ctx.textAlign = 'left'
   const totalAmountStr = new Intl.NumberFormat('es-MX', {
