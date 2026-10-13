@@ -8,15 +8,53 @@ import {
   Info,
   AlertTriangle,
   Menu,
-  X
+  X,
+  DownloadCloud
 } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useApp } from '../../context/AppContext'
 import { formatCurrency } from '../../utils/formatters'
 
 export default function Navbar() {
-  const { activeTab, setActiveTab, cartTotalItems, cartSubtotal, toast, receipts, customers } = useApp()
+  const { activeTab, setActiveTab, cartTotalItems, cartSubtotal, toast, receipts, customers, showToast } = useApp()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [installPrompt, setInstallPrompt] = useState(null)
+  const [isInstalled, setIsInstalled] = useState(false)
+
+  useEffect(() => {
+    // Detectar si ya está en modo standalone (instalada)
+    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+      setIsInstalled(true)
+    }
+
+    const handleBeforeInstall = (e) => {
+      e.preventDefault()
+      setInstallPrompt(e)
+    }
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstall)
+    window.addEventListener('appinstalled', () => {
+      setIsInstalled(true)
+      setInstallPrompt(null)
+      showToast('¡Limpieza OKEY instalada con éxito!')
+    })
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstall)
+    }
+  }, [showToast])
+
+  const handleInstallClick = async () => {
+    if (!installPrompt) {
+      showToast('Para instalar en iPhone: presiona Compartir y "Agregar a pantalla de inicio"', 'info')
+      return
+    }
+    installPrompt.prompt()
+    const { outcome } = await installPrompt.userChoice
+    if (outcome === 'accepted') {
+      setInstallPrompt(null)
+    }
+  }
 
   const navItems = [
     {
@@ -116,6 +154,19 @@ export default function Navbar() {
 
           {/* Right Action / Mobile Menu Toggle */}
           <div className="flex items-center gap-2">
+            {/* Install PWA Button (si no está instalada) */}
+            {!isInstalled && (
+              <button
+                type="button"
+                onClick={handleInstallClick}
+                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white text-xs font-bold shadow-xs transition-all active:scale-95"
+                title="Instalar app en este dispositivo"
+              >
+                <DownloadCloud className="w-3.5 h-3.5" />
+                <span>Instalar App</span>
+              </button>
+            )}
+
             {/* Quick Cart Pill */}
             {cartTotalItems > 0 && (
               <button
@@ -176,6 +227,20 @@ export default function Navbar() {
                 </button>
               )
             })}
+
+            {!isInstalled && (
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false)
+                  handleInstallClick()
+                }}
+                className="w-full mt-2 py-2.5 px-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-xs font-bold shadow-xs flex items-center justify-center gap-2"
+              >
+                <DownloadCloud className="w-4 h-4" />
+                <span>Instalar Limpieza OKEY en Celular</span>
+              </button>
+            )}
           </div>
         )}
       </header>
