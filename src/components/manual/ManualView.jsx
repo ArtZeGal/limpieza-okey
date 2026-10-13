@@ -500,7 +500,7 @@ export default function ManualView() {
           </div>
         )}
 
-        {/* 7. AHORRO EN EDIFICIOS Y DILUCIONES */}
+        {/* 7. AHORRO EN EDIFICIOS, CUBETAS AL DÍA Y DILUCIONES */}
         {activeSection === 'calculator' && (
           <div className="space-y-6 animate-fadeIn">
             <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
@@ -509,43 +509,83 @@ export default function ManualView() {
               </div>
               <div>
                 <h2 className="text-lg font-black text-slate-900">
-                  Calculadora de Costo en Uso y Fichas de Dilución (Venta Corporativa / Torres)
+                  Calculadora de Ahorro, "Cubetas al Día" y Fichas de Dilución
                 </h2>
                 <p className="text-xs text-slate-500">
-                  La herramienta de persuasión y cierre para administradores de condominios, comités y edificios residenciales de lujo.
+                  La herramienta de persuasión para administradores de torres, oficinas y comités vecinales.
                 </p>
               </div>
             </div>
 
+            {/* Bloque explicativo de Cubetas al Día */}
+            <div className="p-5 rounded-2xl bg-gradient-to-br from-indigo-950 via-slate-900 to-blue-950 text-white space-y-3 shadow-md">
+              <div className="flex items-center gap-2 text-cyan-300 font-bold text-xs uppercase tracking-wider">
+                <Sparkles className="w-4 h-4" />
+                <span>¿Por qué medimos en "Cubetas al Día"? (El Secreto de la Venta B2B)</span>
+              </div>
+              <p className="text-xs text-slate-200 leading-relaxed">
+                Ningún administrador o encargado de intendencia sabe de memoria cuántos litros químicos consume al mes ni los metros cuadrados de sus pisos. Pero <strong>SÍ saben exactamente cuántas cubetas de agua preparan sus afanadores para trapear</strong> en su rutina diaria.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs">
+                <div className="p-3 rounded-xl bg-white/10 border border-white/10 space-y-1">
+                  <span className="font-bold text-cyan-300 block">🪣 2 cubetas / día</span>
+                  <span className="text-[11px] text-slate-300 block">Casa grande, departamento u oficina chica.</span>
+                  <span className="text-[10px] text-emerald-300 font-bold block pt-1">~20 L/día = 600 L al mes</span>
+                </div>
+                <div className="p-3 rounded-xl bg-white/10 border border-white/10 space-y-1">
+                  <span className="font-bold text-amber-300 block">🪣 4 cubetas / día (Típico)</span>
+                  <span className="text-[11px] text-slate-300 block">Edificio mediano, privada o gimnasio.</span>
+                  <span className="text-[10px] text-emerald-300 font-bold block pt-1">~40 L/día = 1,200 L al mes</span>
+                </div>
+                <div className="p-3 rounded-xl bg-white/10 border border-white/10 space-y-1">
+                  <span className="font-bold text-purple-300 block">🪣 8 cubetas / día (Torres)</span>
+                  <span className="text-[11px] text-slate-300 block">Torre completa (ej. Torre Árbol), hotel o club.</span>
+                  <span className="text-[10px] text-emerald-300 font-bold block pt-1">~80 L/día = 2,400 L al mes</span>
+                </div>
+              </div>
+              <p className="text-[11px] text-slate-300 pt-1 border-t border-white/10">
+                💡 <em>Una cubeta estándar de trapeador de conserjería contiene 10 litros de agua. Preguntar "¿Cuántas cubetas preparan al día?" abre la puerta para demostrar ahorros de más de $20,000 pesos al mes al instante.</em>
+              </p>
+            </div>
+
+            {/* Dos columnas de uso */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-slate-600">
               <div className="p-5 rounded-2xl bg-blue-50/70 border border-blue-200 space-y-3">
                 <h4 className="font-extrabold text-blue-950 text-sm flex items-center gap-2">
                   <Calculator className="w-4 h-4 text-blue-600" />
-                  <span>¿Cómo usar la Calculadora en una Cita?</span>
+                  <span>Cómo usar la Calculadora en 3 Toques</span>
                 </h4>
-                <p>
-                  En el <strong>Catálogo</strong> o en el <strong>Cotizador</strong>, pulsa el botón <strong>"Calculadora de Ahorro"</strong>.
-                </p>
-                <ul className="space-y-1.5 list-disc pl-4">
-                  <li>Elige el producto concentrado (ej. <em>Key Paraíso</em> o <em>Key Brillante</em>).</li>
-                  <li>Ajusta la dilución y las cubetas que trapean al día en el edificio.</li>
-                  <li>La pantalla mostrará en tiempo real: <strong>$1.28 el litro preparado</strong> vs los $18 a $25 de productos comerciales.</li>
-                  <li>Toca <strong>"Enviar Análisis por WhatsApp"</strong> para mandarle al administrador una propuesta financiera formal e irrechazable.</li>
-                </ul>
+                <ol className="space-y-2 list-decimal pl-4">
+                  <li>
+                    <strong>Toca "Calculadora de Ahorro":</strong> Disponible arriba en el Catálogo o en el Cotizador.
+                  </li>
+                  <li>
+                    <strong>Elige el Producto:</strong> Pisos (<em>Key Paraíso</em>), Mármol (<em>Key Brillante</em>), Vidrios o Desengrasante.
+                  </li>
+                  <li>
+                    <strong>Selecciona las Cubetas:</strong> Elige entre 2, 4 u 8 cubetas diarias.
+                  </li>
+                  <li>
+                    <strong>✏️ Edita en Vivo el Precio del Súper:</strong> En la caja roja <em>"❌ Paga hoy"</em>, teclea el precio por litro que paga el cliente hoy para que vea el cálculo con su número real.
+                  </li>
+                  <li>
+                    <strong>Enviar por WhatsApp:</strong> Envía un estudio financiero formal y personalizado en 1 solo clic.
+                  </li>
+                </ol>
               </div>
 
               <div className="p-5 rounded-2xl bg-emerald-50/70 border border-emerald-200 space-y-3">
                 <h4 className="font-extrabold text-emerald-950 text-sm flex items-center gap-2">
                   <Droplets className="w-4 h-4 text-emerald-600" />
-                  <span>Botón "Ficha & Dilución" en Cada Producto</span>
+                  <span>Botón "🧪 Ficha & Dilución" en el Catálogo</span>
                 </h4>
                 <p>
-                  En cada tarjeta del catálogo verás el botón <strong>"Ficha & Dilución"</strong>. Al tocarlo se despliega:
+                  En cada tarjeta del catálogo verás el botón <strong>"Ficha & Dilución"</strong>. Al tocarlo se despliega una ficha técnica completa:
                 </p>
                 <ul className="space-y-1.5 list-disc pl-4">
-                  <li><strong>Dosis exacta de agua y químico:</strong> Cuántos mililitros poner por cada litro de agua (1:60, 1:40, 1:20...).</li>
-                  <li><strong>Superficies aptas:</strong> Mármoles, granito, cancelería de aluminio y cabinas de elevadores.</li>
-                  <li><strong>Modo de empleo en 3 pasos:</strong> La receta oficial para capacitar al personal de intendencia.</li>
+                  <li><strong>Dosis exacta de agua y químico:</strong> Proporciones oficiales (1:60, 1:40, 1:20...) y mililitros exactos por litro o por cubeta de 10L.</li>
+                  <li><strong>Superficies protegidas:</strong> Mármoles importados, cantera, granito, canceles de aluminio y cabinas de acero inoxidable.</li>
+                  <li><strong>Protección Patrimonial:</strong> Fórmulas con pH neutro y sales orgánicas que evitan servicios de pulido correctivo de más de $50,000 MXN.</li>
                 </ul>
               </div>
             </div>
@@ -561,7 +601,17 @@ export default function ManualView() {
         </div>
 
         <div className="divide-y divide-slate-100">
-          {faqs.map((faq, idx) => {
+          {[
+            ...faqs,
+            {
+              q: '¿Por qué la calculadora mide en "cubetas al día" en lugar de metros cuadrados o litros brutos?',
+              a: 'Porque en la rutina real de intendencia, ningún administrador o afanador mide los metros cuadrados que limpia, pero todos saben cuántas cubetas de trapeador preparan al día (1 cubeta = 10 litros). Al preguntar esto, obtienes su consumo real de inmediato sin abrumarlo con fórmulas matemáticas complejas.',
+            },
+            {
+              q: '¿Cómo explico que el galón de Key Paraíso sale a $1.28 el litro preparado?',
+              a: 'Key Paraíso es un concentrado puro. Con una dilución ligera de mantenimiento diario (1:60, aprox. 16 ml por litro de agua), un galón de 4 litros rinde entre 240 y 320 litros de limpiador listo para trapear. Al dividir el precio del galón ($411) entre 320 litros, cada litro de solución cuesta apenas $1.28 MXN, contra los $20.00 o más que cobran en el súper por agua con aroma.',
+            },
+          ].map((faq, idx) => {
             const isOpen = openFaqIndex === idx
             return (
               <div key={idx} className="py-3.5">
